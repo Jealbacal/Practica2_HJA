@@ -4,6 +4,8 @@
  */
 package poker.practica2.hja.GUI;
 
+import java.awt.Color;
+
 /**
  *
  * @author jjcar
@@ -27,9 +29,43 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         rangeGrid1 = new poker.practica2.hja.GUI.RangeGrid();
+        RangeTextPanel = new javax.swing.JPanel();
+        RangeText = new javax.swing.JTextField();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Practica 2");
+        setResizable(false);
+
+        RangeTextPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3), "Range Text", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 24))); // NOI18N
+
+        RangeText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+
+        javax.swing.GroupLayout RangeTextPanelLayout = new javax.swing.GroupLayout(RangeTextPanel);
+        RangeTextPanel.setLayout(RangeTextPanelLayout);
+        RangeTextPanelLayout.setHorizontalGroup(
+            RangeTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RangeTextPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(RangeText, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        RangeTextPanelLayout.setVerticalGroup(
+            RangeTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RangeTextPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(RangeText, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jToggleButton1.setIconTextGap(0);
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Press(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,19 +73,41 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(jToggleButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(299, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(165, 165, 165)
+                        .addComponent(jToggleButton1)))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Press(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Press
+        // TODO add your handling code here:
+        if (jToggleButton1.isSelected()){
+            jToggleButton1.setBackground(Color.BLUE);
+        }else{
+            jToggleButton1.setBackground(Color.yellow);
+        }
+        
+    }//GEN-LAST:event_Press
 
     /**
      * @param args the command line arguments
@@ -87,6 +145,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField RangeText;
+    private javax.swing.JPanel RangeTextPanel;
+    private javax.swing.JToggleButton jToggleButton1;
     private poker.practica2.hja.GUI.RangeGrid rangeGrid1;
     // End of variables declaration//GEN-END:variables
 }

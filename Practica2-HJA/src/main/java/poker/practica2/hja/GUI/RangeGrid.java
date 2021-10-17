@@ -5,6 +5,10 @@
 package poker.practica2.hja.GUI;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 /**
  *
@@ -13,6 +17,7 @@ import java.awt.Color;
 public class RangeGrid extends javax.swing.JPanel {
     
     private final static int _size = 14;
+    
 
     /**
      * Creates new form RangeGrid
@@ -34,6 +39,7 @@ public class RangeGrid extends javax.swing.JPanel {
         setLayout(new java.awt.GridLayout(13, 13));
     }// </editor-fold>//GEN-END:initComponents
 
+
     //Crea la matriz de botones que van a representar el rango.
     private void createButtons(){
         
@@ -42,30 +48,42 @@ public class RangeGrid extends javax.swing.JPanel {
             for(int j = _size; j >= 2; j--){
                 
                 //Creacion del boton y atributos
-                javax.swing.JButton pair = new javax.swing.JButton();
-                pair.setSize(100, 100);
+                //TODO - Poner que sean botones de la clase nueva
+                PairButton pair = new PairButton();
+                pair.addActionListener(pair);
+                //javax.swing.JToggleButton pair_1 = new javax.swing.JToggleButton();
+                //pair.setSize(100, 100);
                 
                 //Botones de las Parejas
                 if( i == j ){
+
+                    pair.setType(Type.PAIR);
+                    
                     pair.setText(rangeButtonText(i) + 
                             rangeButtonText(j));
-                    pair.setBackground(Color.magenta);
+                    pair.setPairColor();
                     
                 }
                 // Botones de las cartas Suited
                 else if ( i > j){
+                    
+                     pair.setType(Type.SUITED);
+                    
                     pair.setText(rangeButtonText(i) + 
                             rangeButtonText(j) +
                             "s");
-                    pair.setBackground(Color.CYAN);
+                    pair.setSuitedColor();
                 }
                 // Botones de las cartas Offsuit
                 else if( i < j ){
+                    
+                     pair.setType(Type.OFF_SUIT);
+                    
                     pair.setText(rangeButtonText(j) + 
                             rangeButtonText(i) +
                             "o");
-                    pair.setBackground(Color.BLUE);
-                    pair.setForeground(Color.WHITE);
+                    pair.setOffSuitColor();
+                    //pair.setForeground(Color.WHITE);
                 }
                 
                 
