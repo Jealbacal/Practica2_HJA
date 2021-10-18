@@ -21,6 +21,7 @@ public class PairButton extends JToggleButton implements ActionListener {
     private final Color off_color = Color.red;
     private final Color s_color = Color.cyan;
     private final Color sel_color = Color.yellow;
+    
         
     public PairButton(){
        init();
@@ -44,6 +45,7 @@ public class PairButton extends JToggleButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         
+        // Si no estaba seleccionado
         if(!this.isSelected()){
             switch(this._type){
                 case PAIR:
@@ -56,21 +58,44 @@ public class PairButton extends JToggleButton implements ActionListener {
                     this.setBackground(s_color);
                     break;
             }
+        //Si estaba seleccionado
         }else{
             this.setBackground(sel_color);
         }
     } 
 
+    //Pone el color de las manos que son parejas
     public void setPairColor(){
         this.setBackground(pair_color);
     }
     
+    //Pone el color de las manos que son Suited
     public void setSuitedColor(){
         this.setBackground(s_color);
     }
     
+    //Pone el color de las manos que son OffSuit
     public void setOffSuitColor(){
         this.setBackground(off_color);
+    }
+    
+    //Pone el color de la carta segun el tipo
+    public void setColor(Type type){
+        switch(type){
+            case PAIR:
+                this.setPairColor();
+                break;
+            case OFF_SUIT:
+                this.setOffSuitColor();
+                break;
+            case SUITED:
+                this.setSuitedColor();
+                break;
+        }
+    }
+    
+    public void setSelectedColor(){
+        this.setBackground(sel_color);
     }
     
     

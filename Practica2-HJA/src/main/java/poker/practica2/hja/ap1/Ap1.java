@@ -19,8 +19,8 @@ public class Ap1 {
     public Ap1(String textfield){
 
         this.texfield=textfield;
-        ArrayList<String>rangos =  new  ArrayList<String>();
-        ArrayList<String> elems = new ArrayList<String>();
+        rangos =  new  ArrayList<String>();
+        elems = new ArrayList<String>();
         parse();
         procesa();
 
@@ -30,9 +30,9 @@ public class Ap1 {
 
         int lenght =this.texfield.length();
         int i=0;
+        String aux="";
         
         while(i < lenght){
-          String aux=null;
           
           if(texfield.charAt(i) != ','){
               aux=aux+texfield.charAt(i);
@@ -40,7 +40,7 @@ public class Ap1 {
           
           else if (texfield.charAt(i) == ','){
               this.elems.add(aux);
-              aux=null;
+              aux="";
              
           }
             
@@ -178,5 +178,24 @@ public class Ap1 {
             }
            
        }
-   }    
+   }
+   
+   //Testeo del parse
+   public static void main(String args[]){
+       
+       //Parece que no procesa bien el ultimo elemento
+       //Los intervalos no salen
+       
+       String test1 = "AKs-A2s"; // No funciona
+       String test2 = "TT+,T2s+"; // Falta que saque el T2s+, el TT+ lo saca bien
+       String test3 = "AA"; // No funciona
+       String test4 = "AA,TT"; // Saca solo AA
+       String test5 = "AA,TT,22"; // Saca AA y TT pero no 22
+       
+       Ap1 logic = new Ap1(test5);
+       
+       for(String s : logic.rangos){
+           System.out.println(s);
+       }
+   }
 }

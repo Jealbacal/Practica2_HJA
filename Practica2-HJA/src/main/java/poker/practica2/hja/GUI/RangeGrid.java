@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 /**
@@ -17,12 +18,14 @@ import java.awt.event.ActionListener;
 public class RangeGrid extends javax.swing.JPanel {
     
     private final static int _size = 14;
+    private ArrayList<PairButton> button_list;
     
 
     /**
      * Creates new form RangeGrid
      */
     public RangeGrid() {
+        button_list = new ArrayList<>();
         initComponents();
         createButtons();
     }
@@ -41,6 +44,7 @@ public class RangeGrid extends javax.swing.JPanel {
 
 
     //Crea la matriz de botones que van a representar el rango.
+    // Y los mete en un ArrayList para gestionarlos.
     private void createButtons(){
         
         //Recorre la tabla
@@ -48,11 +52,8 @@ public class RangeGrid extends javax.swing.JPanel {
             for(int j = _size; j >= 2; j--){
                 
                 //Creacion del boton y atributos
-                //TODO - Poner que sean botones de la clase nueva
                 PairButton pair = new PairButton();
                 pair.addActionListener(pair);
-                //javax.swing.JToggleButton pair_1 = new javax.swing.JToggleButton();
-                //pair.setSize(100, 100);
                 
                 //Botones de las Parejas
                 if( i == j ){
@@ -65,7 +66,7 @@ public class RangeGrid extends javax.swing.JPanel {
                     
                 }
                 // Botones de las cartas Suited
-                else if ( i > j){
+                else if ( i > j ){
                     
                      pair.setType(Type.SUITED);
                     
@@ -86,13 +87,16 @@ public class RangeGrid extends javax.swing.JPanel {
                     //pair.setForeground(Color.WHITE);
                 }
                 
-                
+                //Añade a la gui
                 add(pair);
+                // Añade al array
+                button_list.add(pair);
+                
             }
         }
     }
     
-    // Metodo para escribir el texto de las cartas en el boton
+    // Metodo para escribir el texto de las cartas en el boton dado un interador
     private String rangeButtonText(int i){
         
         String text = "";
@@ -121,6 +125,47 @@ public class RangeGrid extends javax.swing.JPanel {
         
         return text;
     }
+    
+    // Devuelve el texto del boton
+    public String getPairText(int i){
+        return button_list.get(i).getText();
+    }
+    
+    //Limpia la tabla de botones seleccionados
+    public void clear(){
+        for (PairButton b : button_list){
+            if(b.isSelected()){
+                b.setSelected(false);
+                b.setColor(b.getType());
+            }
+        }
+    }
+    
+    //Metodo que busca el boton dado un texto y lo selecciona
+    public void searchButton(String text){
+        
+        int i = 0;
+        int n = button_list.size();
+        boolean found = false;
+        
+        while(i < n && !found){
+            if(button_list.get(i).getText().equals(text)){
+                found = true;
+                selectButton(button_list.get(i));
+            }else{
+                i++;
+            }
+        }
+        
+    }
+    
+    //Selecciona un boton
+    private void selectButton(PairButton b){
+        b.setSelected(true);
+        b.setSelectedColor();
+        
+    }
+    
     
     
     

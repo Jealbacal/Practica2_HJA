@@ -5,6 +5,7 @@
 package poker.practica2.hja.GUI;
 
 import java.awt.Color;
+import poker.practica2.hja.ap1.Ap1;
 
 /**
  *
@@ -31,7 +32,8 @@ public class MainFrame extends javax.swing.JFrame {
         rangeGrid1 = new poker.practica2.hja.GUI.RangeGrid();
         RangeTextPanel = new javax.swing.JPanel();
         RangeText = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        rep_range_button = new javax.swing.JButton();
+        Get_Range_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Practica 2");
@@ -58,14 +60,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jToggleButton1.setText("jToggleButton1");
-        jToggleButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jToggleButton1.setIconTextGap(0);
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        rep_range_button.setText("Represent Range");
+        rep_range_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Press(evt);
+                rep_range_buttonActionPerformed(evt);
             }
         });
+
+        Get_Range_button.setText("Get Range Text");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,14 +76,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jToggleButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(rep_range_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Get_Range_button, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,23 +95,20 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(165, 165, 165)
-                        .addComponent(jToggleButton1)))
-                .addContainerGap(97, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rep_range_button)
+                            .addComponent(Get_Range_button))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Press(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Press
+    private void rep_range_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rep_range_buttonActionPerformed
         // TODO add your handling code here:
-        if (jToggleButton1.isSelected()){
-            jToggleButton1.setBackground(Color.BLUE);
-        }else{
-            jToggleButton1.setBackground(Color.yellow);
-        }
-        
-    }//GEN-LAST:event_Press
+        representRange();
+    }//GEN-LAST:event_rep_range_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,9 +146,23 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Get_Range_button;
     private javax.swing.JTextField RangeText;
     private javax.swing.JPanel RangeTextPanel;
-    private javax.swing.JToggleButton jToggleButton1;
     private poker.practica2.hja.GUI.RangeGrid rangeGrid1;
+    private javax.swing.JButton rep_range_button;
     // End of variables declaration//GEN-END:variables
+
+    /*Metodo que se llama cuando presionas el boton para marcar en la tabla
+    el rango especificado en el campo de texto.*/
+    private void representRange(){
+        
+        rangeGrid1.clear();
+        
+        Ap1 logic = new Ap1(RangeText.getText());
+        
+        for(String text : logic.rangos){
+            rangeGrid1.searchButton(text);
+        }
+    }
 }
