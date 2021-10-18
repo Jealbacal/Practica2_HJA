@@ -46,14 +46,13 @@ public class Ap1 {
             
           i++;
         }
-            
+         this.elems.add(aux);   
     }
 
     public void procesa(){
         String mayor=null;
         String menor=null;
        for(String x : this.elems){
-           
            if(x.contains("s") || x.contains("o")){
                
                if(x.contains("+")){
@@ -64,23 +63,19 @@ public class Ap1 {
                
                else if(x.contains("-")){
                    
-                   mayor=x.substring(0, 3);
-                   menor=x.substring(3, x.length()-1);
+                   menosOperator(x,false);
                }
                
                else
                   this.rangos.add(x);
            }
-           
            else{
-               
                 if(x.contains("+")){
                    mayor=x.substring(0, x.length()-1);
                    masOperator(mayor,true);
-               }
-               
-               else if(x.contains("-")){
-                   
+               }               
+               else if(x.contains("-")){ //JJ-AA
+                   menosOperator(x,true);
                }
                
                else
@@ -88,7 +83,7 @@ public class Ap1 {
            }
                
            
-       }
+        }
     }
 
     public int cartaParse(char carta){
@@ -159,11 +154,9 @@ public class Ap1 {
        if(!pair){
             while(i<max){
                 
-                aux= aux.replace(rango.charAt(1),valorToChar(i));
+                aux= aux.replace(aux.charAt(1),valorToChar(i));
                 this.rangos.add(aux);
-                
-
-                i++;
+                ++i;
             }
        }
        
@@ -180,19 +173,46 @@ public class Ap1 {
        }
    }
    
+   //AKs-A2s  JJ-QQ
+   public void menosOperator(String rango, boolean pair){
+       
+       int dif, ini, fin;
+       String aux;
+       if (!pair){
+           ini = cartaParse(rango.charAt(1));
+           fin = cartaParse(rango.charAt(5));
+           aux = rango.substring(0,3);
+           for(int i = Math.min(ini, fin); i <= Math.max(ini, fin); i++){
+                aux= aux.replace(aux.charAt(1),valorToChar(i));
+                this.rangos.add(aux);
+           }
+       }
+       else{
+           ini = cartaParse(rango.charAt(0));
+           fin = cartaParse(rango.charAt(3));
+           for(int i = Math.min(ini, fin); i <= Math.max(ini, fin); i++){
+               String s =String.valueOf(valorToChar(i));
+               aux= s+s;
+               this.rangos.add(aux);
+           }
+       }
+
+      
+   }
+   
    //Testeo del parse
    public static void main(String args[]){
        
        //Parece que no procesa bien el ultimo elemento
        //Los intervalos no salen
        
-       String test1 = "AKs-A2s"; // No funciona
+       String test1 = "AKs-A2s, TT+, T2s"; // No funciona
        String test2 = "TT+,T2s+"; // Falta que saque el T2s+, el TT+ lo saca bien
        String test3 = "AA"; // No funciona
        String test4 = "AA,TT"; // Saca solo AA
-       String test5 = "AA,TT,22"; // Saca AA y TT pero no 22
+       String test5 = "J3s+"; 
        
-       Ap1 logic = new Ap1(test5);
+       Ap1 logic = new Ap1(test1);
        
        for(String s : logic.rangos){
            System.out.println(s);
