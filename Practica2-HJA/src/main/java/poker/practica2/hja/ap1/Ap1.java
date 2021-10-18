@@ -21,6 +21,8 @@ public class Ap1 {
         this.texfield=textfield;
         ArrayList<String>rangos =  new  ArrayList<String>();
         ArrayList<String> elems = new ArrayList<String>();
+        parse();
+        procesa();
 
     }
 
@@ -56,6 +58,7 @@ public class Ap1 {
                
                if(x.contains("+")){
                    mayor=x.substring(0, x.length()-1);
+                   masOperator(mayor,false);
                    
                }
                
@@ -72,7 +75,8 @@ public class Ap1 {
            else{
                
                 if(x.contains("+")){
-                   
+                   mayor=x.substring(0, x.length()-1);
+                   masOperator(mayor,true);
                }
                
                else if(x.contains("-")){
