@@ -14,6 +14,13 @@ public class Ap1 {
     public ArrayList<String> rangos; //A2O+ -> A3o...Ako  JJ+ ->
     public String texfield;
     public ArrayList<String> elems;
+    
+    //Aqui se devuelve el rango carta a carta. La entrada para la logica inversa.
+    //Misma forma que rangos
+    private ArrayList<String> range2Text;
+    
+    //Si podeis guardar aqui el String que escribir en el bloque de texto seria maravilloso.
+    private String textFromRange;
 
 
     public Ap1(String textfield){
@@ -21,9 +28,19 @@ public class Ap1 {
         this.texfield=textfield;
         rangos =  new  ArrayList<String>();
         elems = new ArrayList<String>();
+        range2Text = new ArrayList<String>();
         parse();
         procesa();
 
+    }
+    
+    //Constructor sin argumentos para procesar la tabla. No el texto.
+    public Ap1(){
+        rangos =  new  ArrayList<String>();
+        elems = new ArrayList<String>();
+        range2Text = new ArrayList<String>();
+        
+        //Aqui los metodos que procesan range2Text
     }
 
     public void parse(){
@@ -198,6 +215,20 @@ public class Ap1 {
        }
 
       
+   }
+   
+   //Copia la entrada que lleva la GUI en el array range2Text para procesarlo
+   public void fillRange2Text(ArrayList<String> r){
+       //No se si esta asignacion funciona, si no funciona se hace el bucle y listo.
+       range2Text = r;
+       
+//       for(String s : r){
+//           range2Text.add(s);
+//       }
+   }
+   
+   public String getTextFromRange(){
+       return textFromRange;
    }
    
    //Testeo del parse

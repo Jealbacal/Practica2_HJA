@@ -19,6 +19,7 @@ public class RangeGrid extends javax.swing.JPanel {
     
     private final static int _size = 14;
     private ArrayList<PairButton> button_list;
+    private ArrayList<PairButton> sel_button_list;
     
 
     /**
@@ -26,6 +27,7 @@ public class RangeGrid extends javax.swing.JPanel {
      */
     public RangeGrid() {
         button_list = new ArrayList<>();
+        sel_button_list = new ArrayList<>();
         initComponents();
         createButtons();
     }
@@ -137,6 +139,7 @@ public class RangeGrid extends javax.swing.JPanel {
             if(b.isSelected()){
                 b.setSelected(false);
                 b.setColor(b.getType());
+                sel_button_list.clear();
             }
         }
     }
@@ -163,7 +166,28 @@ public class RangeGrid extends javax.swing.JPanel {
     private void selectButton(PairButton b){
         b.setSelected(true);
         b.setSelectedColor();
+        sel_button_list.add(b);
+    }
+    
+    public void checkSelected(){
+        for(PairButton b : button_list){
+            if(b.isSelected()){
+                sel_button_list.add(b);
+            }else{
+                sel_button_list.remove(b);
+            }
+        }
+    }
+    
+    public ArrayList<String> getSelButtonList(){
         
+        ArrayList<String> list = new ArrayList<String>();
+        
+        for( PairButton b : sel_button_list){
+            list.add(b.getText());
+        }
+        
+        return list;
     }
     
     

@@ -68,6 +68,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         Get_Range_button.setText("Get Range Text");
+        Get_Range_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Get_Range_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,8 +112,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void rep_range_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rep_range_buttonActionPerformed
         // TODO add your handling code here:
-        representRange();
+        Text2Range();
     }//GEN-LAST:event_rep_range_buttonActionPerformed
+
+    private void Get_Range_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Get_Range_buttonActionPerformed
+        // TODO add your handling code here:
+        Range2Text();
+    }//GEN-LAST:event_Get_Range_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,7 +165,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     /*Metodo que se llama cuando presionas el boton para marcar en la tabla
     el rango especificado en el campo de texto.*/
-    private void representRange(){
+    private void Text2Range(){
         
         rangeGrid1.clear();
         
@@ -164,5 +174,16 @@ public class MainFrame extends javax.swing.JFrame {
         for(String text : logic.rangos){
             rangeGrid1.searchButton(text);
         }
+    }
+    
+    private void Range2Text(){
+        
+        rangeGrid1.checkSelected();
+        
+        Ap1 logic = new Ap1();
+        
+        logic.fillRange2Text(rangeGrid1.getSelButtonList());
+        
+        RangeText.setText(logic.getTextFromRange());
     }
 }
