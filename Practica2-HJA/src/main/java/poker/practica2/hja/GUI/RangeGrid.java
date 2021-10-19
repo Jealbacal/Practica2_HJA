@@ -173,6 +173,7 @@ public class RangeGrid extends javax.swing.JPanel {
     //Se asegura de que todos los botones seleccionados estan en la lista
     //de botones seleccionados
     public void checkSelected(){
+        sel_button_list.clear();
         for(PairButton b : button_list){
             if(b.isSelected()){
                 sel_button_list.add(b);
@@ -188,8 +189,9 @@ public class RangeGrid extends javax.swing.JPanel {
         2.- Las suited
         3.- Las offsuit
             - Creo que las offsuit no quedan ordenadas para comprobar los intervalos bien.
-            Osease, AQo-A5o no estarian consecutivas si hay alguna otro offsuit seleccionado
+            Por ejemplo, AQo-A5o no estarian consecutivas si hay alguna otro offsuit seleccionado.
             - Collections.sort(off_list); puede que lo ordene
+            - Collections.sort(off_list); lo ordena de manera decreciente :(
     */
     public ArrayList<String> getSelButtonList(){
         
@@ -217,8 +219,6 @@ public class RangeGrid extends javax.swing.JPanel {
             }
         }
         
-        //Se puede intentar ordenar la lista de offs a ver que tal
-        //No se si esto lo ordena bien xD
         Collections.sort(off_list);
         
         list.addAll(pair_list);

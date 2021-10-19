@@ -5,6 +5,7 @@
 package poker.practica2.hja.GUI;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import poker.practica2.hja.ap1.Ap1;
 
 /**
@@ -180,10 +181,19 @@ public class MainFrame extends javax.swing.JFrame {
         
         rangeGrid1.checkSelected();
         
-        Ap1 logic = new Ap1();
+        //DEBUG--------------------------------------
+        ArrayList<String> test = new ArrayList<>();
+        test = rangeGrid1.getSelButtonList();
         
-        logic.fillRange2Text(rangeGrid1.getSelButtonList());
+        for( String s : test){
+            System.out.println(s);
+        }
+        //--------------------------------------
         
-        RangeText.setText(logic.getTextFromRange());
+//      Ap1 logic = new Ap1();
+//        
+//      logic.fillRange2Text(rangeGrid1.getSelButtonList());
+//        
+//      RangeText.setText(logic.getTextFromRange());
     }
 }
