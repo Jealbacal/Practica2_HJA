@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -169,6 +170,8 @@ public class RangeGrid extends javax.swing.JPanel {
         sel_button_list.add(b);
     }
     
+    //Se asegura de que todos los botones seleccionados estan en la lista
+    //de botones seleccionados
     public void checkSelected(){
         for(PairButton b : button_list){
             if(b.isSelected()){
@@ -179,13 +182,48 @@ public class RangeGrid extends javax.swing.JPanel {
         }
     }
     
+    //Crea una lista (semi-ordenada) con los strings (nombres) de los botones seleccionados
+    /*Orden:
+        1.- Las parejas
+        2.- Las suited
+        3.- Las offsuit
+            - Creo que las offsuit no quedan ordenadas para comprobar los intervalos bien.
+            Osease, AQo-A5o no estarian consecutivas si hay alguna otro offsuit seleccionado
+            - Collections.sort(off_list); puede que lo ordene
+    */
     public ArrayList<String> getSelButtonList(){
         
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> pair_list = new ArrayList<>();
+        ArrayList<String> suit_list = new ArrayList<>();
+        ArrayList<String> off_list = new ArrayList<>();
         
         for( PairButton b : sel_button_list){
-            list.add(b.getText());
+            if (null != b.getType()){
+                
+                switch (b.getType()) {
+                case PAIR:
+                    pair_list.add(b.getText());
+                    break;
+                case SUITED:
+                    suit_list.add(b.getText());
+                    break;
+                case OFF_SUIT:
+                    off_list.add(b.getText());
+                    break;
+                default:
+                    break;
+                }
+            }
         }
+        
+        //Se puede intentar ordenar la lista de offs a ver que tal
+        //No se si esto lo ordena bien xD
+        Collections.sort(off_list);
+        
+        list.addAll(pair_list);
+        list.addAll(suit_list);
+        list.addAll(off_list);
         
         return list;
     }
