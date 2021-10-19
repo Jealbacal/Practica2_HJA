@@ -188,10 +188,11 @@ public class RangeGrid extends javax.swing.JPanel {
         1.- Las parejas
         2.- Las suited
         3.- Las offsuit
-            - Creo que las offsuit no quedan ordenadas para comprobar los intervalos bien.
+            - v1 Creo que las offsuit no quedan ordenadas para comprobar los intervalos bien.
             Por ejemplo, AQo-A5o no estarian consecutivas si hay alguna otro offsuit seleccionado.
-            - Collections.sort(off_list); puede que lo ordene
-            - Collections.sort(off_list); lo ordena de manera decreciente :(
+            - v2 Collections.sort(off_list); puede que lo ordene
+            - v2 Collections.sort(off_list); lo ordena de manera decreciente :(
+            - v3 Collections.sort(off_list, Collections.reverseOrder()); ya lo hace bien!!!
     */
     public ArrayList<String> getSelButtonList(){
         
@@ -219,7 +220,7 @@ public class RangeGrid extends javax.swing.JPanel {
             }
         }
         
-        Collections.sort(off_list);
+        Collections.sort(off_list, Collections.reverseOrder());
         
         list.addAll(pair_list);
         list.addAll(suit_list);
