@@ -35,10 +35,13 @@ public class Ap1 {
     }
     
     //Constructor sin argumentos para procesar la tabla. No el texto.
-    public Ap1(){
-        rangos =  new  ArrayList<String>();
+    public Ap1(ArrayList<String> rangos){
+        this.rangos = rangos;
         elems = new ArrayList<String>();
         range2Text = new ArrayList<String>();
+        texfield="";
+        fillRange2Text(rangos);
+        
         
         //Aqui los metodos que procesan range2Text
     }
@@ -221,10 +224,72 @@ public class Ap1 {
    public void fillRange2Text(ArrayList<String> r){
        //No se si esta asignacion funciona, si no funciona se hace el bucle y listo.
        range2Text = r;
+       int i=0;
+       int j=1;
+       String aux="";
        
 //       for(String s : r){
 //           range2Text.add(s);
 //       }
+        
+        while ( j < range2Text.size()){
+            
+            String rngI=range2Text.get(i);
+            String rngIN=range2Text.get(j-1);
+            String rngF =range2Text.get(j);
+            
+            if(rngI.charAt(0)==rngI.charAt(1)){
+                
+                if(rngF.charAt(0)==rngF.charAt(1) && cartaParse(rngIN.charAt(0))- cartaParse(rngF.charAt(0))==1 ){
+                    j++;
+                }
+                
+                else if((rngF.charAt(0)==rngF.charAt(1) && cartaParse(rngIN.charAt(0))-cartaParse(rngF.charAt(0))>1 && rngI != rngIN) || rngF.charAt(0)!=rngF.charAt(1) && rngI != rngIN ){
+                    
+                    if(rngI.charAt(0)=='A')
+                        aux=aux+ rngIN+"+,";
+                    
+                    else
+                        aux=aux+ rngI+"-"+rngIN+",";
+                    
+                    i=j;
+                }
+                
+                else{
+                    aux= aux+range2Text.get(i)+",";
+                    i++;
+                    j++;
+                }    
+            }
+            
+            else {
+                
+                if(cartaParse(rngIN.charAt(1))- cartaParse(rngF.charAt(1))==1){
+                    j++;
+                }
+                else if( cartaParse(rngIN.charAt(0))-cartaParse(rngF.charAt(0))>1 && rngI != rngIN ){
+                    
+                     if(rngIN.charAt(0)- cartaParse(rngIN.charAt(1))==1)
+                        aux=aux+ rngIN+"+,";
+                    
+                    else
+                        aux=aux+ rngI+"-"+rngIN+",";
+                    
+                    i=j;
+                }
+                
+                else{
+                    aux= aux+range2Text.get(i)+",";
+                    i++;
+                    j++;
+                }    
+                
+            }
+            
+         
+        }
+
+         this.texfield=aux;
    }
    
    public String getTextFromRange(){
@@ -244,9 +309,12 @@ public class Ap1 {
        String test5 = "J3s+"; 
        
        Ap1 logic = new Ap1(test1);
+       Ap1 logic2 = new Ap1(logic.rangos);
        
        for(String s : logic.rangos){
            System.out.println(s);
        }
+       
+       System.out.println(logic2.texfield);
    }
 }

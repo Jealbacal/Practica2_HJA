@@ -190,10 +190,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
         //--------------------------------------
         
-//      Ap1 logic = new Ap1();
-//        
-//      logic.fillRange2Text(rangeGrid1.getSelButtonList());
-//        
-//      RangeText.setText(logic.getTextFromRange());
+        Ap1 logic = new Ap1(rangeGrid1.getSelButtonList());
+        
+        //logic.fillRange2Text(rangeGrid1.getSelButtonList());
+       
+        RangeText.setText(logic.texfield);
     }
 }
