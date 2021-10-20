@@ -227,6 +227,8 @@ public class Ap1 {
        int i=0;
        int j=1;
        String aux="";
+       boolean solo=false;
+       boolean ultimo=false;
        
 //       for(String s : r){
 //           range2Text.add(s);
@@ -242,53 +244,101 @@ public class Ap1 {
                 
                 if(rngF.charAt(0)==rngF.charAt(1) && cartaParse(rngIN.charAt(0))- cartaParse(rngF.charAt(0))==1 ){
                     j++;
+                    solo=true;
                 }
                 
-                else if((rngF.charAt(0)==rngF.charAt(1) && cartaParse(rngIN.charAt(0))-cartaParse(rngF.charAt(0))>1 && rngI != rngIN) || rngF.charAt(0)!=rngF.charAt(1) && rngI != rngIN ){
+                if((rngF.charAt(0)==rngF.charAt(1) && cartaParse(rngIN.charAt(0))-cartaParse(rngF.charAt(0))>1 && rngI != rngIN) || rngF.charAt(0)!=rngF.charAt(1) && rngI != rngIN || j >= range2Text.size()){
                     
-                    if(rngI.charAt(0)=='A')
-                        aux=aux+ rngIN+"+,";
+                    if(rngI.charAt(0)=='A'){
+                        
+                        if(j>= range2Text.size())
+                            aux=aux+ rngF+"+";
+                         else
+                             aux=aux+ rngIN+"+,";
+                        
+                    }
+                    
+                    else if(j>= range2Text.size())
+                        aux=aux+ rngI+"-"+rngF;
                     
                     else
                         aux=aux+ rngI+"-"+rngIN+",";
                     
                     i=j;
+                    j++;
+                    
+                    if(j==range2Text.size())
+                        ultimo=true;
+                        
+                    solo = true;
                 }
                 
-                else{
-                    aux= aux+range2Text.get(i)+",";
+                if(!solo || ultimo){
+                    if(j>= range2Text.size())
+                        aux= aux+range2Text.get(i);
+                    
+                    else
+                        aux= aux+range2Text.get(i)+",";
+                        
                     i++;
                     j++;
+                    
+                    if(j==range2Text.size())
+                        aux= aux+range2Text.get(i);
                 }    
             }
             
             else {
                 
-                if(cartaParse(rngIN.charAt(1))- cartaParse(rngF.charAt(1))==1){
+                if(cartaParse(rngIN.charAt(1))- cartaParse(rngF.charAt(1))==1 && cartaParse(rngIN.charAt(0))== cartaParse(rngF.charAt(0))){
                     j++;
+                    solo=true;
                 }
-                else if( cartaParse(rngIN.charAt(0))-cartaParse(rngF.charAt(0))>1 && rngI != rngIN ){
+                
+                if( cartaParse(rngIN.charAt(1))-cartaParse(rngF.charAt(1))>1 && rngI != rngIN || j>= range2Text.size() || (cartaParse(rngIN.charAt(0))!= cartaParse(rngF.charAt(0)) && rngI != rngIN)  ){
                     
-                     if(rngIN.charAt(0)- cartaParse(rngIN.charAt(1))==1)
-                        aux=aux+ rngIN+"+,";
+                     if(cartaParse(rngI.charAt(0))- cartaParse(rngI.charAt(1))==1){
+                         
+                         if(j>= range2Text.size())
+                            aux=aux+ rngF+"+";
+                         else
+                             aux=aux+ rngIN+"+,";
+                     }
+                        
+                     
+                    else if(j>= range2Text.size())
+                        aux=aux+ rngI+"-"+rngF;
                     
                     else
                         aux=aux+ rngI+"-"+rngIN+",";
                     
                     i=j;
+                    j++;
+                    
+                    if(j==range2Text.size())
+                        ultimo=true;
+                    
+                    solo=true;
                 }
                 
-                else{
-                    aux= aux+range2Text.get(i)+",";
+                if(!solo || ultimo){
+                    if(j>= range2Text.size())
+                        aux= aux+range2Text.get(i);
+                    
+                    else
+                        aux= aux+range2Text.get(i)+",";
                     i++;
                     j++;
+                    
+                    if(j==range2Text.size())
+                        aux= aux+range2Text.get(i);
                 }    
                 
             }
             
-         
+            solo=false;
         }
-
+         
          this.texfield=aux;
    }
    
