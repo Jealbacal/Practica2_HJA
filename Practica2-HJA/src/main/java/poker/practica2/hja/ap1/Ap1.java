@@ -236,31 +236,46 @@ public class Ap1 {
         
         while ( j < range2Text.size()){
             
+            //inicio del rango
             String rngI=range2Text.get(i);
+            //pivote
             String rngIN=range2Text.get(j-1);
+            //final del rango
             String rngF =range2Text.get(j);
             
+            //comprobaciones para los pares 
             if(rngI.charAt(0)==rngI.charAt(1)){
                 
+                //cartas contiguas
                 if(rngF.charAt(0)==rngF.charAt(1) && cartaParse(rngIN.charAt(0))- cartaParse(rngF.charAt(0))==1 ){
                     j++;
                     solo=true;
                 }
                 
+                //entra cuando:
+                //1-las cartas dejan de ser contiguas
+                //2-las cartas dejan de ser pares
+                //3-el final del rango llega al final del array
                 if((rngF.charAt(0)==rngF.charAt(1) && cartaParse(rngIN.charAt(0))-cartaParse(rngF.charAt(0))>1 && rngI != rngIN) || rngF.charAt(0)!=rngF.charAt(1) && rngI != rngIN || j >= range2Text.size()){
                     
+                    //si el rango inicial es el A significa que es el operador +
                     if(rngI.charAt(0)=='A'){
                         
+                        //si j llega al final del array (el operador + es lo ultimo que encontro)
                         if(j>= range2Text.size())
                             aux=aux+ rngF+"+";
+                        
+                        //el operador + esta entremedias
                          else
                              aux=aux+ rngIN+"+,";
                         
                     }
                     
+                    //si j llega al final del array (el operador - es lo ultimo que encontro)
                     else if(j>= range2Text.size())
                         aux=aux+ rngI+"-"+rngF;
                     
+                    //el operador - esta entremedias
                     else
                         aux=aux+ rngI+"-"+rngIN+",";
                     
@@ -273,42 +288,58 @@ public class Ap1 {
                     solo = true;
                 }
                 
+                //un rango suelto
                 if(!solo || ultimo){
+                    
+                    //si el rango suelto esta al final
                     if(j>= range2Text.size())
                         aux= aux+range2Text.get(i);
                     
+                    //si esta entremedias
                     else
                         aux= aux+range2Text.get(i)+",";
                         
                     i++;
                     j++;
                     
+                    //si hay dos rangos sueltos al final del array
                     if(j==range2Text.size())
                         aux= aux+range2Text.get(i);
                 }    
             }
             
+            //comprobaciones del Suited y los Offs
             else {
                 
+                //cartas contiguas
                 if(cartaParse(rngIN.charAt(1))- cartaParse(rngF.charAt(1))==1 && cartaParse(rngIN.charAt(0))== cartaParse(rngF.charAt(0))){
                     j++;
                     solo=true;
                 }
                 
+                //entra cuando:
+                //1-las cartas dejan de ser contiguas dentro de la misma fila
+                //2-las cartas dejan de ser contguas por ser de distintas filas
+                //3-el final del rango llega al final del array
                 if( cartaParse(rngIN.charAt(1))-cartaParse(rngF.charAt(1))>1 && rngI != rngIN || j>= range2Text.size() || (cartaParse(rngIN.charAt(0))!= cartaParse(rngF.charAt(0)) && rngI != rngIN)  ){
                     
+                     //si el rango inicial la diferencia de los dos caracteres es uno es un operador +
                      if(cartaParse(rngI.charAt(0))- cartaParse(rngI.charAt(1))==1){
                          
+                         //si j llega al final del array (el operador + es lo ultimo que encontro)
                          if(j>= range2Text.size())
                             aux=aux+ rngF+"+";
+                         
+                         //el operador + esta entremedias
                          else
                              aux=aux+ rngIN+"+,";
                      }
                         
-                     
+                    //si j llega al final del array (el operador - es lo ultimo que encontro) 
                     else if(j>= range2Text.size())
                         aux=aux+ rngI+"-"+rngF;
                     
+                    //el operador - esta entremedias
                     else
                         aux=aux+ rngI+"-"+rngIN+",";
                     
@@ -321,15 +352,20 @@ public class Ap1 {
                     solo=true;
                 }
                 
+                //un rango suelto
                 if(!solo || ultimo){
+                    
+                    //si el rango suelto esta al final
                     if(j>= range2Text.size())
                         aux= aux+range2Text.get(i);
                     
+                    //si esta entremedias
                     else
                         aux= aux+range2Text.get(i)+",";
                     i++;
                     j++;
                     
+                    //si hay dos rangos sueltos al final del array
                     if(j==range2Text.size())
                         aux= aux+range2Text.get(i);
                 }    
