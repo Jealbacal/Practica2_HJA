@@ -234,6 +234,9 @@ public class Ap1 {
 //           range2Text.add(s);
 //       }
         
+         if(j==range2Text.size())
+               aux= aux+range2Text.get(i);
+
         while ( j < range2Text.size()){
             
             //inicio del rango
@@ -374,6 +377,8 @@ public class Ap1 {
             
             solo=false;
         }
+        
+        
          
          this.texfield=aux;
    }
