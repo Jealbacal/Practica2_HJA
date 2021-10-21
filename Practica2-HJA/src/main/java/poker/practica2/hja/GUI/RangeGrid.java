@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 
 /**
@@ -21,6 +22,8 @@ public class RangeGrid extends javax.swing.JPanel {
     private final static int _size = 14;
     private ArrayList<PairButton> button_list;
     private ArrayList<PairButton> sel_button_list;
+    private PairButton[][] button_matrix;
+   
     
 
     /**
@@ -29,8 +32,11 @@ public class RangeGrid extends javax.swing.JPanel {
     public RangeGrid() {
         button_list = new ArrayList<>();
         sel_button_list = new ArrayList<>();
+        button_matrix = new PairButton[_size-1][_size-1];
+        
         initComponents();
         createButtons();
+        fillMatrix(button_list);
     }
 
     /**
@@ -45,6 +51,26 @@ public class RangeGrid extends javax.swing.JPanel {
         setLayout(new java.awt.GridLayout(13, 13));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void fillMatrix(ArrayList<PairButton> b){
+        
+        int col_count = 0;
+        int row_count = 0;
+        int index = col_count;
+        
+        while( row_count < _size-1){
+            if(col_count == _size-1){
+                col_count = 0;
+                row_count++;
+            }
+            if ( row_count < _size -1){
+                  button_matrix[row_count][col_count] = b.get(index);
+            }
+          
+            col_count++;
+            index++;
+        }
+       
+    }
 
     //Crea la matriz de botones que van a representar el rango.
     // Y los mete en un ArrayList para gestionarlos.
@@ -185,14 +211,15 @@ public class RangeGrid extends javax.swing.JPanel {
     
     //Crea una lista (semi-ordenada) con los strings (nombres) de los botones seleccionados
     /*Orden:
-        1.- Las parejas
-        2.- Las suited
+        1.- Las parejas (bien)
+        2.- Las suited (bien)
         3.- Las offsuit
             - v1 Creo que las offsuit no quedan ordenadas para comprobar los intervalos bien.
             Por ejemplo, AQo-A5o no estarian consecutivas si hay alguna otro offsuit seleccionado.
             - v2 Collections.sort(off_list); puede que lo ordene
             - v2 Collections.sort(off_list); lo ordena de manera decreciente :(
             - v3 Collections.sort(off_list, Collections.reverseOrder()); ya lo hace bien!!!
+            - v3 No funciona todavia, el orden alfabetico lo jode.
     */
     public ArrayList<String> getSelButtonList(){
         
@@ -212,7 +239,7 @@ public class RangeGrid extends javax.swing.JPanel {
                     suit_list.add(b.getText());
                     break;
                 case OFF_SUIT:
-                    off_list.add(b.getText());
+                    //off_list.add(b.getText());
                     break;
                 default:
                     break;
@@ -220,7 +247,22 @@ public class RangeGrid extends javax.swing.JPanel {
             }
         }
         
-        Collections.sort(off_list, Collections.reverseOrder());
+        
+        
+        
+        int col = 0;
+        
+        while (col < _size-1){
+            for (int i = 0; i < _size-1; i++){
+                if(button_matrix[i][col].getType().equals(Type.OFF_SUIT)){
+                    if(button_matrix[i][col].isSelected()){
+                        off_list.add(button_matrix[i][col].getText());
+                    }
+                    
+                }
+            }
+            col++;
+        }
         
         list.addAll(pair_list);
         list.addAll(suit_list);
