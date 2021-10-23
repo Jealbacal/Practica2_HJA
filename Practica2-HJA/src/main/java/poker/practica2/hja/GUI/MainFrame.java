@@ -31,15 +31,16 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        rangeGrid1 = new poker.practica2.hja.GUI.RangeGrid();
+        RangeGrid = new poker.practica2.hja.GUI.RangeGrid();
         RangeTextPanel = new javax.swing.JPanel();
         RangeText = new javax.swing.JTextField();
-        RangeSlider = new javax.swing.JSlider();
-        SliderNumber = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        ButtonPanel = new javax.swing.JPanel();
         rep_range_button = new javax.swing.JButton();
         Get_Range_button = new javax.swing.JButton();
         clear_button = new javax.swing.JButton();
+        SliderPanel = new javax.swing.JPanel();
+        SliderNumber = new javax.swing.JLabel();
+        RangeSlider = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Practica 2");
@@ -55,7 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
             RangeTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RangeTextPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(RangeText, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(RangeText)
                 .addContainerGap())
         );
         RangeTextPanelLayout.setVerticalGroup(
@@ -66,59 +67,89 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        RangeSlider.setPaintLabels(true);
-        RangeSlider.setPaintTicks(true);
-        RangeSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                RangeSliderStateChanged(evt);
-            }
-        });
-
-        SliderNumber.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        SliderNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SliderNumber.setText("50 %");
-
-        rep_range_button.setText("Represent Range");
+        rep_range_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\Icon input 3.png")); // NOI18N
         rep_range_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rep_range_buttonActionPerformed(evt);
             }
         });
 
-        Get_Range_button.setText("Get Range Text");
+        Get_Range_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\Icon output 3.png")); // NOI18N
         Get_Range_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Get_Range_buttonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rep_range_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Get_Range_button, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rep_range_button)
-                    .addComponent(Get_Range_button))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        clear_button.setText("Clear");
+        clear_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\clear icon.png")); // NOI18N
         clear_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clear_buttonActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout ButtonPanelLayout = new javax.swing.GroupLayout(ButtonPanel);
+        ButtonPanel.setLayout(ButtonPanelLayout);
+        ButtonPanelLayout.setHorizontalGroup(
+            ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ButtonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rep_range_button, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Get_Range_button, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        ButtonPanelLayout.setVerticalGroup(
+            ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ButtonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Get_Range_button, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(rep_range_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clear_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        SliderNumber.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        SliderNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SliderNumber.setText("0 %");
+
+        RangeSlider.setMajorTickSpacing(10);
+        RangeSlider.setMinorTickSpacing(1);
+        RangeSlider.setPaintLabels(true);
+        RangeSlider.setPaintTicks(true);
+        RangeSlider.setSnapToTicks(true);
+        RangeSlider.setValue(0);
+        RangeSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                RangeSliderStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout SliderPanelLayout = new javax.swing.GroupLayout(SliderPanel);
+        SliderPanel.setLayout(SliderPanelLayout);
+        SliderPanelLayout.setHorizontalGroup(
+            SliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SliderPanelLayout.createSequentialGroup()
+                .addComponent(RangeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SliderNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+        );
+        SliderPanelLayout.setVerticalGroup(
+            SliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SliderPanelLayout.createSequentialGroup()
+                .addGroup(SliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(SliderPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SliderNumber)
+                        .addGap(12, 12, 12))
+                    .addGroup(SliderPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(RangeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,41 +158,28 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SliderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(RangeGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(RangeTextPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(RangeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SliderNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(341, 341, 341))))
+                            .addComponent(ButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(RangeTextPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clear_button)))
+                        .addComponent(ButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RangeGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RangeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(SliderNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 8, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(SliderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -223,14 +241,15 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ButtonPanel;
     private javax.swing.JButton Get_Range_button;
+    private poker.practica2.hja.GUI.RangeGrid RangeGrid;
     private javax.swing.JSlider RangeSlider;
     private javax.swing.JTextField RangeText;
     private javax.swing.JPanel RangeTextPanel;
     private javax.swing.JLabel SliderNumber;
+    private javax.swing.JPanel SliderPanel;
     private javax.swing.JButton clear_button;
-    private javax.swing.JPanel jPanel1;
-    private poker.practica2.hja.GUI.RangeGrid rangeGrid1;
     private javax.swing.JButton rep_range_button;
     // End of variables declaration//GEN-END:variables
 
@@ -238,37 +257,37 @@ public class MainFrame extends javax.swing.JFrame {
     el rango especificado en el campo de texto.*/
     private void Text2Range(){
         
-        rangeGrid1.clear();
+        RangeGrid.clear();
         
         Ap1 logic = new Ap1(RangeText.getText());
         
         for(String text : logic.rangos){
-            rangeGrid1.searchButton(text);
+            RangeGrid.searchButton(text);
         }
     }
     
     private void Range2Text(){
         
-        rangeGrid1.checkSelected();
+        RangeGrid.checkSelected();
         
         //DEBUG--------------------------------------
         ArrayList<String> test = new ArrayList<>();
-        test = rangeGrid1.getSelButtonList();
+        test = RangeGrid.getSelButtonList();
         
         for( String s : test){
             System.out.println(s);
         }
         //--------------------------------------
         
-        Ap1 logic = new Ap1(rangeGrid1.getSelButtonList());
+        Ap1 logic = new Ap1(RangeGrid.getSelButtonList());
         
-        logic.fillRange2Text(rangeGrid1.getSelButtonList());
+        logic.fillRange2Text(RangeGrid.getSelButtonList());
        
         RangeText.setText(logic.texfield);
     }
     
     private void clear(){
-        rangeGrid1.clear();
+        RangeGrid.clear();
         RangeText.setText("");
     }
     
@@ -278,11 +297,11 @@ public class MainFrame extends javax.swing.JFrame {
         
         SliderNumber.setText(Integer.toString(slider_value) + " %");
         
-        rangeGrid1.clear();
+        RangeGrid.clear();
         
         Ap2 logic = new Ap2(percent_range, slider_value);
         
-        rangeGrid1.selectSliderRange(percent_range);
+        RangeGrid.selectSliderRange(percent_range);
         
     }
 }
