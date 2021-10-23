@@ -220,6 +220,7 @@ public class RangeGrid extends javax.swing.JPanel {
             - v2 Collections.sort(off_list); lo ordena de manera decreciente :(
             - v3 Collections.sort(off_list, Collections.reverseOrder()); ya lo hace bien!!!
             - v3 No funciona todavia, el orden alfabetico lo jode.
+            - v4 Ya funciona por reestructuracion de la estrucutra de botones. Lista -> Matriz
     */
     public ArrayList<String> getSelButtonList(){
         
@@ -271,7 +272,16 @@ public class RangeGrid extends javax.swing.JPanel {
         return list;
     }
     
-    
+    /**Recorre la lista de texto pasada y seleccciona el boton que corresponde con el texto.
+     * 
+     * @param percent_range La lista de texto de botones a seleccionar
+     */
+    public void selectSliderRange(ArrayList<String> percent_range){
+        
+       for (String s : percent_range){
+           searchButton(s);
+       }
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

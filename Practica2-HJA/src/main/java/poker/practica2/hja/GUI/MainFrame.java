@@ -7,6 +7,7 @@ package poker.practica2.hja.GUI;
 import java.awt.Color;
 import java.util.ArrayList;
 import poker.practica2.hja.ap1.Ap1;
+import poker.practica2.hja.ap1.Ap2;
 
 /**
  *
@@ -33,6 +34,9 @@ public class MainFrame extends javax.swing.JFrame {
         rangeGrid1 = new poker.practica2.hja.GUI.RangeGrid();
         RangeTextPanel = new javax.swing.JPanel();
         RangeText = new javax.swing.JTextField();
+        RangeSlider = new javax.swing.JSlider();
+        SliderNumber = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         rep_range_button = new javax.swing.JButton();
         Get_Range_button = new javax.swing.JButton();
         clear_button = new javax.swing.JButton();
@@ -51,7 +55,7 @@ public class MainFrame extends javax.swing.JFrame {
             RangeTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RangeTextPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(RangeText, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addComponent(RangeText, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                 .addContainerGap())
         );
         RangeTextPanelLayout.setVerticalGroup(
@@ -61,6 +65,18 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(RangeText, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        RangeSlider.setPaintLabels(true);
+        RangeSlider.setPaintTicks(true);
+        RangeSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                RangeSliderStateChanged(evt);
+            }
+        });
+
+        SliderNumber.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        SliderNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SliderNumber.setText("50 %");
 
         rep_range_button.setText("Represent Range");
         rep_range_button.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +92,27 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rep_range_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Get_Range_button, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rep_range_button)
+                    .addComponent(Get_Range_button))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         clear_button.setText("Clear");
         clear_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,23 +126,22 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(rangeGrid1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(RangeTextPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 1, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rep_range_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Get_Range_button, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
+                                .addGap(12, 12, 12)
+                                .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(clear_button)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(RangeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SliderNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(341, 341, 341))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,12 +152,16 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rep_range_button)
-                            .addComponent(Get_Range_button))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clear_button)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RangeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SliderNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 8, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -141,6 +181,11 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         clear();
     }//GEN-LAST:event_clear_buttonActionPerformed
+
+    private void RangeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_RangeSliderStateChanged
+        // TODO add your handling code here:
+        moveSlider();
+    }//GEN-LAST:event_RangeSliderStateChanged
 
     /**
      * @param args the command line arguments
@@ -179,9 +224,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Get_Range_button;
+    private javax.swing.JSlider RangeSlider;
     private javax.swing.JTextField RangeText;
     private javax.swing.JPanel RangeTextPanel;
+    private javax.swing.JLabel SliderNumber;
     private javax.swing.JButton clear_button;
+    private javax.swing.JPanel jPanel1;
     private poker.practica2.hja.GUI.RangeGrid rangeGrid1;
     private javax.swing.JButton rep_range_button;
     // End of variables declaration//GEN-END:variables
@@ -222,5 +270,19 @@ public class MainFrame extends javax.swing.JFrame {
     private void clear(){
         rangeGrid1.clear();
         RangeText.setText("");
+    }
+    
+    private void moveSlider(){
+        int slider_value = RangeSlider.getValue();
+        ArrayList<String> percent_range = new ArrayList<>();
+        
+        SliderNumber.setText(Integer.toString(slider_value) + " %");
+        
+        rangeGrid1.clear();
+        
+        Ap2 logic = new Ap2(percent_range, slider_value);
+        
+        rangeGrid1.selectSliderRange(percent_range);
+        
     }
 }
