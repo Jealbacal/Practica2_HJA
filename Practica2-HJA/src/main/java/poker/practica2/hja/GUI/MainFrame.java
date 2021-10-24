@@ -72,21 +72,21 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        rep_range_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\Icon input 3.png")); // NOI18N
+        rep_range_button.setIcon(new javax.swing.ImageIcon("H:\\UCM\\3\\HJA\\Practica2_HJA\\Practica2-HJA\\icons\\Icon input 3.png")); // NOI18N
         rep_range_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rep_range_buttonActionPerformed(evt);
             }
         });
 
-        Get_Range_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\Icon output 3.png")); // NOI18N
+        Get_Range_button.setIcon(new javax.swing.ImageIcon("H:\\UCM\\3\\HJA\\Practica2_HJA\\Practica2-HJA\\icons\\Icon output 3.png")); // NOI18N
         Get_Range_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Get_Range_buttonActionPerformed(evt);
             }
         });
 
-        clear_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\clear icon.png")); // NOI18N
+        clear_button.setIcon(new javax.swing.ImageIcon("H:\\UCM\\3\\HJA\\Practica2_HJA\\Practica2-HJA\\icons\\clear_icon.png")); // NOI18N
         clear_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clear_buttonActionPerformed(evt);
@@ -111,7 +111,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(ButtonPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Get_Range_button, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(Get_Range_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(rep_range_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clear_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -267,7 +267,7 @@ public class MainFrame extends javax.swing.JFrame {
         Ap1 logic = new Ap1(RangeText.getText());
         
         for(String text : logic.rangos){
-            RangeGrid.searchButton(text);
+            RangeGrid.searchButton(text,true);
         }
     }
     

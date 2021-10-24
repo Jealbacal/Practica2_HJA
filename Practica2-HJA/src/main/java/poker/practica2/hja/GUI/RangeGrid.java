@@ -172,7 +172,7 @@ public class RangeGrid extends javax.swing.JPanel {
     }
     
     //Metodo que busca el boton dado un texto y lo selecciona
-    public void searchButton(String text){
+    public void searchButton(String text,Boolean ap){
         
         int i = 0;
         int n = button_list.size();
@@ -181,7 +181,10 @@ public class RangeGrid extends javax.swing.JPanel {
         while(i < n && !found){
             if(button_list.get(i).getText().equals(text)){
                 found = true;
-                selectButton(button_list.get(i));
+                if(ap)
+                    selectButton(button_list.get(i));
+                else
+                    selectButton2(button_list.get(i));
             }else{
                 i++;
             }
@@ -194,6 +197,12 @@ public class RangeGrid extends javax.swing.JPanel {
         b.setSelected(true);
         b.setSelectedColor();
         sel_button_list.add(b);
+    }
+    
+    private void selectButton2(PairButton b){
+    //    b.setSelected(true);
+        b.setSelectedColor2();
+   //     sel_button_list.add(b);
     }
     
     //Se asegura de que todos los botones seleccionados estan en la lista
@@ -279,7 +288,7 @@ public class RangeGrid extends javax.swing.JPanel {
     public void selectSliderRange(ArrayList<String> percent_range){
         
        for (String s : percent_range){
-           searchButton(s);
+           searchButton(s,false);
        }
     }
     

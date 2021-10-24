@@ -129,7 +129,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Get_Range_button" pref="64" max="32767" attributes="0"/>
+                      <Component id="Get_Range_button" max="32767" attributes="0"/>
                       <Component id="rep_range_button" alignment="1" max="32767" attributes="0"/>
                       <Component id="clear_button" alignment="1" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -142,7 +142,7 @@
         <Component class="javax.swing.JButton" name="rep_range_button">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\jjcar\OneDrive\Documentos\!Universidad\POK\Practicas\Practica 2\Practica2_HJA\Practica2-HJA\icons\Icon input 3.png"/>
+              <Image iconType="2" name="H:\UCM\3\HJA\Practica2_HJA\Practica2-HJA\icons\Icon input 3.png"/>
             </Property>
           </Properties>
           <Events>
@@ -152,7 +152,7 @@
         <Component class="javax.swing.JButton" name="Get_Range_button">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\jjcar\OneDrive\Documentos\!Universidad\POK\Practicas\Practica 2\Practica2_HJA\Practica2-HJA\icons\Icon output 3.png"/>
+              <Image iconType="2" name="H:\UCM\3\HJA\Practica2_HJA\Practica2-HJA\icons\Icon output 3.png"/>
             </Property>
           </Properties>
           <Events>
@@ -162,7 +162,7 @@
         <Component class="javax.swing.JButton" name="clear_button">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\jjcar\OneDrive\Documentos\!Universidad\POK\Practicas\Practica 2\Practica2_HJA\Practica2-HJA\icons\clear icon.png"/>
+              <Image iconType="2" name="H:\UCM\3\HJA\Practica2_HJA\Practica2-HJA\icons\clear_icon.png"/>
             </Property>
           </Properties>
           <Events>

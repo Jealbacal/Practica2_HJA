@@ -21,6 +21,7 @@ public class PairButton extends JToggleButton implements ActionListener {
     private final Color off_color = Color.red;
     private final Color s_color = Color.cyan;
     private final Color sel_color = Color.yellow;
+    private final Color sel_color2 = Color.MAGENTA;
     
         
     public PairButton(){
@@ -98,7 +99,9 @@ public class PairButton extends JToggleButton implements ActionListener {
         this.setBackground(sel_color);
     }
     
-    
+    public void setSelectedColor2(){
+        this.setBackground(sel_color2);
+    }
     
         
     
