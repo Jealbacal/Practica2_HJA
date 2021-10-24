@@ -5,7 +5,12 @@
 package poker.practica2.hja.GUI;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import poker.practica2.hja.ap1.Ap1;
 import poker.practica2.hja.ap1.Ap2;
 
@@ -294,14 +299,34 @@ public class MainFrame extends javax.swing.JFrame {
     private void moveSlider(){
         int slider_value = RangeSlider.getValue();
         ArrayList<String> percent_range = new ArrayList<>();
+        String file="rangos"+".txt";
         
         SliderNumber.setText(Integer.toString(slider_value) + " %");
         
         RangeGrid.clear();
-        
+        readFile(file,percent_range);
+
         Ap2 logic = new Ap2(percent_range, slider_value);
         
-        RangeGrid.selectSliderRange(percent_range);
+        RangeGrid.selectSliderRange(logic.result);
+        
         
     }
-}
+    
+    private void readFile(String file,ArrayList<String> aux){
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+           while ((line = br.readLine()) != null) {
+              aux.add(line);
+              
+           }   
+        }
+        
+        catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+    }
+

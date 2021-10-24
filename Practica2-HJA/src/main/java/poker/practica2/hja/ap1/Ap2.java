@@ -12,17 +12,17 @@ import java.util.ArrayList;
  */
 public class Ap2 {
     
-    ArrayList<String>rankings;
-    int percent;
-    ArrayList<String>result;
-    int _size=13;
+    public ArrayList<String>rankings;
+    public int percent;
+    public ArrayList<String>result;
+    private int _size=13;
 
     public Ap2(ArrayList<String> rankings, int percent){
         
         this.rankings=rankings;
         this.percent=percent;
         result= new ArrayList<String>();
-        
+        bestRanking();
     }
     
     public void bestRanking(){
