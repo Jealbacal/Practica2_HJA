@@ -200,14 +200,15 @@ public class RangeGrid extends javax.swing.JPanel {
     }
     
     private void selectButton2(PairButton b){
-    //    b.setSelected(true);
+        b.setSelected(true);
         b.setSelectedColor2();
-   //     sel_button_list.add(b);
+        sel_button_list.add(b);
     }
     
     //Se asegura de que todos los botones seleccionados estan en la lista
     //de botones seleccionados
-    public void checkSelected(){
+    
+   public void checkSelected(){
         sel_button_list.clear();
         for(PairButton b : button_list){
             if(b.isSelected()){

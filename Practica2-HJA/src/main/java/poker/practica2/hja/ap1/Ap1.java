@@ -388,24 +388,5 @@ public class Ap1 {
    }
    
    //Testeo del parse
-   public static void main(String args[]){
-       
-       //Parece que no procesa bien el ultimo elemento
-       //Los intervalos no salen
-       
-       String test1 = "AKs-A2s, TT+, T2s"; // No funciona
-       String test2 = "TT+,T2s+"; // Falta que saque el T2s+, el TT+ lo saca bien
-       String test3 = "AA"; // No funciona
-       String test4 = "AA,TT"; // Saca solo AA
-       String test5 = "J3s+"; 
-       
-       Ap1 logic = new Ap1(test1);
-       Ap1 logic2 = new Ap1(logic.rangos);
-       
-       for(String s : logic.rangos){
-           System.out.println(s);
-       }
-       
-       System.out.println(logic2.texfield);
-   }
+
 }
