@@ -37,8 +37,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         RangeGrid = new poker.practica2.hja.GUI.RangeGrid();
-        RangeTextPanel = new javax.swing.JPanel();
-        RangeText = new javax.swing.JTextField();
         ButtonPanel = new javax.swing.JPanel();
         rep_range_button = new javax.swing.JButton();
         Get_Range_button = new javax.swing.JButton();
@@ -46,47 +44,25 @@ public class MainFrame extends javax.swing.JFrame {
         SliderPanel = new javax.swing.JPanel();
         SliderNumber = new javax.swing.JLabel();
         RangeSlider = new javax.swing.JSlider();
+        RangeTextPanel = new javax.swing.JPanel();
+        RangeText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Practica 2");
         setResizable(false);
 
-        RangeTextPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3), "Range Text", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 24))); // NOI18N
-
-        RangeText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-
-        javax.swing.GroupLayout RangeTextPanelLayout = new javax.swing.GroupLayout(RangeTextPanel);
-        RangeTextPanel.setLayout(RangeTextPanelLayout);
-        RangeTextPanelLayout.setHorizontalGroup(
-            RangeTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RangeTextPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(RangeText)
-                .addContainerGap())
-        );
-        RangeTextPanelLayout.setVerticalGroup(
-            RangeTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RangeTextPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(RangeText, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        rep_range_button.setIcon(new javax.swing.ImageIcon("H:\\UCM\\3\\HJA\\Practica2_HJA\\Practica2-HJA\\icons\\Icon input 3.png")); // NOI18N
         rep_range_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rep_range_buttonActionPerformed(evt);
             }
         });
 
-        Get_Range_button.setIcon(new javax.swing.ImageIcon("H:\\UCM\\3\\HJA\\Practica2_HJA\\Practica2-HJA\\icons\\Icon output 3.png")); // NOI18N
         Get_Range_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Get_Range_buttonActionPerformed(evt);
             }
         });
 
-        clear_button.setIcon(new javax.swing.ImageIcon("H:\\UCM\\3\\HJA\\Practica2_HJA\\Practica2-HJA\\icons\\clear_icon.png")); // NOI18N
         clear_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clear_buttonActionPerformed(evt);
@@ -102,7 +78,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(rep_range_button, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Get_Range_button, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
                 .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -156,6 +132,28 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        RangeTextPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3), "Range Text", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 24))); // NOI18N
+        RangeTextPanel.setAutoscrolls(true);
+
+        RangeText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+
+        javax.swing.GroupLayout RangeTextPanelLayout = new javax.swing.GroupLayout(RangeTextPanel);
+        RangeTextPanel.setLayout(RangeTextPanelLayout);
+        RangeTextPanelLayout.setHorizontalGroup(
+            RangeTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RangeTextPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(RangeText, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        RangeTextPanelLayout.setVerticalGroup(
+            RangeTextPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RangeTextPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(RangeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,10 +164,10 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(SliderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RangeGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(RangeTextPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -179,7 +177,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(ButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(RangeGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,7 +308,11 @@ public class MainFrame extends javax.swing.JFrame {
         
         RangeGrid.selectSliderRange(logic.result);
         
+        Ap1 logic2 = new Ap1(RangeGrid.getSelButtonList());
         
+        logic2.fillRange2Text(RangeGrid.getSelButtonList());
+       
+        Range2Text(); 
     }
     
     private void readFile(String file,ArrayList<String> aux){
