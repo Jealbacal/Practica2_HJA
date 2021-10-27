@@ -324,7 +324,7 @@ public class Ap1 {
                 //1-las cartas dejan de ser contiguas dentro de la misma fila
                 //2-las cartas dejan de ser contguas por ser de distintas filas
                 //3-el final del rango llega al final del array
-                if( cartaParse(rngIN.charAt(1))-cartaParse(rngF.charAt(1))>1 && rngI != rngIN || j>= range2Text.size() || (cartaParse(rngIN.charAt(0))!= cartaParse(rngF.charAt(0)) && rngI != rngIN)  ){
+                if( cartaParse(rngIN.charAt(1))-cartaParse(rngF.charAt(1))>1 && rngI != rngIN || j>= range2Text.size() || (cartaParse(rngIN.charAt(0))!= cartaParse(rngF.charAt(0)) && rngI != rngIN) || (rngIN.charAt(2)!=rngF.charAt(2))){
                     
                      //si el rango inicial la diferencia de los dos caracteres es uno es un operador +
                      if(cartaParse(rngI.charAt(0))- cartaParse(rngI.charAt(1))==1){
