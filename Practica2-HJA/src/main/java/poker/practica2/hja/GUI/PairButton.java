@@ -6,6 +6,7 @@ package poker.practica2.hja.GUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JToggleButton;
@@ -29,7 +30,9 @@ public class PairButton extends JToggleButton implements ActionListener {
     }
 
     private void init(){
-         this.setFont(new Font("Arial", Font.BOLD, 12));
+         this.setFont(new Font("Arial", Font.BOLD, 17));
+         this.setMargin(new Insets(0,0,0,0));
+         this.setBorder(null);
          this.setSelected(false);
          
     }

@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class CombGrid extends javax.swing.JPanel {
     
-    private final int n_rows = 14;
-    private final int n_cols = 4;
+    private final int n_rows = 4;
+    private final int n_cols = 14;
     private ArrayList<BoardButton> button_list;
     private ArrayList<BoardButton> sel_button_list;
     
@@ -25,8 +25,8 @@ public class CombGrid extends javax.swing.JPanel {
     
     private void createButtons(){
         
-        for( int i = n_rows; i >= 2; i--){
-            for(int j = 0; j < n_cols; j++){
+        for (int i = 0; i < n_rows; i++){
+            for(int j = n_cols; j >= 2; j--){
                 
                 BoardButton b_button = new BoardButton();
                 b_button.addActionListener(b_button);
@@ -36,9 +36,25 @@ public class CombGrid extends javax.swing.JPanel {
                 button_list.add(b_button);
                 
                 this.add(b_button);
-                
             }
         }
+        
+//        for( int i = n_rows; i >= 2; i--){
+//            for(int j = 0; j < n_cols; j++){
+//                
+//                BoardButton b_button = new BoardButton();
+//                b_button.addActionListener(b_button);
+//                
+//                buttonConfig(i,j,b_button);
+//                
+//                button_list.add(b_button);
+//                
+//                this.add(b_button);
+//                
+//            }
+//        }
+
+          
     }
     
     private String rangeButtonText(int i){
@@ -72,23 +88,23 @@ public class CombGrid extends javax.swing.JPanel {
     
     private void buttonConfig(int i, int j, BoardButton b_button){
         
-        String card = rangeButtonText(i);
+        String card = rangeButtonText(j);
         
-        switch(j){
+        switch(i){
             case 0:
-                b_button.setText(card + "h");
+                b_button.setText(card + "♥");
                 b_button.setSuit(Suit.HEARTS);
                 break;
             case 1:
-                b_button.setText(card + "c");
+                b_button.setText(card + "♣");
                 b_button.setSuit(Suit.CLUBS);
                 break;
             case 2:
-                 b_button.setText(card + "d");
+                 b_button.setText(card + "♦");
                  b_button.setSuit(Suit.DIAMONDS);
                 break;
             case 3:
-                 b_button.setText(card + "s");
+                 b_button.setText(card + "♠");
                  b_button.setSuit(Suit.SPADES);
                 break;
         }

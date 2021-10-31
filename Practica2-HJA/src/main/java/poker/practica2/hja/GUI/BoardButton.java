@@ -6,6 +6,7 @@ package poker.practica2.hja.GUI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JToggleButton;
@@ -53,6 +54,8 @@ public class BoardButton extends JToggleButton implements ActionListener {
     
     //-----------------------------------------------------------------------
     
+    private Font custom_font = new Font("Arial", Font.BOLD, 22);
+    
     /**
      * Constructor
      */
@@ -64,8 +67,10 @@ public class BoardButton extends JToggleButton implements ActionListener {
      * Metodo que inicializa parametros de los botones
      */
     private void init(){
-         this.setFont(new Font("Arial", Font.BOLD, 12));
          this.setSelected(false);
+         this.setFont(custom_font);
+         this.setMargin(new Insets(0,0,0,0));
+         this.setBorder(null);
          sel_count = 0;
          
     }
