@@ -228,7 +228,7 @@ public class RangeGrid extends javax.swing.JPanel {
             Por ejemplo, AQo-A5o no estarian consecutivas si hay alguna otro offsuit seleccionado.
             - v2 Collections.sort(off_list); puede que lo ordene
             - v2 Collections.sort(off_list); lo ordena de manera decreciente :(
-            - v3 Collections.sort(off_list, Collections.reverseOrder()); ya lo hace bien!!!
+            - v3 Collections.sort(off_list, Collections.reverseOrder()); ¡¡¡ya lo hace bien!!!
             - v3 No funciona todavia, el orden alfabetico lo jode.
             - v4 Ya funciona por reestructuracion de la estrucutra de botones. Lista -> Matriz
     */
@@ -258,9 +258,6 @@ public class RangeGrid extends javax.swing.JPanel {
             }
         }
         
-        
-        
-        
         int col = 0;
         
         while (col < _size-1){
@@ -282,8 +279,8 @@ public class RangeGrid extends javax.swing.JPanel {
         return list;
     }
     
-    /**Recorre la lista de texto pasada y seleccciona el boton que corresponde con el texto.
-     * 
+    /**
+     * Recorre la lista de texto pasada y seleccciona el boton que corresponde con el texto.
      * @param percent_range La lista de texto de botones a seleccionar
      */
     public void selectSliderRange(ArrayList<String> percent_range){
@@ -292,7 +289,6 @@ public class RangeGrid extends javax.swing.JPanel {
            searchButton(s,false);
        }
     }
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

@@ -4,7 +4,8 @@
  */
 package poker.practica2.hja.GUI;
 
-import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        CombGridActionListener();
     }
 
     /**
@@ -50,6 +52,14 @@ public class MainFrame extends javax.swing.JFrame {
         CombGrid = new poker.practica2.hja.GUI.CombGrid();
         ClearCombButton = new javax.swing.JButton();
         Ap3OutPanel = new javax.swing.JPanel();
+        FlopPanel = new javax.swing.JPanel();
+        Flop1 = new javax.swing.JLabel();
+        Flop2 = new javax.swing.JLabel();
+        Flop3 = new javax.swing.JLabel();
+        TurnPanel = new javax.swing.JPanel();
+        Turn = new javax.swing.JLabel();
+        RiverPanel = new javax.swing.JPanel();
+        River = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Practica 2");
@@ -169,15 +179,106 @@ public class MainFrame extends javax.swing.JFrame {
 
         Ap3OutPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
+        FlopPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Flop"));
+
+        Flop1.setBackground(new java.awt.Color(255, 255, 255));
+        Flop1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        Flop1.setBorder(null);
+
+        Flop2.setBackground(new java.awt.Color(255, 255, 255));
+        Flop2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        Flop2.setBorder(null);
+
+        Flop3.setBackground(new java.awt.Color(255, 255, 255));
+        Flop3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        Flop3.setBorder(null);
+
+        javax.swing.GroupLayout FlopPanelLayout = new javax.swing.GroupLayout(FlopPanel);
+        FlopPanel.setLayout(FlopPanelLayout);
+        FlopPanelLayout.setHorizontalGroup(
+            FlopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FlopPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Flop1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Flop2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Flop3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        FlopPanelLayout.setVerticalGroup(
+            FlopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Flop1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Flop2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Flop3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        TurnPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Turn"));
+
+        Turn.setBackground(new java.awt.Color(255, 255, 255));
+        Turn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        Turn.setBorder(null);
+
+        javax.swing.GroupLayout TurnPanelLayout = new javax.swing.GroupLayout(TurnPanel);
+        TurnPanel.setLayout(TurnPanelLayout);
+        TurnPanelLayout.setHorizontalGroup(
+            TurnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TurnPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Turn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        TurnPanelLayout.setVerticalGroup(
+            TurnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TurnPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Turn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        RiverPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("River"));
+
+        River.setBackground(new java.awt.Color(255, 255, 255));
+        River.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        River.setBorder(null);
+
+        javax.swing.GroupLayout RiverPanelLayout = new javax.swing.GroupLayout(RiverPanel);
+        RiverPanel.setLayout(RiverPanelLayout);
+        RiverPanelLayout.setHorizontalGroup(
+            RiverPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RiverPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(River, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        RiverPanelLayout.setVerticalGroup(
+            RiverPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RiverPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(River, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout Ap3OutPanelLayout = new javax.swing.GroupLayout(Ap3OutPanel);
         Ap3OutPanel.setLayout(Ap3OutPanelLayout);
         Ap3OutPanelLayout.setHorizontalGroup(
             Ap3OutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(Ap3OutPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(FlopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(TurnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(RiverPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Ap3OutPanelLayout.setVerticalGroup(
             Ap3OutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addGroup(Ap3OutPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Ap3OutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TurnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(FlopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RiverPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout CombPanelLayout = new javax.swing.GroupLayout(CombPanel);
@@ -188,15 +289,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(CombPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ClearCombButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CombGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 551, Short.MAX_VALUE)
+                    .addComponent(CombGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                     .addComponent(Ap3OutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         CombPanelLayout.setVerticalGroup(
             CombPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(CombPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Ap3OutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Ap3OutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(CombGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -226,21 +326,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(CombPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(CombPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RangeGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RangeTextPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(SliderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,8 +364,15 @@ public class MainFrame extends javax.swing.JFrame {
     private void ClearCombButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearCombButtonActionPerformed
         // TODO add your handling code here:
         CombGrid.clear();
+        BoardButton.sel_cards.clear();
+        Flop1.setText("");
+        Flop2.setText("");
+        Flop3.setText("");
+        Turn.setText("");
+        River.setText("");
     }//GEN-LAST:event_ClearCombButtonActionPerformed
-
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -312,13 +414,21 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton ClearCombButton;
     private poker.practica2.hja.GUI.CombGrid CombGrid;
     private javax.swing.JPanel CombPanel;
+    private javax.swing.JLabel Flop1;
+    private javax.swing.JLabel Flop2;
+    private javax.swing.JLabel Flop3;
+    private javax.swing.JPanel FlopPanel;
     private javax.swing.JButton Get_Range_button;
     private poker.practica2.hja.GUI.RangeGrid RangeGrid;
     private javax.swing.JSlider RangeSlider;
     private javax.swing.JTextField RangeText;
     private javax.swing.JPanel RangeTextPanel;
+    private javax.swing.JLabel River;
+    private javax.swing.JPanel RiverPanel;
     private javax.swing.JLabel SliderNumber;
     private javax.swing.JPanel SliderPanel;
+    private javax.swing.JLabel Turn;
+    private javax.swing.JPanel TurnPanel;
     private javax.swing.JButton clear_button;
     private javax.swing.JButton rep_range_button;
     // End of variables declaration//GEN-END:variables
@@ -397,6 +507,64 @@ public class MainFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    private void boardFiller(BoardButton b){
+        
+        switch(BoardButton.sel_cards.size()){ 
+            case 3:
+                Flop1.setText(BoardButton.sel_cards.get(0).getText());
+                
+                Flop2.setText(BoardButton.sel_cards.get(1).getText());
+                
+                Flop3.setText(BoardButton.sel_cards.get(2).getText());
+                
+                Turn.setText("");
+                River.setText("");
+                break;
+            case 4:
+                Flop1.setText(BoardButton.sel_cards.get(0).getText());
+                
+                Flop2.setText(BoardButton.sel_cards.get(1).getText());
+                
+                Flop3.setText(BoardButton.sel_cards.get(2).getText());
+                
+                Turn.setText(BoardButton.sel_cards.get(3).getText());
+                
+                River.setText("");
+                break;
+            case 5:
+                Flop1.setText(BoardButton.sel_cards.get(0).getText());
+                
+                Flop2.setText(BoardButton.sel_cards.get(1).getText());
+                
+                Flop3.setText(BoardButton.sel_cards.get(2).getText());
+                
+                Turn.setText(BoardButton.sel_cards.get(3).getText());
+                
+                River.setText(BoardButton.sel_cards.get(4).getText());
+                
+                break;
+            default:
+                Flop1.setText("");
+                Flop2.setText("");
+                Flop3.setText("");
+                Turn.setText("");
+                River.setText("");
+                break;
+        }
         
     }
+    
+    private void CombGridActionListener(){
+        
+        for(BoardButton b : CombGrid.getButtonList()){
+            b.addChangeListener(new javax.swing.event.ChangeListener() {
+                public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                    boardFiller(b);
+                }
+            });
+        }
+    }
+        
+}
 

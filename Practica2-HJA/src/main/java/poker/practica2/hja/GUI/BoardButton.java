@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JToggleButton;
 
 /**
@@ -18,11 +19,15 @@ import javax.swing.JToggleButton;
 public class BoardButton extends JToggleButton implements ActionListener {
    
     //Numero minimo de botones seleccionados
-    private static final int min_sel_count = 3;
+    protected static final int min_sel_count = 3;
     //Numero de maximo de botones seleccionados
-    private static final int max_sel_count = 5;
+    protected static final int max_sel_count = 5;
     //Numero botones hay seleccionados
     private static int sel_count;
+    
+    //Array estatico que guarda que botones estan seleccionados (para el board)
+    protected static ArrayList<BoardButton> sel_cards;
+    
     //El palo de la carta
     private Suit suit;
     
@@ -54,7 +59,11 @@ public class BoardButton extends JToggleButton implements ActionListener {
     
     //-----------------------------------------------------------------------
     
+    //Fuente del Boton
     private Font custom_font = new Font("Arial", Font.BOLD, 22);
+    
+    //Texto parseado con las letras en lugar de los simbolos
+    private String text;
     
     /**
      * Constructor
@@ -72,6 +81,7 @@ public class BoardButton extends JToggleButton implements ActionListener {
          this.setMargin(new Insets(0,0,0,0));
          this.setBorder(null);
          sel_count = 0;
+         sel_cards = new ArrayList<>();
          
     }
     
@@ -90,6 +100,22 @@ public class BoardButton extends JToggleButton implements ActionListener {
      */
     public Suit getSuit(){
         return this.suit;
+    }
+    
+    /**
+     * Setter del atributo de texto para procesarlo bien (h,d,c,s)
+     * @param s: El texto de la carta
+     */
+    public void setCardText(String s){
+        text = s;
+    }
+    
+    /**
+     * Getter del atrubuto de texto para procesarlo bien (h,d,c,s)
+     * @return: Un string con el texto "bueno" de la carta
+     */
+    public String getCardText(){
+        return this.text;
     }
     
     /**
@@ -133,6 +159,7 @@ public class BoardButton extends JToggleButton implements ActionListener {
             if(sel_count < max_sel_count){
                 //Se selecciona
                 setSuitColor(this.suit);
+                sel_cards.add(this);
                 sel_count++;
             //Si hay cinco cartas en el board y se intenta seleccionar otra carta mas.
             }else {
@@ -144,23 +171,47 @@ public class BoardButton extends JToggleButton implements ActionListener {
         else{
             //Se deselecciona
             setSuitColor(this.suit);
+            //sel_cards[sel_count] = null;
+            sel_cards.remove(this);
             sel_count--;
         } 
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     /**
      * Devuelve el numero de cartas seleccionadas
-     * @return Un entero entre 0 y 5;
+     * @return Un entero entre 0 y 5
      */
     public static int getSelCount(){
         return sel_count;
     }
     
+    /**
+     * Selecciona el numero de cartas seleccionadas
+     * @param i: Un entero entre 0 y 5
+     */
     public static void setSelCount(int i){
         if( i > 0 || i < 5){
             sel_count = i;
         }
     }
+    
+   public Color getColor(){
+       switch (this.suit){
+           case HEARTS:
+               return h_color_S;
+               
+           case DIAMONDS:
+               return d_color_S;
+               
+           case SPADES:
+               return s_color_S;
+               
+           case CLUBS:
+               return c_color_S;
+           default:
+               return Color.black;
+       }
+   }
+    
 }
