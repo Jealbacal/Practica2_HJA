@@ -230,9 +230,6 @@ public class Ap1 {
        boolean solo=false;
        boolean ultimo=false;
        
-//       for(String s : r){
-//           range2Text.add(s);
-//       }
         
          if(j==range2Text.size())
                aux= aux+range2Text.get(i);

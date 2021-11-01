@@ -74,7 +74,8 @@ public class Ap3 {
     
                                       
     public static void compara(String rango, ArrayList<Character> palos, ArrayList<Integer> valores){
-        int countFirst = 0, countSecond = 0, straightGap = -1, gapNeed = -1, straightCount = 1, hs = 0, cs = 0, ds = 0, ss= 0;
+        int countFirst = 0, countSecond = 0, straightGap = -1, gapNeed = -1, straightCount = 1, hs = 0, cs = 0, ds = 0, ss= 0, twopairCard1,twopairCard2;
+        boolean twopair=false,fullhouse=false;
         result = new ArrayList<>();
 
         if(rango.charAt(0) == rango.charAt(1)){ //El rango es pareja JJ 22 AA
@@ -84,19 +85,33 @@ public class Ap3 {
                 //Contamos si se repiten cartas
                 if (cartaParse(rango.charAt(0)) == valores.get(i)) ++countFirst;
                 //Contamos cartas seguidas
-                if (i > 0 && valores.get(i) == valores.get(i-1)+1) ++straightCount;
+                if (i > 0 && valores.get(i) == valores.get(i-1)-1) ++straightCount;
                 //Si hay un gap en la escalera guardamos la posision del gap y el valor necesario
-                if (i > 0 && valores.get(i) == valores.get(i-1)+2) {straightGap = i; gapNeed = valores.get(i)-1; ++straightCount;}
+                if (i > 0 && valores.get(i) == valores.get(i-1)-2) {straightGap = i; gapNeed = valores.get(i)-1; ++straightCount;}
+                
+                if(!fullhouse&&(countFirst ==1 && twopair) || (i > 1 && valores.get(i) == valores.get(i-1) && valores.get(i) == valores.get(i-2) &&  valores.get(i) != cartaParse(rango.charAt(0)))){
+                    fullhouse=true;
+                }
+                    
+                    
+                //Caso de doble pareja
+                if(i > 1 && valores.get(i) == valores.get(i-1) && valores.get(i) != valores.get(i-2) &&  valores.get(i) != cartaParse(rango.charAt(0)) && !twopair) {
+                    twopair=true; twopairCard1=valores.get(i);twopairCard2=valores.get(i+1);}
                 //Contamos cada palo
                 if(palos.get(i)=='h')++hs; if(palos.get(i)=='c')++cs; if(palos.get(i)=='d')++ds; if(palos.get(i)=='s')++ss;
             }
             
             //Analizo jugada
-            
+            //if(((hs >= 4||cs >= 4 ||ds >= 4 ||ss >= 4) && !valores.contains(cartaParse(rango.charAt(0)))) &&
             if(countFirst == 2) result.add(new output(Ranking.FOUROFAKIND,rango,1));
-            else if (countFirst == 1)result.add(new output(Ranking.THREEOFAKIND,rango,2));
+            else if ((hs >= 4||cs >= 4 ||ds >= 4 ||ss >= 4) && !valores.contains(cartaParse(rango.charAt(0))))result.add(new output(Ranking.FLUSH,rango,1));
+           // else if (straightCount >=4 && gapNeed == cartaParse(rango.charAt(0))|| straightCount >=4 &&  ) result.add(new output(Ranking.STRAIGHT,rango,1));
+            //mal combinatoria
+            else if(fullhouse) result.add(new output(Ranking.FULLHOUSE,rango,1));
+            else if (countFirst == 1)result.add(new output(Ranking.THREEOFAKIND,rango,3));
+            else if (twopair )result.add(new output(Ranking.TWOPAIR,rango,6));
+            else if (countFirst == 0) comparaParejas(rango,valores.get(0),valores.get(1));
             
-            //else if (hs==3 ||cs==3 ||ds==3 ||ss==3)result.add(new output(Ranking.FLUSH,rango,2));
         }
         else if (rango.charAt(2) == 's'){ // El rango es suited Aks QJs
             
@@ -130,6 +145,26 @@ public class Ap3 {
         }
         
         
+    }
+    
+    public static void comparaParejas(String range, int first,int second ){
+        
+        if(cartaParse(range.charAt(0)) > first)
+            result.add(new output(Ranking.OVERPAIR,range,6));
+        
+        //la combinatoria esta mal exepto la primera distincion
+        else if (cartaParse(range.charAt(0)) == first)
+            result.add(new output(Ranking.TOPPAIR,range,6));
+        
+        //preguntar sobre el weak pair 
+        else if (cartaParse(range.charAt(0)) < first && cartaParse(range.charAt(0)) > 8)
+            result.add(new output(Ranking.PPBTP,range,6));
+        
+        else if (cartaParse(range.charAt(0)) == second && cartaParse(range.charAt(0)) > 8)
+            result.add(new output(Ranking.MIDDLEPAIR,range,6));
+        
+        else
+            result.add(new output(Ranking.WEAKPAIR,range,6));
     }
     
     public static int cartaParse(char carta){
