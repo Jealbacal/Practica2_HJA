@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import poker.practica2.hja.ap1.Ap1;
 import poker.practica2.hja.ap1.Ap2;
 
@@ -20,13 +21,15 @@ import poker.practica2.hja.ap1.Ap2;
  * @author jjcar
  */
 public class MainFrame extends javax.swing.JFrame {
+    
+    protected static ArrayList<JLabel> board;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        CombGridActionListener();
+        initBoard();
     }
 
     /**
@@ -65,7 +68,7 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("Practica 2");
         setResizable(false);
 
-        Get_Range_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\Icon output 3.png")); // NOI18N
+        Get_Range_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\Icon input 3.png")); // NOI18N
         Get_Range_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Get_Range_buttonActionPerformed(evt);
@@ -79,7 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        rep_range_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\Icon input 3.png")); // NOI18N
+        rep_range_button.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Practica2_HJA\\Practica2-HJA\\icons\\Icon output 3.png")); // NOI18N
         rep_range_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rep_range_buttonActionPerformed(evt);
@@ -414,27 +417,30 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton ClearCombButton;
     private poker.practica2.hja.GUI.CombGrid CombGrid;
     private javax.swing.JPanel CombPanel;
-    private javax.swing.JLabel Flop1;
-    private javax.swing.JLabel Flop2;
-    private javax.swing.JLabel Flop3;
+    private static javax.swing.JLabel Flop1;
+    private static javax.swing.JLabel Flop2;
+    private static javax.swing.JLabel Flop3;
     private javax.swing.JPanel FlopPanel;
     private javax.swing.JButton Get_Range_button;
     private poker.practica2.hja.GUI.RangeGrid RangeGrid;
     private javax.swing.JSlider RangeSlider;
     private javax.swing.JTextField RangeText;
     private javax.swing.JPanel RangeTextPanel;
-    private javax.swing.JLabel River;
+    private static javax.swing.JLabel River;
     private javax.swing.JPanel RiverPanel;
     private javax.swing.JLabel SliderNumber;
     private javax.swing.JPanel SliderPanel;
-    private javax.swing.JLabel Turn;
+    private static javax.swing.JLabel Turn;
     private javax.swing.JPanel TurnPanel;
     private javax.swing.JButton clear_button;
     private javax.swing.JButton rep_range_button;
     // End of variables declaration//GEN-END:variables
 
-    /*Metodo que se llama cuando presionas el boton para marcar en la tabla
-    el rango especificado en el campo de texto.*/
+    
+    /**
+     * Funcion para el ActionListener del boton Text2Range. 
+     * Marca en la tabla el rango especificado en el campo de texto.
+     */
     private void Text2Range(){
         
         RangeGrid.clear();
@@ -446,6 +452,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Funcion para el ActionListener del boton Range2Text
+     * Coge el Rango seleccionado y lo convierte a texto.
+     */
     private void Range2Text(){
         
         RangeGrid.checkSelected();
@@ -466,12 +476,20 @@ public class MainFrame extends javax.swing.JFrame {
         RangeText.setText(logic.texfield);
     }
     
+    /**
+     * Funcion para el ActionListener del boton de clear. 
+     * Limpia la tabla de rangos, el slider, y el campo de texto.
+     */
     private void clear(){
         RangeGrid.clear();
         RangeText.setText("");
         RangeSlider.setValue(0);
     }
     
+    /**
+     * Funcion para el ActionListener del slider. Representa el rango segun el valor del slider
+     * y el ranking dado por un archivo de texto.
+     */
     private void moveSlider(){
         int slider_value = RangeSlider.getValue();
         ArrayList<String> percent_range = new ArrayList<>();
@@ -493,6 +511,11 @@ public class MainFrame extends javax.swing.JFrame {
         Range2Text(); 
     }
     
+    /**
+     * Lee el fichero de texto con el rango y lo parsea
+     * @param file: El archivo de texto
+     * @param aux: Ls lista con el ranking parseado si exito
+     */
     private void readFile(String file,ArrayList<String> aux){
         
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -508,6 +531,30 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * SIN USAR
+     * Metodo auxiliar que pinta el board. Hay que cambiarlo para que se pinten las
+     * cartas con colores.
+     * 
+     * Para que se pinten los colores posible solucion:
+     *  - Hacer los labels del board ==estaticos== y modificarlos en el listener del boton.
+     *      - Esto se hace desde el design -> properties -> code o algo asi.
+     *  - Meter los labels en un ArrayList estatico y modificarlos en el listener del boton.
+     *  - En el listener del boton:
+     *      - Segun el array estatico de botones seleccionados de Boardbutton,
+     *          Asignar texto y el color del boton para cada caso.
+     *      - Pintar solo el flop cuando hay tres, pero asignar color y texto cuando haya menos
+     *      - Turn y river en el momento, no pasas nada.
+     * 
+     * Esta solucion hacede esta funcion y el actionListener de esta clase obsoletos y habria que quitarlos,
+     * Creo. 
+     * xD
+     * 
+     * SIN USAR
+     * 
+     * @param b 
+     */
+    /*
     private void boardFiller(BoardButton b){
         
         switch(BoardButton.sel_cards.size()){ 
@@ -553,17 +600,33 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
         }
         
-    }
+    }*/
     
+    /**
+     * NOT USED -Listener para pintar el board cuando se aprietna botones. Se ejecuta cada vex que se le hace
+     * algo al boton. 
+     */
+    /*
     private void CombGridActionListener(){
         
         for(BoardButton b : CombGrid.getButtonList()){
             b.addChangeListener(new javax.swing.event.ChangeListener() {
                 public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                    boardFiller(b);
+                    //boardFiller(b);
                 }
             });
         }
+    }*/
+    
+    private void initBoard(){
+        board= new ArrayList<>();
+        
+        
+        board.add(Flop1);
+        board.add(Flop2);
+        board.add(Flop3);
+        board.add(Turn);
+        board.add(River);
     }
         
 }

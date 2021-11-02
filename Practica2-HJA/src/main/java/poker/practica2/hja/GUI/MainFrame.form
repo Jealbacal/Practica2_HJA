@@ -100,7 +100,7 @@
         <Component class="javax.swing.JButton" name="Get_Range_button">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\jjcar\OneDrive\Documentos\!Universidad\POK\Practicas\Practica 2\Practica2_HJA\Practica2-HJA\icons\Icon output 3.png"/>
+              <Image iconType="2" name="C:\Users\jjcar\OneDrive\Documentos\!Universidad\POK\Practicas\Practica 2\Practica2_HJA\Practica2-HJA\icons\Icon input 3.png"/>
             </Property>
           </Properties>
           <Events>
@@ -120,7 +120,7 @@
         <Component class="javax.swing.JButton" name="rep_range_button">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\jjcar\OneDrive\Documentos\!Universidad\POK\Practicas\Practica 2\Practica2_HJA\Practica2-HJA\icons\Icon input 3.png"/>
+              <Image iconType="2" name="C:\Users\jjcar\OneDrive\Documentos\!Universidad\POK\Practicas\Practica 2\Practica2_HJA\Practica2-HJA\icons\Icon output 3.png"/>
             </Property>
           </Properties>
           <Events>
@@ -351,6 +351,9 @@
                       <Connection code="null" type="code"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Flop2">
                   <Properties>
@@ -364,6 +367,9 @@
                       <Connection code="null" type="code"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Flop3">
                   <Properties>
@@ -377,6 +383,9 @@
                       <Connection code="null" type="code"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -421,6 +430,9 @@
                       <Connection code="null" type="code"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -465,6 +477,9 @@
                       <Connection code="null" type="code"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

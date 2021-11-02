@@ -37,19 +37,19 @@ public class BoardButton extends JToggleButton implements ActionListener {
     //No seleccionado
     private final Color h_color_NS = new Color(255,204,204);
     //Seleccionado
-    private final Color h_color_S = Color.red;
+    private final Color h_color_S = new Color(203,67,53);
     
     //Colores de los treboles (Verde)
     //No Seleccionado
     private final Color c_color_NS = new Color(204,255,204);
     //Seleccionado
-    private final Color c_color_S = Color.green;
+    private final Color c_color_S = new Color(34,153,84);
     
     //Colores de los diamantes (Cyan)
     //No seleccionado
     private final Color d_color_NS = new Color(204,255,255);
     //Seleccionado
-    private final Color d_color_S = Color.cyan;
+    private final Color d_color_S = new Color(46,134,193);
     
     //Colores de las picas (Gris)
     //No seleccionado
@@ -160,6 +160,7 @@ public class BoardButton extends JToggleButton implements ActionListener {
                 //Se selecciona
                 setSuitColor(this.suit);
                 sel_cards.add(this);
+                setBoard();
                 sel_count++;
             //Si hay cinco cartas en el board y se intenta seleccionar otra carta mas.
             }else {
@@ -173,6 +174,7 @@ public class BoardButton extends JToggleButton implements ActionListener {
             setSuitColor(this.suit);
             //sel_cards[sel_count] = null;
             sel_cards.remove(this);
+            setBoard();
             sel_count--;
         } 
         
@@ -199,18 +201,50 @@ public class BoardButton extends JToggleButton implements ActionListener {
    public Color getColor(){
        switch (this.suit){
            case HEARTS:
-               return h_color_S;
+               return new Color(203,67,53);
                
            case DIAMONDS:
-               return d_color_S;
+               return new Color(46,134,193);
                
            case SPADES:
-               return s_color_S;
+               return new Color(39,55,70);
                
            case CLUBS:
-               return c_color_S;
+               return new Color(34,153,84);
            default:
                return Color.black;
+       }
+   }
+   
+   private void setBoard(){
+       switch(sel_cards.size()){
+           
+           case 3:
+               MainFrame.board.get(0).setText(sel_cards.get(0).getText());
+               MainFrame.board.get(0).setForeground(sel_cards.get(0).getColor());
+               MainFrame.board.get(1).setText(sel_cards.get(1).getText());
+               MainFrame.board.get(1).setForeground(sel_cards.get(1).getColor());
+               MainFrame.board.get(2).setText(sel_cards.get(2).getText());
+               MainFrame.board.get(2).setForeground(sel_cards.get(2).getColor());
+               MainFrame.board.get(3).setText("");
+               MainFrame.board.get(4).setText("");
+               break;
+           case 4:
+               MainFrame.board.get(3).setText(sel_cards.get(3).getText());
+               MainFrame.board.get(3).setForeground(sel_cards.get(3).getColor());
+               MainFrame.board.get(4).setText("");
+               break;
+           case 5:
+               MainFrame.board.get(4).setText(sel_cards.get(4).getText());
+               MainFrame.board.get(4).setForeground(sel_cards.get(4).getColor());
+               break;
+           default:
+               MainFrame.board.get(0).setText("");
+               MainFrame.board.get(1).setText("");
+               MainFrame.board.get(2).setText("");
+               MainFrame.board.get(3).setText("");
+               MainFrame.board.get(4).setText("");
+               break;
        }
    }
     
