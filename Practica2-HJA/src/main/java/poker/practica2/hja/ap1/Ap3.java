@@ -6,6 +6,8 @@ package poker.practica2.hja.ap1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  *
@@ -74,46 +76,39 @@ public class Ap3 {
     
                                       
     public static void compara(String rango, ArrayList<Character> palos, ArrayList<Integer> valores){
-        int countFirst = 0, countSecond = 0, straightGap = -1, gapNeed = -1, straightCount = 1, hs = 0, cs = 0, ds = 0, ss= 0, twopairCard1,twopairCard2;
-        boolean twopair=false,fullhouse=false;
+        int countFirst = 0, countSecond = 0, straightCount = 1, hs = 0, cs = 0, ds = 0, ss= 0;
+        int first, second, maxCount = 0, freq;
         result = new ArrayList<>();
 
         if(rango.charAt(0) == rango.charAt(1)){ //El rango es pareja JJ 22 AA
-            
+            first = cartaParse(rango.charAt(0));
             //Analizo board
             for(int i = 0; i < palos.size(); ++i){
                 //Contamos si se repiten cartas
-                if (cartaParse(rango.charAt(0)) == valores.get(i)) ++countFirst;
+                if (first == valores.get(i)) ++countFirst;
                 //Contamos cartas seguidas
-                if (i > 0 && valores.get(i) == valores.get(i-1)-1) ++straightCount;
-                //Si hay un gap en la escalera guardamos la posision del gap y el valor necesario
-                if (i > 0 && valores.get(i) == valores.get(i-1)-2) {straightGap = i; gapNeed = valores.get(i)-1; ++straightCount;}
-                
-                if(!fullhouse&&(countFirst ==1 && twopair) || (i > 1 && valores.get(i) == valores.get(i-1) && valores.get(i) == valores.get(i-2) &&  valores.get(i) != cartaParse(rango.charAt(0)))){
-                    fullhouse=true;
-                }
-                    
-                    
-                //Caso de doble pareja
-                if(i > 1 && valores.get(i) == valores.get(i-1) && valores.get(i) != valores.get(i-2) &&  valores.get(i) != cartaParse(rango.charAt(0)) && !twopair) {
-                    twopair=true; twopairCard1=valores.get(i);twopairCard2=valores.get(i+1);}
+                if (i > 0 && valores.get(i) == valores.get(i-1)+1) ++straightCount;
+                //Si hay un gap en la escalera comprobamos si el rango lo suple
+                if (i > 0 && valores.get(i) == valores.get(i-1)+2 && first == valores.get(i-1)+1) { ++straightCount;first = -1;}
                 //Contamos cada palo
                 if(palos.get(i)=='h')++hs; if(palos.get(i)=='c')++cs; if(palos.get(i)=='d')++ds; if(palos.get(i)=='s')++ss;
+                freq = Collections.frequency(valores, valores.get(i));
+                if(freq > maxCount) maxCount = freq;
             }
             
             //Analizo jugada
-            //if(((hs >= 4||cs >= 4 ||ds >= 4 ||ss >= 4) && !valores.contains(cartaParse(rango.charAt(0)))) &&
-            if(countFirst == 2) result.add(new output(Ranking.FOUROFAKIND,rango,1));
-            else if ((hs >= 4||cs >= 4 ||ds >= 4 ||ss >= 4) && !valores.contains(cartaParse(rango.charAt(0))))result.add(new output(Ranking.FLUSH,rango,1));
-           // else if (straightCount >=4 && gapNeed == cartaParse(rango.charAt(0))|| straightCount >=4 &&  ) result.add(new output(Ranking.STRAIGHT,rango,1));
-            //mal combinatoria
-            else if(fullhouse) result.add(new output(Ranking.FULLHOUSE,rango,1));
+            if (straightCount >= 5 && (hs >=4 || cs >=4 || ds >=4 || ss >=4))result.add(new output(Ranking.STRAIGHTFLUSH,rango,1));
+            else if(countFirst == 2) result.add(new output(Ranking.FOUROFAKIND,rango,1));
+            else if(maxCount == 2 && countFirst == 1)result.add(new output(Ranking.FULLHOUSE,rango,3));
+            else if(maxCount == 3 && countFirst == 0)result.add(new output(Ranking.FULLHOUSE,rango,6));
+            else if (hs >=4 || cs >=4 || ds >=4 || ss >=4) result.add(new output(Ranking.FLUSH,rango,3));
+            else if (straightCount >= 5) result.add(new output(Ranking.STRAIGHT,rango,4));
             else if (countFirst == 1)result.add(new output(Ranking.THREEOFAKIND,rango,3));
-            else if (twopair )result.add(new output(Ranking.TWOPAIR,rango,6));
-            else if (countFirst == 0) comparaParejas(rango,valores.get(0),valores.get(1));
-            
+            else result.add(new output(Ranking.PAIR,rango,6));
         }
         else if (rango.charAt(2) == 's'){ // El rango es suited Aks QJs
+            first = cartaParse(rango.charAt(0));
+            second = cartaParse(rango.charAt(1));
             
              for(int i = 0; i < palos.size(); ++i){
                 //Contamos si se repiten cartas
@@ -121,50 +116,110 @@ public class Ap3 {
                 if (cartaParse(rango.charAt(1)) == valores.get(i)) ++countSecond;
                 //Contamos cartas seguidas
                 if (i > 0 && valores.get(i) == valores.get(i-1)+1) ++straightCount;
-                //Si hay un gap en la escalera guardamos la posision del gap y el valor necesario
-                if (i > 0 && valores.get(i) == valores.get(i-1)+2) {straightGap = i; gapNeed = valores.get(i)-1; ++straightCount;}
+                //Si hay un gap en la escalera comprobamos si el rango lo suple
+                if (i > 0 && valores.get(i) == valores.get(i-1)+2){
+                    if (first == valores.get(i-1)+1){
+                        ++straightCount;first = -1;
+                    }
+                    if (second == valores.get(i-1)+1){
+                        ++straightCount;second = -1;
+                    }
+                }      
                 //Contamos cada palo
                 if(palos.get(i)=='h')++hs; if(palos.get(i)=='c')++cs; if(palos.get(i)=='d')++ds; if(palos.get(i)=='s')++ss;
+                freq = Collections.frequency(valores, valores.get(i));
+                if(freq > maxCount) maxCount = freq;
             }
+             //Analizo jugada
+            if (straightCount >= 5){
+                if(hs >=3) {result.add(new output(Ranking.STRAIGHTFLUSH,rango.charAt(0)+"h"+rango.charAt(1)+"h",1));
+                            result.add(new output(Ranking.STRAIGHT,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+                if(cs >=3) {result.add(new output(Ranking.STRAIGHTFLUSH,rango.charAt(0)+"c"+rango.charAt(1)+"c",1));
+                            result.add(new output(Ranking.STRAIGHT,rango.charAt(0)+"h"+rango.charAt(1)+"h, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+                if(ds >=3) {result.add(new output(Ranking.STRAIGHTFLUSH,rango.charAt(0)+"d"+rango.charAt(1)+"d",1));
+                            result.add(new output(Ranking.STRAIGHT,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"h"+rango.charAt(1)+"h, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+                if(ss >=3) {result.add(new output(Ranking.STRAIGHTFLUSH,rango.charAt(0)+"s"+rango.charAt(1)+"s",1));
+                            result.add(new output(Ranking.STRAIGHT,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"h"+rango.charAt(1)+"h",3));}
+            }
+            else if(countFirst == 3 || countSecond == 3) result.add(new output(Ranking.FOUROFAKIND,rango,1));
+            else if(maxCount == 1 && countFirst == 2 && countSecond == 1)result.add(new output(Ranking.FULLHOUSE,rango,6));
+            else if(maxCount == 1 && countFirst == 1 && countSecond == 2)result.add(new output(Ranking.FULLHOUSE,rango,6));
+            else if(maxCount == 2 && countFirst == 2 && countSecond == 0)result.add(new output(Ranking.FULLHOUSE,rango,8));
+            else if(maxCount == 2 && countFirst == 0 && countSecond == 2)result.add(new output(Ranking.FULLHOUSE,rango,8));
+            else if(maxCount == 3 && countFirst == 1 && countSecond == 0)result.add(new output(Ranking.FULLHOUSE,rango,12));
+            else if(maxCount == 3 && countFirst == 0 && countSecond == 1)result.add(new output(Ranking.FULLHOUSE,rango,12));
+            else if(hs >=3) {result.add(new output(Ranking.FLUSH,rango.charAt(0)+"h"+rango.charAt(1)+"h",1));
+                            result.add(new output(Ranking.HIGHCARD,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+            else if(cs >=3) {result.add(new output(Ranking.FLUSH,rango.charAt(0)+"c"+rango.charAt(1)+"c",1));
+                            result.add(new output(Ranking.HIGHCARD,rango.charAt(0)+"h"+rango.charAt(1)+"h, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+            else if(ds >=3) {result.add(new output(Ranking.FLUSH,rango.charAt(0)+"d"+rango.charAt(1)+"d",1));
+                            result.add(new output(Ranking.HIGHCARD,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"h"+rango.charAt(1)+"h, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+            else if(ss >=3) {result.add(new output(Ranking.FLUSH,rango.charAt(0)+"s"+rango.charAt(1)+"s",1));
+                            result.add(new output(Ranking.HIGHCARD,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"h"+rango.charAt(1)+"h",3));}
+            else if (straightCount >= 5) result.add(new output(Ranking.STRAIGHT,rango,4));
+            else if (countFirst == 2 || countSecond == 2)result.add(new output(Ranking.THREEOFAKIND,rango,4));
+            else if (countFirst == 1 || countSecond == 1)result.add(new output(Ranking.PAIR,rango,4));
+            else result.add(new output(Ranking.HIGHCARD,rango,4));
             
         }
         else{ // El rango es offsuited Ako QJo
+            first = cartaParse(rango.charAt(0));
+            second = cartaParse(rango.charAt(1));
             
             for(int i = 0; i < palos.size(); ++i){
-                //Contamos si se repiten cartas
+                ///Contamos si se repiten cartas
                 if (cartaParse(rango.charAt(0)) == valores.get(i)) ++countFirst;
                 if (cartaParse(rango.charAt(1)) == valores.get(i)) ++countSecond;
                 //Contamos cartas seguidas
                 if (i > 0 && valores.get(i) == valores.get(i-1)+1) ++straightCount;
-                //Si hay un gap en la escalera guardamos la posision del gap y el valor necesario
-                if (i > 0 && valores.get(i) == valores.get(i-1)+2) {straightGap = i; gapNeed = valores.get(i)-1; ++straightCount;}
+                //Si hay un gap en la escalera comprobamos si el rango lo suple
+                if (i > 0 && valores.get(i) == valores.get(i-1)+2){
+                    if (first == valores.get(i-1)+1){
+                        ++straightCount;first = -1;
+                    }
+                    if (second == valores.get(i-1)+1){
+                        ++straightCount;second = -1;
+                    }
+                }      
                 //Contamos cada palo
                 if(palos.get(i)=='h')++hs; if(palos.get(i)=='c')++cs; if(palos.get(i)=='d')++ds; if(palos.get(i)=='s')++ss;
+                freq = Collections.frequency(valores, valores.get(i));
+                if(freq > maxCount) maxCount = freq;
             }
-            
+            /* Por terminar
+            if (straightCount >= 5){
+                if(hs >=3) {result.add(new output(Ranking.STRAIGHTFLUSH,rango.charAt(0)+"h"+rango.charAt(1)+"h",1));
+                            result.add(new output(Ranking.STRAIGHT,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+                if(cs >=3) {result.add(new output(Ranking.STRAIGHTFLUSH,rango.charAt(0)+"c"+rango.charAt(1)+"c",1));
+                            result.add(new output(Ranking.STRAIGHT,rango.charAt(0)+"h"+rango.charAt(1)+"h, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+                if(ds >=3) {result.add(new output(Ranking.STRAIGHTFLUSH,rango.charAt(0)+"d"+rango.charAt(1)+"d",1));
+                            result.add(new output(Ranking.STRAIGHT,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"h"+rango.charAt(1)+"h, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+                if(ss >=3) {result.add(new output(Ranking.STRAIGHTFLUSH,rango.charAt(0)+"s"+rango.charAt(1)+"s",1));
+                            result.add(new output(Ranking.STRAIGHT,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"h"+rango.charAt(1)+"h",3));}
+            }
+            else if(countFirst == 3 || countSecond == 3) result.add(new output(Ranking.FOUROFAKIND,rango,1));
+            else if(maxCount == 1 && countFirst == 2 && countSecond == 1)result.add(new output(Ranking.FULLHOUSE,rango,6));
+            else if(maxCount == 1 && countFirst == 1 && countSecond == 2)result.add(new output(Ranking.FULLHOUSE,rango,6));
+            else if(maxCount == 2 && countFirst == 2 && countSecond == 0)result.add(new output(Ranking.FULLHOUSE,rango,8));
+            else if(maxCount == 2 && countFirst == 0 && countSecond == 2)result.add(new output(Ranking.FULLHOUSE,rango,8));
+            else if(maxCount == 3 && countFirst == 1 && countSecond == 0)result.add(new output(Ranking.FULLHOUSE,rango,12));
+            else if(maxCount == 3 && countFirst == 0 && countSecond == 1)result.add(new output(Ranking.FULLHOUSE,rango,12));
+            else if(hs >=3) {result.add(new output(Ranking.FLUSH,rango.charAt(0)+"h"+rango.charAt(1)+"h",1));
+                            result.add(new output(Ranking.HIGHCARD,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+            else if(cs >=3) {result.add(new output(Ranking.FLUSH,rango.charAt(0)+"c"+rango.charAt(1)+"c",1));
+                            result.add(new output(Ranking.HIGHCARD,rango.charAt(0)+"h"+rango.charAt(1)+"h, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+            else if(ds >=3) {result.add(new output(Ranking.FLUSH,rango.charAt(0)+"d"+rango.charAt(1)+"d",1));
+                            result.add(new output(Ranking.HIGHCARD,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"h"+rango.charAt(1)+"h, "+rango.charAt(0)+"s"+rango.charAt(1)+"s",3));}
+            else if(ss >=3) {result.add(new output(Ranking.FLUSH,rango.charAt(0)+"s"+rango.charAt(1)+"s",1));
+                            result.add(new output(Ranking.HIGHCARD,rango.charAt(0)+"c"+rango.charAt(1)+"c, "+rango.charAt(0)+"d"+rango.charAt(1)+"d, "+rango.charAt(0)+"h"+rango.charAt(1)+"h",3));}
+            else if (straightCount >= 5) result.add(new output(Ranking.STRAIGHT,rango,4));
+            else if (countFirst == 2 || countSecond == 2)result.add(new output(Ranking.THREEOFAKIND,rango,4));
+            else if (countFirst == 1 || countSecond == 1)result.add(new output(Ranking.PAIR,rango,4));
+            else result.add(new output(Ranking.HIGHCARD,rango,4));
+            */
         }
         
         
-    }
-    
-    public static void comparaParejas(String range, int first,int second ){
-        
-        if(cartaParse(range.charAt(0)) > first)
-            result.add(new output(Ranking.OVERPAIR,range,6));
-        
-        //la combinatoria esta mal exepto la primera distincion
-        else if (cartaParse(range.charAt(0)) == first)
-            result.add(new output(Ranking.TOPPAIR,range,6));
-        
-        //preguntar sobre el weak pair 
-        else if (cartaParse(range.charAt(0)) < first && cartaParse(range.charAt(0)) > 8)
-            result.add(new output(Ranking.PPBTP,range,6));
-        
-        else if (cartaParse(range.charAt(0)) == second && cartaParse(range.charAt(0)) > 8)
-            result.add(new output(Ranking.MIDDLEPAIR,range,6));
-        
-        else
-            result.add(new output(Ranking.WEAKPAIR,range,6));
     }
     
     public static int cartaParse(char carta){
