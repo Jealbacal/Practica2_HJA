@@ -18,9 +18,9 @@ import javax.swing.JToggleButton;
 public class PairButton extends JToggleButton implements ActionListener {
     
     private Type _type;
-    private final Color pair_color = Color.green;
-    private final Color off_color = Color.red;
-    private final Color s_color = Color.cyan;
+    private final Color pair_color = Color.white;
+    private final Color off_color = new Color(52,152,219);
+    private final Color s_color = new Color(26,188,156);
     private final Color sel_color = Color.yellow;
     private final Color sel_color2 = Color.MAGENTA;
     
