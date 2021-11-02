@@ -37,19 +37,19 @@ public class BoardButton extends JToggleButton implements ActionListener {
     //No seleccionado
     private final Color h_color_NS = new Color(255,204,204);
     //Seleccionado
-    private final Color h_color_S = new Color(203,67,53);
+    private final Color h_color_S = new Color(231,76,60);
     
     //Colores de los treboles (Verde)
     //No Seleccionado
     private final Color c_color_NS = new Color(204,255,204);
     //Seleccionado
-    private final Color c_color_S = new Color(34,153,84);
+    private final Color c_color_S = new Color(39,174,96);
     
     //Colores de los diamantes (Cyan)
     //No seleccionado
     private final Color d_color_NS = new Color(204,255,255);
     //Seleccionado
-    private final Color d_color_S = new Color(46,134,193);
+    private final Color d_color_S = new Color(52,152,219);
     
     //Colores de las picas (Gris)
     //No seleccionado
@@ -201,16 +201,16 @@ public class BoardButton extends JToggleButton implements ActionListener {
    public Color getColor(){
        switch (this.suit){
            case HEARTS:
-               return new Color(203,67,53);
+               return h_color_S;
                
            case DIAMONDS:
-               return new Color(46,134,193);
+               return d_color_S;
                
            case SPADES:
-               return new Color(39,55,70);
+               return Color.black;
                
            case CLUBS:
-               return new Color(34,153,84);
+               return c_color_S;
            default:
                return Color.black;
        }
