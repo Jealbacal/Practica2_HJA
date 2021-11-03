@@ -31,6 +31,9 @@ public class BoardButton extends JToggleButton implements ActionListener {
     //El palo de la carta
     private Suit suit;
     
+    //Valor numerico de la carta
+    private int valor;
+    
     //--------------COLORES-----------------------------------------
     
     //Colores de los corazones (Rojo)
@@ -68,8 +71,9 @@ public class BoardButton extends JToggleButton implements ActionListener {
     /**
      * Constructor
      */
-    public BoardButton(){
+    public BoardButton(int i){
         init();
+        setValor(i);
     }
     
     /**
@@ -100,6 +104,22 @@ public class BoardButton extends JToggleButton implements ActionListener {
      */
     public Suit getSuit(){
         return this.suit;
+    }
+    
+    /**
+     * Setter del valor numerico de la carta
+     * @param n 
+     */
+    public void setValor(int n){
+        this.valor = n;
+    }
+    
+    /**
+     * Getter del valor numerico de la carta
+     * @return 
+     */
+    public int getValor(){
+        return valor;
     }
     
     /**
@@ -230,11 +250,23 @@ public class BoardButton extends JToggleButton implements ActionListener {
                MainFrame.board.get(4).setText("");
                break;
            case 4:
+               MainFrame.board.get(0).setText(sel_cards.get(0).getText());
+               MainFrame.board.get(0).setForeground(sel_cards.get(0).getColor());
+               MainFrame.board.get(1).setText(sel_cards.get(1).getText());
+               MainFrame.board.get(1).setForeground(sel_cards.get(1).getColor());
+               MainFrame.board.get(2).setText(sel_cards.get(2).getText());
+               MainFrame.board.get(2).setForeground(sel_cards.get(2).getColor());
                MainFrame.board.get(3).setText(sel_cards.get(3).getText());
                MainFrame.board.get(3).setForeground(sel_cards.get(3).getColor());
                MainFrame.board.get(4).setText("");
                break;
            case 5:
+               MainFrame.board.get(0).setText(sel_cards.get(0).getText());
+               MainFrame.board.get(0).setForeground(sel_cards.get(0).getColor());
+               MainFrame.board.get(1).setText(sel_cards.get(1).getText());
+               MainFrame.board.get(1).setForeground(sel_cards.get(1).getColor());
+               MainFrame.board.get(2).setText(sel_cards.get(2).getText());
+               MainFrame.board.get(2).setForeground(sel_cards.get(2).getColor());
                MainFrame.board.get(4).setText(sel_cards.get(4).getText());
                MainFrame.board.get(4).setForeground(sel_cards.get(4).getColor());
                break;

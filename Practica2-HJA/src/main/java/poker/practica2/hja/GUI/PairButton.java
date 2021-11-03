@@ -18,6 +18,8 @@ import javax.swing.JToggleButton;
 public class PairButton extends JToggleButton implements ActionListener {
     
     private Type _type;
+    private int first_card;
+    private int second_card;
     private final Color pair_color = Color.white;
     private final Color off_color = new Color(52,152,219);
     private final Color s_color = new Color(26,188,156);
@@ -25,8 +27,10 @@ public class PairButton extends JToggleButton implements ActionListener {
     private final Color sel_color2 = Color.MAGENTA;
     
         
-    public PairButton(){
+    public PairButton(int i, int j){
        init();
+       setFirstCard(i);
+       setSecondCard(j);
     }
 
     private void init(){
@@ -43,6 +47,22 @@ public class PairButton extends JToggleButton implements ActionListener {
     
     public Type getType(){
         return this._type;
+    }
+    
+    public void setFirstCard(int n){
+        first_card = n;
+    }
+    
+    public void setSecondCard(int n){
+        second_card = n;
+    }
+    
+    public int getFirstCard(){
+        return first_card;
+    }
+    
+    public int getSecondCard(){
+        return second_card;
     }
     
     //El action listener

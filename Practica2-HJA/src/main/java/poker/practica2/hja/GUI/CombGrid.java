@@ -41,7 +41,7 @@ public class CombGrid extends javax.swing.JPanel {
         for (int i = 0; i < n_rows; i++){
             for(int j = n_cols; j >= 2; j--){
                 
-                BoardButton b_button = new BoardButton();
+                BoardButton b_button = new BoardButton(j);
                 b_button.addActionListener(b_button);
                 
                 buttonConfig(i,j,b_button);

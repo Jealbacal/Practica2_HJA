@@ -81,7 +81,7 @@ public class RangeGrid extends javax.swing.JPanel {
             for(int j = _size; j >= 2; j--){
                 
                 //Creacion del boton y atributos
-                PairButton pair = new PairButton();
+                PairButton pair = new PairButton(i, j);
                 pair.addActionListener(pair);
                 
                 //Botones de las Parejas
