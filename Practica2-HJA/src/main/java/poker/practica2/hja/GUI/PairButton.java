@@ -26,6 +26,9 @@ public class PairButton extends JToggleButton implements ActionListener {
     private final Color sel_color = Color.magenta;
     private final Color sel_color2 = Color.MAGENTA;
     
+    public static int comb_sum;
+    private int combs;
+    
         
     public PairButton(int i, int j){
        init();
@@ -63,6 +66,10 @@ public class PairButton extends JToggleButton implements ActionListener {
     
     public int getSecondCard(){
         return second_card;
+    }
+    
+    public static int getCombSum(){
+        return comb_sum;
     }
     
     //El action listener
@@ -125,6 +132,20 @@ public class PairButton extends JToggleButton implements ActionListener {
     public void setSelectedColor2(){
         this.setBackground(sel_color2);
     }
+    
+    public void setCombs(Type type){
+        combs = type.getCombs();
+    }
+    
+    public void substractCombs(int n){
+        combs -= n;
+    }
+    
+    public int getCombs(){
+        return this.combs;
+    }
+    
+   
     
         
     

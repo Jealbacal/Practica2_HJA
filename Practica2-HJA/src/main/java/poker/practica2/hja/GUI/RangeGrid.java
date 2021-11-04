@@ -92,6 +92,7 @@ public class RangeGrid extends javax.swing.JPanel {
                     pair.setText(rangeButtonText(i) + 
                             rangeButtonText(j));
                     pair.setPairColor();
+                    pair.setCombs(pair.getType());
                     
                 }
                 // Botones de las cartas Suited
@@ -103,6 +104,7 @@ public class RangeGrid extends javax.swing.JPanel {
                             rangeButtonText(j) +
                             "s");
                     pair.setSuitedColor();
+                    pair.setCombs(pair.getType());
                 }
                 // Botones de las cartas Offsuit
                 else if( i < j ){
@@ -113,6 +115,7 @@ public class RangeGrid extends javax.swing.JPanel {
                             rangeButtonText(i) +
                             "o");
                     pair.setOffSuitColor();
+                    pair.setCombs(pair.getType());
                     //pair.setForeground(Color.WHITE);
                 }
                 
@@ -210,13 +213,17 @@ public class RangeGrid extends javax.swing.JPanel {
     
    public void checkSelected(){
         sel_button_list.clear();
+        PairButton.comb_sum=0;
         for(PairButton b : button_list){
             if(b.isSelected()){
                 sel_button_list.add(b);
+                PairButton.comb_sum += b.getCombs();
             }else{
                 sel_button_list.remove(b);
             }
         }
+        
+        
     }
     
     //Crea una lista (semi-ordenada) con los strings (nombres) de los botones seleccionados
@@ -230,9 +237,11 @@ public class RangeGrid extends javax.swing.JPanel {
             - v2 Collections.sort(off_list); lo ordena de manera decreciente :(
             - v3 Collections.sort(off_list, Collections.reverseOrder()); ¡¡¡ya lo hace bien!!!
             - v3 No funciona todavia, el orden alfabetico lo jode.
-            - v4 Ya funciona por reestructuracion de la estrucutra de botones. Lista -> Matriz
+            - v4 Ya funciona por reestructuracion de la estrucutra de datos de botones(off). Lista -> Matriz
+            - v4 PENDIENTE DE REFACTOR: Usar solo una estructura de datos para esta funcion.
+            - v4 Se sigue la politica de: "Si funciona, no lo toques 2 dias antes de la entrega".
     */
-    public ArrayList<String> getSelButtonList(){
+    public ArrayList<String> getSelButtonTextList(){
         
         ArrayList<String> list = new ArrayList<>();
         ArrayList<String> pair_list = new ArrayList<>();
@@ -288,6 +297,13 @@ public class RangeGrid extends javax.swing.JPanel {
        for (String s : percent_range){
            searchButton(s,false);
        }
+    }
+    
+    public ArrayList<PairButton> getSelButtonList(){
+        
+        this.checkSelected();
+        
+        return sel_button_list;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
