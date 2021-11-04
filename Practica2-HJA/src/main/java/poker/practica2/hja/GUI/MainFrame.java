@@ -63,6 +63,9 @@ public class MainFrame extends javax.swing.JFrame {
         Turn = new javax.swing.JLabel();
         RiverPanel = new javax.swing.JPanel();
         River = new javax.swing.JLabel();
+        CalcCombs = new javax.swing.JButton();
+        Ap3OutScroll = new javax.swing.JScrollPane();
+        Ap3Out = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Practica 2");
@@ -211,7 +214,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         FlopPanelLayout.setVerticalGroup(
             FlopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Flop1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Flop1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
             .addComponent(Flop2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(Flop3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -233,9 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         TurnPanelLayout.setVerticalGroup(
             TurnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TurnPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Turn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(Turn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         RiverPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("River"));
@@ -255,10 +256,21 @@ public class MainFrame extends javax.swing.JFrame {
         );
         RiverPanelLayout.setVerticalGroup(
             RiverPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RiverPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(River, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(River, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        CalcCombs.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjcar\\OneDrive\\Documentos\\!Universidad\\POK\\Practicas\\Practica 2\\Imagenes Iconos\\poker-cards(2).png")); // NOI18N
+        CalcCombs.setBorder(null);
+        CalcCombs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CalcCombsActionPerformed(evt);
+            }
+        });
+
+        Ap3Out.setColumns(20);
+        Ap3Out.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        Ap3Out.setRows(5);
+        Ap3OutScroll.setViewportView(Ap3Out);
 
         javax.swing.GroupLayout Ap3OutPanelLayout = new javax.swing.GroupLayout(Ap3OutPanel);
         Ap3OutPanel.setLayout(Ap3OutPanelLayout);
@@ -266,22 +278,30 @@ public class MainFrame extends javax.swing.JFrame {
             Ap3OutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Ap3OutPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(FlopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(TurnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(RiverPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(Ap3OutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Ap3OutScroll)
+                    .addGroup(Ap3OutPanelLayout.createSequentialGroup()
+                        .addComponent(FlopPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(TurnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(RiverPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(CalcCombs, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         Ap3OutPanelLayout.setVerticalGroup(
             Ap3OutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Ap3OutPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Ap3OutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TurnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(FlopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RiverPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(311, Short.MAX_VALUE))
+                    .addComponent(RiverPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CalcCombs, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(TurnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
+                .addComponent(Ap3OutScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout CombPanelLayout = new javax.swing.GroupLayout(CombPanel);
@@ -292,7 +312,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(CombPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ClearCombButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CombGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                    .addComponent(CombGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
                     .addComponent(Ap3OutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -373,7 +393,13 @@ public class MainFrame extends javax.swing.JFrame {
         Flop3.setText("");
         Turn.setText("");
         River.setText("");
+        Ap3Out.setText("");
     }//GEN-LAST:event_ClearCombButtonActionPerformed
+
+    private void CalcCombsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcCombsActionPerformed
+        // TODO add your handling code here:
+        calcCombs();
+    }//GEN-LAST:event_CalcCombsActionPerformed
     
     
     /**
@@ -412,8 +438,11 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea Ap3Out;
     private javax.swing.JPanel Ap3OutPanel;
+    private javax.swing.JScrollPane Ap3OutScroll;
     private javax.swing.JPanel ButtonPanel;
+    private javax.swing.JButton CalcCombs;
     private javax.swing.JButton ClearCombButton;
     private poker.practica2.hja.GUI.CombGrid CombGrid;
     private javax.swing.JPanel CombPanel;
@@ -462,16 +491,16 @@ public class MainFrame extends javax.swing.JFrame {
         
         //DEBUG--------------------------------------
         ArrayList<String> test = new ArrayList<>();
-        test = RangeGrid.getSelButtonList();
+        test = RangeGrid.getSelButtonTextList();
         
         for( String s : test){
             System.out.println(s);
         }
         //--------------------------------------
         
-        Ap1 logic = new Ap1(RangeGrid.getSelButtonList());
+        Ap1 logic = new Ap1(RangeGrid.getSelButtonTextList());
         
-        logic.fillRange2Text(RangeGrid.getSelButtonList());
+        logic.fillRange2Text(RangeGrid.getSelButtonTextList());
        
         RangeText.setText(logic.texfield);
     }
@@ -504,9 +533,9 @@ public class MainFrame extends javax.swing.JFrame {
         
         RangeGrid.selectSliderRange(logic.result);
         
-        Ap1 logic2 = new Ap1(RangeGrid.getSelButtonList());
+        Ap1 logic2 = new Ap1(RangeGrid.getSelButtonTextList());
         
-        logic2.fillRange2Text(RangeGrid.getSelButtonList());
+        logic2.fillRange2Text(RangeGrid.getSelButtonTextList());
        
         Range2Text(); 
     }
@@ -621,12 +650,110 @@ public class MainFrame extends javax.swing.JFrame {
     private void initBoard(){
         board= new ArrayList<>();
         
-        
         board.add(Flop1);
         board.add(Flop2);
         board.add(Flop3);
         board.add(Turn);
         board.add(River);
+    }
+    
+    private void calcCombs(){
+        
+        RangeGrid.checkSelected();
+        CombGrid.checkSelected();
+        
+        int comb_sum = 0;
+        
+        String text = "";
+        Ap3Out.setText(text);
+        
+        text = text.concat("The total number of combos pre-flop is:" + "\n"
+                + Integer.toString(PairButton.comb_sum));
+        
+       
+        for(PairButton p : RangeGrid.getSelButtonList()){
+            
+            int FC_rep_count = 0;
+            int SC_rep_count = 0;
+            
+            ArrayList<Suit> FC_suits = new ArrayList<>();
+            ArrayList<Suit> SC_suits = new ArrayList<>();
+           
+            for(BoardButton b : CombGrid.getSelectedCards()){
+                switch (p.getType()){
+                    case PAIR:
+                        if(p.getFirstCard() == b.getValor()){
+                            FC_rep_count++;
+                        }
+                        break;
+                    default:
+                        if(p.getFirstCard() == b.getValor()){
+                            FC_suits.add(b.getSuit());
+                            FC_rep_count++;
+                        }else if (p.getSecondCard() == b.getValor()){
+                            SC_suits.add(b.getSuit());
+                            SC_rep_count++;
+                        }
+                        break;
+                    }
+                
+            }
+            
+            switch (p.getType()){
+                case PAIR:
+                    if ( FC_rep_count == 1){ p.substractCombs(3); }
+                    else if( FC_rep_count == 2){ p.substractCombs(5); }
+                    break;
+                case OFF_SUIT:
+                    if(FC_rep_count == 4 || SC_rep_count == 4){
+                        p.substractCombs(p.getCombs());
+                    }else{
+                        if(FC_rep_count > SC_rep_count){
+                            for(int i = 0; i < FC_rep_count; i++){
+                                p.substractCombs(3);
+                            }
+                            p.substractCombs(SC_rep_count);
+                        }
+                        else if(SC_rep_count > FC_rep_count){
+                            for(int i = 0; i < SC_rep_count; i++){
+                                p.substractCombs(3);
+                            }
+                            p.substractCombs(FC_rep_count);
+                        }else{
+                            p.substractCombs(5);
+                        }
+                    }
+                    
+                    break;
+                case SUITED:
+                    if(FC_rep_count == 4 || SC_rep_count == 4){
+                        p.substractCombs(p.getCombs());
+                    }else{
+                        for(Suit s1 : FC_suits){
+                            for(Suit s2 : SC_suits){
+                                if (s1 == s2){
+                                    p.substractCombs(1);
+                                    FC_rep_count--;
+                                    SC_rep_count--;
+                                }
+                            }
+                        }
+                        p.substractCombs(FC_rep_count + SC_rep_count);
+                    }
+                    
+                    break;
+            }
+            
+            comb_sum += p.getCombs();
+            p.setCombs(p.getType());
+        }
+        
+        PairButton.comb_sum = comb_sum;
+        
+        text = text.concat("\n" + "The total number of combos post-Flop is: " + "\n" + 
+                Integer.toString(PairButton.comb_sum));
+        
+        Ap3Out.setText(text);
     }
         
 }

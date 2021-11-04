@@ -9,5 +9,20 @@ package poker.practica2.hja.GUI;
  * @author jjcar
  */
 public enum Type {
-    PAIR, OFF_SUIT, SUITED
+    PAIR(6), OFF_SUIT(12), SUITED(4);
+    
+    private int combs;
+
+    private Type(int combs){
+        this.combs =combs;
+    }
+    
+    public int getCombs(){
+        return combs;
+    }
+    
+    public void removeCombs(int n){
+        this.combs -= n;
+    }
+    
 }
