@@ -22,11 +22,12 @@ public class Ap3 {
     ArrayList<PairButton> rangos;
     Ap1 logic;
     ArrayList<BoardButton> board;
-    public static ArrayList<output> result;
+    public static ArrayList<output> result = new ArrayList<>();;
     
     
     public Ap3(ArrayList<PairButton> rangos, ArrayList<BoardButton> board){
-        
+      
+
     
     }
     
@@ -71,7 +72,7 @@ public class Ap3 {
         int countFirst = 0, countSecond = 0, straightCount = 1, hs = 0, cs = 0, ds = 0, ss= 0;
         int first, second, maxCount = 0, freq;
         char palo;
-        result = new ArrayList<>();
+        boolean escaleras;
         ArrayList<Integer> escalera = new ArrayList<Integer>();
         Type tipo = rango.getType();
         
@@ -81,8 +82,8 @@ public class Ap3 {
         
          first=rango.getFirstCard();
          second=rango.getSecondCard();
-         palo=comprobarColor(rango, board);
-        boolean escaleras=comprobarEscalera(rango,escalera);
+        
+    
         char firstString=rango.getText().charAt(0);
         char secondString=rango.getText().charAt(1);
         
@@ -90,8 +91,8 @@ public class Ap3 {
             
             case PAIR:
                
-                
-
+                escaleras=comprobarEscalera(rango,escalera);
+                palo=comprobarColor(rango, board,false);
                 for(int i = 0; i < board.size(); ++i){
                     
                 //Contamos si se repiten cartas
@@ -116,23 +117,23 @@ public class Ap3 {
                     switch(palo){
                         
                         case 'h':
-                        {result.add(new output(Ranking.STRAIGHTFLUSH,firstString+"h"+secondString+"h",1));
-                         result.add(new output(Ranking.STRAIGHT,firstString+"c"+secondString+"c, "+firstString+"d"+secondString+"d, "+firstString+"s"+secondString+"s",3));}
+                        {result.add(new output(Ranking.STRAIGHTFLUSH,firstString+secondString+"h",1));
+                         result.add(new output(Ranking.STRAIGHT,firstString+secondString+"c, "+firstString+secondString+"d, "+firstString+secondString+"s",3));}
                         
                         break;
                         
                         case 'c':
-                           {result.add(new output(Ranking.STRAIGHTFLUSH,firstString+"c"+secondString+"c",1));
-                                result.add(new output(Ranking.STRAIGHT,firstString+"h"+secondString+"h, "+firstString+"d"+secondString+"d, "+firstString+"s"+secondString+"s",3));}
+                           {result.add(new output(Ranking.STRAIGHTFLUSH,firstString+secondString+"c",1));
+                                result.add(new output(Ranking.STRAIGHT,firstString+secondString+"h, "+firstString+secondString+"d, "+firstString+secondString+"s",3));}
                         break;   
                         case 'd':
-                           {result.add(new output(Ranking.STRAIGHTFLUSH,firstString+"d"+secondString+"d",1));
-                                result.add(new output(Ranking.STRAIGHT,firstString+"c"+secondString+"c, "+firstString+"h"+secondString+"h, "+firstString+"s"+secondString+"s",3));}
+                           {result.add(new output(Ranking.STRAIGHTFLUSH,firstString+secondString+"d",1));
+                                result.add(new output(Ranking.STRAIGHT,firstString+secondString+"c, "+firstString+secondString+"h, "+firstString+secondString+"s",3));}
                         break; 
                         
                         case 's':
-                             {result.add(new output(Ranking.STRAIGHTFLUSH,firstString+"s"+secondString+"s",1));
-                                result.add(new output(Ranking.STRAIGHT,firstString+"c"+secondString+"c, "+firstString+"d"+secondString+"d, "+firstString+"h"+secondString+"h",3));}
+                             {result.add(new output(Ranking.STRAIGHTFLUSH,firstString+secondString+"s",1));
+                                result.add(new output(Ranking.STRAIGHT,firstString+secondString+"c, "+firstString+secondString+"d, "+firstString+secondString+"h",3));}
                         break;
                         
                         case 'x' : 
@@ -150,20 +151,24 @@ public class Ap3 {
                 else if(maxCount == 3 && countFirst == 0)result.add(new output(Ranking.FULLHOUSE,rango.getText(),6));
                 else if (palo!= 'x') result.add(new output(Ranking.FLUSH,rango.getText(),3));
                 else if (countFirst == 1)result.add(new output(Ranking.THREEOFAKIND,rango.getText(),3));
+                else if (maxCount==2)result.add(new output(Ranking.TWOPAIR,rango.getText(),6));
                 //parametro boolean 
-                else if (countFirst == 0) comparaParejas(rango,escalera.get(0),escalera.get(1),escalera.get(escalera.size()-1));
-                else result.add(new output(Ranking.NOMADEHAND,rango.getText(),1));
+                else  comparaParejas(rango,escalera.get(0),escalera.get(1),escalera.get(escalera.size()-1));
+               
             break;
             
             case SUITED:
                 
                
-
+                escaleras=comprobarEscaleraSO(rango,escalera);
+                palo=comprobarColor(rango, board,true);
                  for(int i = 0; i < board.size(); ++i){
                     //Contamos si se repiten cartas
                     if (first == board.get(i).getValor()) ++countFirst;
                     if (second ==board.get(i).getValor()) ++countSecond;
                     //Contamos cartas seguidas
+                   
+                        
                     freq = Collections.frequency(escalera, board.get(i).getValor());
                     if(freq > maxCount) maxCount = freq;
                 }
@@ -208,24 +213,29 @@ public class Ap3 {
                 else if(maxCount == 3 && countFirst == 1 && countSecond == 0)result.add(new output(Ranking.FULLHOUSE,rango.getText(),12));
                 else if(maxCount == 3 && countFirst == 0 && countSecond == 1)result.add(new output(Ranking.FULLHOUSE,rango.getText(),12));
                 else if(hs >=3) {result.add(new output(Ranking.FLUSH,firstString+"h"+secondString+"h",1));
-                                result.add(new output(Ranking.HIGHCARD,firstString+"c"+secondString+"c, "+firstString+"d"+secondString+"d, "+firstString+"s"+secondString+"s",3));}
+                                result.add(new output(Ranking.NOMADEHAND,firstString+"c"+secondString+"c, "+firstString+"d"+secondString+"d, "+firstString+"s"+secondString+"s",3));}
                 else if(cs >=3) {result.add(new output(Ranking.FLUSH,firstString+"c"+secondString+"c",1));
-                                result.add(new output(Ranking.HIGHCARD,firstString+"h"+secondString+"h, "+firstString+"d"+secondString+"d, "+firstString+"s"+secondString+"s",3));}
+                                result.add(new output(Ranking.NOMADEHAND,firstString+"h"+secondString+"h, "+firstString+"d"+secondString+"d, "+firstString+"s"+secondString+"s",3));}
                 else if(ds >=3) {result.add(new output(Ranking.FLUSH,firstString+"d"+secondString+"d",1));
-                                result.add(new output(Ranking.HIGHCARD,firstString+"c"+secondString+"c, "+firstString+"h"+secondString+"h, "+firstString+"s"+secondString+"s",3));}
+                                result.add(new output(Ranking.NOMADEHAND,firstString+"c"+secondString+"c, "+firstString+"h"+secondString+"h, "+firstString+"s"+secondString+"s",3));}
                 else if(ss >=3) {result.add(new output(Ranking.FLUSH,firstString+"s"+secondString+"s",1));
-                                result.add(new output(Ranking.HIGHCARD,firstString+"c"+secondString+"c, "+firstString+"d"+secondString+"d, "+firstString+"h"+secondString+"h",3));}
+                                result.add(new output(Ranking.NOMADEHAND,firstString+"c"+secondString+"c, "+firstString+"d"+secondString+"d, "+firstString+"h"+secondString+"h",3));}
                 else if (straightCount >= 5) result.add(new output(Ranking.STRAIGHT,rango.getText(),4));
                 else if (countFirst == 2 || countSecond == 2)result.add(new output(Ranking.THREEOFAKIND,rango.getText(),4));
-                else if (countFirst == 1 || countSecond == 1)result.add(new output(Ranking.PAIR,rango,4));
-                else result.add(new output(Ranking.HIGHCARD,rango.getText(),4));
+                else if (countFirst == 1 && countSecond == 1 && maxCount==0)result.add(new output(Ranking.TWOPAIR,rango.getText(),3));
+                else if (countFirst == 1 && countSecond == 0 && maxCount==2)result.add(new output(Ranking.TWOPAIR,rango.getText(),3));
+                else if (countFirst == 0 && countSecond == 1 && maxCount==2)result.add(new output(Ranking.TWOPAIR,rango.getText(),3));
+                else if (countFirst == 1 || countSecond == 1)comparaParejas(rango,escalera.get(0),escalera.get(1),escalera.get(escalera.size()-1));
+                else result.add(new output(Ranking.NOMADEHAND,rango.getText(),4));
                 
             break;
             
             case OFF_SUIT:    
                 first = cartaParse(rango.charAt(0));
                 second = cartaParse(rango.charAt(1));
-
+                
+                escaleras=comprobarEscaleraSO(rango,escalera);
+                palo=comprobarColor(rango, board,false);
                 for(int i = 0; i < board.size(); ++i){
                     ///Contamos si se repiten cartas
                     if (cartaParse(rango.charAt(0)) == valores.get(i)) ++countFirst;
@@ -286,7 +296,8 @@ public class Ap3 {
      public static boolean comprobarEscalera(PairButton rango,ArrayList<Integer> escalera ){
         boolean result=true;
         int i=1,iguales=0;
-         ArrayList<Integer> aux= escalera;
+         ArrayList<Integer> aux= new ArrayList<Integer>();
+         aux=(ArrayList<Integer>)escalera.clone();
          aux.add(rango.getFirstCard());
          
          Collections.sort(aux);
@@ -307,6 +318,8 @@ public class Ap3 {
                 else if (iguales > 1)
                     result=false;
             }
+            else 
+                result=false;
              
             i++;
          }
@@ -318,9 +331,11 @@ public class Ap3 {
      
      //comprobar esto
      public static boolean comprobarEscaleraSO(PairButton rango,ArrayList<Integer> escalera){
-         ArrayList<Integer> aux= escalera;
-         int i=0,cont=1;
-        
+         
+         int i=1,cont=1;
+         ArrayList<Integer> aux= new ArrayList<Integer>();
+         aux=(ArrayList<Integer>)escalera.clone();
+         
          aux.add(rango.getFirstCard());
          aux.add(rango.getSecondCard());
          Collections.sort(aux);
@@ -334,7 +349,7 @@ public class Ap3 {
          }
          
          
-         if(cont>5)
+         if(cont>=5)
              return true;
          
          else 
@@ -342,21 +357,21 @@ public class Ap3 {
          
      }
      
-     public static char comprobarColor(PairButton rango,ArrayList<BoardButton> color ){
+     public static char comprobarColor(PairButton rango,ArrayList<BoardButton> color ,boolean suited){
         boolean result=true;
         char aux1='x';
-        int i=1,h=0,s=0,c=0,d=0;
+        int i=0,h=0,s=0,c=0,d=0;
         ArrayList<BoardButton> aux= color;  
          
-        while(i<aux.size() && result){
+        while(i < aux.size()){
 
-           if(color.get(i).getCardText().equals("h"))
+           if(color.get(i).getCardText().charAt(1)==('h'))
                h++;
-           else if(color.get(i).getCardText().equals("s"))
+           else if(color.get(i).getCardText().charAt(1)==('s'))
                s++;
-           else if(color.get(i).getCardText().equals("c"))
+           else if(color.get(i).getCardText().charAt(1)==('c'))
                c++;
-           else if(color.get(i).getCardText().equals("d"))
+           else if(color.get(i).getCardText().charAt(1)==('d'))
                d++; 
            
            if(color.get(i).getValor()== rango.getFirstCard() || color.get(i).getValor()== rango.getSecondCard())
@@ -365,8 +380,12 @@ public class Ap3 {
            i++;
         }
         
-        if(h<4 && s<4 &&  d<4 && c<4 )
-           return aux1;
+        if(!suited)
+            if(h<4 && s<4 &&  d<4 && c<4 )
+               return aux1;
+        else
+            if(h<3 && s<3 &&  d<3 && c<3 )
+               return aux1;    
         
         
         if(h > s || h > d ||h > c ){
