@@ -92,6 +92,17 @@ public class PairButton extends JToggleButton implements ActionListener {
         //Si estaba seleccionado
         }else{
             this.setBackground(sel_color);
+            switch(this._type){
+                case PAIR:
+                    this.setBackground(new Color(255,153,255));
+                    break;
+                case OFF_SUIT:
+                    this.setBackground(new Color(178,102,255));
+                    break;
+                case SUITED:
+                    this.setBackground(new Color(204,0,204));
+                    break;
+            }
         }
     } 
 
@@ -127,10 +138,32 @@ public class PairButton extends JToggleButton implements ActionListener {
     
     public void setSelectedColor(){
         this.setBackground(sel_color);
+        switch(this._type){
+                case PAIR:
+                    this.setBackground(new Color(255,153,255));
+                    break;
+                case OFF_SUIT:
+                    this.setBackground(new Color(178,102,255));
+                    break;
+                case SUITED:
+                    this.setBackground(new Color(204,0,204));
+                    break;
+            }
     }
     
     public void setSelectedColor2(){
         this.setBackground(sel_color2);
+        switch(this._type){
+                case PAIR:
+                    this.setBackground(new Color(255,153,255));
+                    break;
+                case OFF_SUIT:
+                    this.setBackground(new Color(178,102,255));
+                    break;
+                case SUITED:
+                    this.setBackground(new Color(204,0,204));
+                    break;
+            }
     }
     
     public void setCombs(Type type){

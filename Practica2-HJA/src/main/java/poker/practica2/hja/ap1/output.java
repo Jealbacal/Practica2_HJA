@@ -28,4 +28,11 @@ public class output {
         this.jugadas = jugadas;        
     }
     
+    @Override
+    public String toString(){ 
+        return ranking.toString() + ": " + Integer.toString(jugadas) + "\n" +
+                "   - Cartas: " + cards + "\n";
+        
+    }
+    
 }

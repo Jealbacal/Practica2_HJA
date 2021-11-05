@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import poker.practica2.hja.ap1.Ap1;
 import poker.practica2.hja.ap1.Ap2;
+import poker.practica2.hja.ap1.Ap3;
+import poker.practica2.hja.ap1.output;
 
 /**
  *
@@ -267,6 +269,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        Ap3Out.setEditable(false);
         Ap3Out.setColumns(20);
         Ap3Out.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         Ap3Out.setRows(5);
@@ -657,21 +660,38 @@ public class MainFrame extends javax.swing.JFrame {
         board.add(River);
     }
     
+    /**
+     * Action Listener del boton de calcular combinaciones
+     */
     private void calcCombs(){
         
         RangeGrid.checkSelected();
         CombGrid.checkSelected();
         
-        int comb_sum = 0;
-        
         String text = "";
         Ap3Out.setText(text);
         
         text = text.concat("The total number of combos pre-flop is:" + "\n"
-                + Integer.toString(PairButton.comb_sum));
+                + Integer.toString(PairButton.comb_sum) + "\n");
         
-       
-        for(PairButton p : RangeGrid.getSelButtonList()){
+        Ap3Out.setText(text);
+        
+        Ap3 logic = new Ap3(RangeGrid.getSelButtonList(), CombGrid.getButtonList());
+        
+        Ap3.calcular(RangeGrid.getSelButtonList(), CombGrid.getButtonList());
+        
+        for(output o : Ap3.result){
+            text = text.concat(o.toString());
+        }
+        
+        Ap3Out.setText(text);
+        
+    }
+        
+}
+
+/**
+for(PairButton p : RangeGrid.getSelButtonList()){
             
             int FC_rep_count = 0;
             int SC_rep_count = 0;
@@ -701,8 +721,12 @@ public class MainFrame extends javax.swing.JFrame {
             
             switch (p.getType()){
                 case PAIR:
+                    if(FC_rep_count == 4 || SC_rep_count == 4){
+                        p.substractCombs(p.getCombs());
+                    }
                     if ( FC_rep_count == 1){ p.substractCombs(3); }
                     else if( FC_rep_count == 2){ p.substractCombs(5); }
+                    
                     break;
                 case OFF_SUIT:
                     if(FC_rep_count == 4 || SC_rep_count == 4){
@@ -754,7 +778,5 @@ public class MainFrame extends javax.swing.JFrame {
                 Integer.toString(PairButton.comb_sum));
         
         Ap3Out.setText(text);
-    }
-        
-}
 
+*/

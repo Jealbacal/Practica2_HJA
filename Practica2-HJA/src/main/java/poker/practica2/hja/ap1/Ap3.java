@@ -22,7 +22,7 @@ public class Ap3 {
     ArrayList<PairButton> rangos;
     Ap1 logic;
     ArrayList<BoardButton> board;
-    static ArrayList<output> result;
+    public static ArrayList<output> result;
     
     
     public Ap3(ArrayList<PairButton> rangos, ArrayList<BoardButton> board){
