@@ -679,7 +679,7 @@ public class MainFrame extends javax.swing.JFrame {
         Ap3 logic = new Ap3(RangeGrid.getSelButtonList(), CombGrid.getButtonList());
         
         Ap3.calcular(RangeGrid.getSelButtonList(), CombGrid.getSelectedCards());
-        
+        text="";
         for(output o : Ap3.result){
             text = text.concat(o.toString());
         }
