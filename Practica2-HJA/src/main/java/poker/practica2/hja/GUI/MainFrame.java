@@ -668,23 +668,8 @@ public class MainFrame extends javax.swing.JFrame {
         
         RangeGrid.checkSelected();
         CombGrid.checkSelected();
-        
-<<<<<<< HEAD
-        String text = "";
-        Ap3Out.setText(text);
-        
-        text = text.concat("The total number of combos pre-flop is:" + "\n"
-                + Integer.toString(PairButton.comb_sum) + "\n");
-        
-        Ap3Out.setText(text);
-        
-        Ap3 logic = new Ap3(RangeGrid.getSelButtonList(), CombGrid.getButtonList());
-        
-        Ap3.calcular(RangeGrid.getSelButtonList(), CombGrid.getSelectedCards());
-        text="";
-        for(output o : Ap3.result){
-            text = text.concat(o.toString());
-=======
+       
+
         if(CombGrid.getSelectedCards().size() >= 3){
             
             String text = "";
@@ -705,7 +690,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             Ap3Out.setText(text);
             
->>>>>>> jj's-BranchV2
+
         }
         
         
