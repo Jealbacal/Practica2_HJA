@@ -12,7 +12,6 @@ import poker.practica2.hja.GUI.BoardButton;
 import poker.practica2.hja.GUI.PairButton;
 import poker.practica2.hja.GUI.Type;
 import java.util.Collections;
-import jdk.internal.vm.compiler.collections.Pair;
 
 /**
  *
@@ -48,12 +47,15 @@ public class Ap3 {
         int first, second, maxCount = 0, freq;
         char palo;
         boolean escaleras;
+        straightFlush = true;
         
         ArrayList<Integer> escalera = new ArrayList<Integer>();
+        ArrayList<Character> colorPalo = new ArrayList<Character>();
         Type tipo = rango.getType();
 
         for (BoardButton s : board) {
             escalera.add(s.getValor());
+            colorPalo.add(s.getCardText().charAt(1));
         }
 
         first = rango.getFirstCard();
@@ -144,7 +146,7 @@ public class Ap3 {
 
             case SUITED:
 
-                escaleras = comprobarEscaleraSO(rango, escalera);
+                escaleras = comprobarEscaleraSO(rango, escalera,colorPalo);
                 palo = comprobarColor(rango, board, true);
                 boolean h1 = false,
                  h2 = false,
@@ -201,6 +203,9 @@ public class Ap3 {
 
                                 result.add(new output(Ranking.STRAIGHTFLUSH, firstString + "h" + secondString + "h", 1));
                                 result.add(new output(Ranking.STRAIGHT, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
+                            }else{
+                                result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "h", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
                             }
                         }
 
@@ -211,6 +216,9 @@ public class Ap3 {
 
                                 result.add(new output(Ranking.STRAIGHTFLUSH, firstString + "c" + secondString + "c", 1));
                                 result.add(new output(Ranking.STRAIGHT, firstString + "h" + secondString + "h, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
+                            }else{
+                                result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "c", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "h, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
                             }
                         }
                         break;
@@ -219,6 +227,9 @@ public class Ap3 {
 
                                 result.add(new output(Ranking.STRAIGHTFLUSH, firstString + "d" + secondString + "d", 1));
                                 result.add(new output(Ranking.STRAIGHT, firstString + "c" + secondString + "c, " + firstString + "h" + secondString + "h, " + firstString + "s" + secondString + "s", 3));
+                            }else{
+                                 result.add(new output(Ranking.FLUSH, firstString + "d" + secondString + "d", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "h" + secondString + "h, " + firstString + "s" + secondString + "s", 3));
                             }
                         }
                         break;
@@ -228,6 +239,9 @@ public class Ap3 {
 
                                 result.add(new output(Ranking.STRAIGHTFLUSH, firstString + "s" + secondString + "s", 1));
                                 result.add(new output(Ranking.STRAIGHT, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "h" + secondString + "h", 3));
+                            }else{
+                                result.add(new output(Ranking.FLUSH, firstString + "s" + secondString + "s", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "h" + secondString + "h", 3));
                             }
                         }
                         break;
@@ -252,32 +266,6 @@ public class Ap3 {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 3));
                 } else if (maxCount >= 3 && countFirst == 0 && countSecond == 1) {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 3));
-                } else if (palo != 'x') {
-                    switch (palo) {
-                        case 'h':
-                            result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "h", 1));
-                            result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
-                            break;
-
-                        case 'c': {
-                            result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "c", 1));
-                            result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "h, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
-                        }
-                        break;
-                        case 'd': {
-                            result.add(new output(Ranking.FLUSH, firstString + "d" + secondString + "d", 1));
-                            result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "h" + secondString + "h, " + firstString + "s" + secondString + "s", 3));
-                        }
-                        break;
-
-                        case 's': {
-                            result.add(new output(Ranking.FLUSH, firstString + "s" + secondString + "s", 1));
-                            result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "h" + secondString + "h", 3));
-                        }
-                        break;
-
-                    }
-
                 } else if (countFirst == 2 || countSecond == 2) {
                     result.add(new output(Ranking.THREEOFAKIND, rango.getText(), 2));
                 } else if (countFirst == 1 && countSecond == 1) {
@@ -311,7 +299,7 @@ public class Ap3 {
                 break;
 
             case OFF_SUIT:
-                escaleras = comprobarEscaleraSO(rango, escalera);
+                escaleras = comprobarEscaleraSO(rango, escalera,colorPalo);
                 palo = comprobarColor(rango, board, false);
                 h1 = false;
                 h2 = false;
@@ -322,7 +310,8 @@ public class Ap3 {
                 d1 = false;
                 d2 = false;
                 carta = "";
-
+                int res = 0;
+                if(countFirst > 0 || countSecond > 0)res = 3;
                 for (int i = 0; i < board.size(); ++i) {
                     if (first == board.get(i).getValor()) {
 
@@ -366,6 +355,11 @@ public class Ap3 {
                                 result.add(new output(Ranking.STRAIGHT, firstString + "c" + secondString + "h, " + firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s"
                                         + firstString + "d" + secondString + "c, " + firstString + "d" + secondString + "h, " + firstString + "d" + secondString + "s"
                                         + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, " + firstString + "s" + secondString + "h", 9));
+                            }else{
+                                result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s", 6-res));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s"
+                                        + firstString + "d" + secondString + "c" + firstString + "d" + secondString + "s"
+                                        + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, ", 6));
                             }
                         }
                         break;
@@ -376,6 +370,11 @@ public class Ap3 {
                                 result.add(new output(Ranking.STRAIGHT, firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s"
                                         + firstString + "d" + secondString + "c, " + firstString + "d" + secondString + "h, " + firstString + "d" + secondString + "s"
                                         + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, " + firstString + "s" + secondString + "h", 9));
+                            }else{
+                                result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "h, " + firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s", 6-res));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s"
+                                        + firstString + "d" + secondString + "h" + firstString + "d" + secondString + "s"
+                                        + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, ", 6));
                             }
                         }
                         break;
@@ -388,6 +387,11 @@ public class Ap3 {
                                 result.add(new output(Ranking.STRAIGHT, firstString + "c" + secondString + "h, " + firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s"
                                         + firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s"
                                         + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, " + firstString + "s" + secondString + "h", 9));
+                            }else{
+                                result.add(new output(Ranking.FLUSH, firstString + "d" + secondString + "h, " + firstString + "d" + secondString + "c, " + firstString + "d" + secondString + "s", 6-res));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s"
+                                        + firstString + "h" + secondString + "d" + firstString + "h" + secondString + "s"
+                                        + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, ", 6));
                             }
                         }
                         break;
@@ -399,6 +403,11 @@ public class Ap3 {
                                 result.add(new output(Ranking.STRAIGHT, firstString + "c" + secondString + "h, " + firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s"
                                         + firstString + "d" + secondString + "c, " + firstString + "d" + secondString + "h, " + firstString + "d" + secondString + "s"
                                         + firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s", 9));
+                            }else{
+                                result.add(new output(Ranking.FLUSH, firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, " + firstString + "s" + secondString + "h", 6-res));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s"
+                                        + firstString + "d" + secondString + "c" + firstString + "d" + secondString + "s"
+                                        + firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, ", 6));
                             }
                         }
                         break;
@@ -426,75 +435,7 @@ public class Ap3 {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 9));
                 } else if (maxCount >= 3 && countFirst == 0 && countSecond == 1) {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 9));
-                } else if (palo != 'x' && board.size() > 3) {
-                    if (countFirst > 0 || countSecond > 0) {
-                        switch (palo) {
-                            case 'h':
-                                result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s", 3));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s"
-                                        + firstString + "d" + secondString + "c" + firstString + "d" + secondString + "s"
-                                        + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, ", 6));
-                                break;
-
-                            case 'c': {
-                                result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "h, " + firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s", 3));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s"
-                                        + firstString + "d" + secondString + "h" + firstString + "d" + secondString + "s"
-                                        + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, ", 6));
-                            }
-                            break;
-                            case 'd': {
-                                result.add(new output(Ranking.FLUSH, firstString + "d" + secondString + "h, " + firstString + "d" + secondString + "c, " + firstString + "d" + secondString + "s", 3));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s"
-                                        + firstString + "h" + secondString + "d" + firstString + "h" + secondString + "s"
-                                        + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, ", 6));
-                            }
-                            break;
-
-                            case 's': {
-                                result.add(new output(Ranking.FLUSH, firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, " + firstString + "s" + secondString + "h", 3));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s"
-                                        + firstString + "d" + secondString + "c" + firstString + "d" + secondString + "s"
-                                        + firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, ", 6));
-                            }
-                            break;
-                        }
-                    } else {
-                        switch (palo) {
-
-                            case 'h':
-                                result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s", 6));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s"
-                                        + firstString + "d" + secondString + "c" + firstString + "d" + secondString + "s"
-                                        + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, ", 6));
-                                break;
-
-                            case 'c': {
-                                result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "h, " + firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s", 6));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s"
-                                        + firstString + "d" + secondString + "h" + firstString + "d" + secondString + "s"
-                                        + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, ", 6));
-                            }
-                            break;
-                            case 'd': {
-                                result.add(new output(Ranking.FLUSH, firstString + "d" + secondString + "h, " + firstString + "d" + secondString + "c, " + firstString + "d" + secondString + "s", 6));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s"
-                                        + firstString + "h" + secondString + "d" + firstString + "h" + secondString + "s"
-                                        + firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, ", 6));
-                            }
-                            break;
-
-                            case 's': {
-                                result.add(new output(Ranking.FLUSH, firstString + "s" + secondString + "c, " + firstString + "s" + secondString + "d, " + firstString + "s" + secondString + "h", 6));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "d, " + firstString + "c" + secondString + "s"
-                                        + firstString + "d" + secondString + "c" + firstString + "d" + secondString + "s"
-                                        + firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, ", 6));
-                            }
-                            break;
-
-                        }
-                    }
-
+                
                 } else if (countFirst == 2 || countSecond == 2) {
                     result.add(new output(Ranking.THREEOFAKIND, rango.getText(), 6));
                 } else if (countFirst == 1 && countSecond == 1) {
@@ -569,8 +510,10 @@ public class Ap3 {
     }
 
     //comprobar esto
-    public static boolean comprobarEscaleraSO(PairButton rango, ArrayList<Integer> escalera){
+    public static boolean comprobarEscaleraSO(PairButton rango, ArrayList<Integer> escalera, ArrayList<Character> color){
         int i = 1, cont = 1;
+        ArrayList<Integer> asc = new ArrayList<Integer>();
+        ArrayList<Character> res = new ArrayList<Character>();
         ArrayList<Integer> aux = new ArrayList<Integer>();
         aux = (ArrayList<Integer>) escalera.clone();
 
@@ -580,19 +523,32 @@ public class Ap3 {
         aux.add(rango.getFirstCard());
         aux.add(rango.getSecondCard());
         Collections.sort(aux);
-
+        
+        
+        
         while (i < aux.size()) {
 
             if (aux.get(i) - aux.get(i - 1) == 1) {
                 cont++;
-            } else if (cont < 5) {
-                cont = 1;
-                straightFlush=false;
+                asc.add(aux.get(i-1));
+            } else if  (aux.get(i) - aux.get(i - 1) == 0);
+            else if (cont < 5) {
+                cont = 1; 
             }
            
             i++;
         }
-
+        if(aux.get(aux.size()-1) - aux.get(aux.size()-2) == 1)asc.add(aux.get(aux.size()-1));
+        
+        int k = 0;
+        for(int j = 0; j < color.size();++j){
+            if(asc.contains(escalera.get(j))){
+                res.add(color.get(j));
+            }
+        }
+        for(int cnt = 1; cnt <res.size(); ++cnt){
+            if(res.get(cnt) != res.get(cnt-1))straightFlush = false;
+        }
         if (cont >= 5) {
             return true;
         } else {
@@ -617,10 +573,10 @@ public class Ap3 {
             } else if (color.get(i).getCardText().charAt(1) == ('d')) {
                 d++;
             }
-
-            if (color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard()) {
-                return aux1;
-            }
+            
+//            if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
+//                return aux1;
+//            }
 
             i++;
         }
@@ -760,31 +716,5 @@ public class Ap3 {
         return valor;
     }
 
-    public static void main(String args[]) {
-
-        //Parece que no procesa bien el ultimo elemento
-        //Los intervalos no salen
-//       String test1 = "AKs-A2s, TT+,T2s"; // No funciona
-//       String test2 = "Ah,Js,Ad"; // Falta que saque el T2s+, el TT+ lo saca bien
-//       String test3 = "AA"; // No funciona
-//       String test4 = "AA,TT"; // Saca solo AA
-//       String test5 = "J3s+"; 
-//       
-//       Ap3 logic = new Ap3(test1,test2);
-//      
-//       
-//       for(String s : logic.rangos){
-//           System.out.println(s);
-//       }
-//       
-//       System.out.println("---------------------------------------------------------------");
-//         
-//       for(String s : logic.board){
-//           System.out.println(s);
-//       }
-        ArrayList<String> testBoard = new ArrayList<>(Arrays.asList("Ah", "Qh", "Jc"));
-        ArrayList<String> testRange = new ArrayList<>(Arrays.asList("AA", "KK", "22", "AKs", "Q9s", "65s"));
-
-    }
 
 }
