@@ -29,9 +29,9 @@ public class Ap3 {
 
     }
 
-    public static void calcular(ArrayList<PairButton> rangos, ArrayList<BoardButton> board) {
+    public static int calcular(ArrayList<PairButton> rangos, ArrayList<BoardButton> board) {
         result = new ArrayList<>();
-
+        
         for (PairButton act : rangos) {
 
             compara(act, board);
@@ -40,6 +40,7 @@ public class Ap3 {
 
         }
         result = cargaLista(result);
+        return total;
     }
 
     public static void compara(PairButton rango, ArrayList<BoardButton> board) {
@@ -135,12 +136,17 @@ public class Ap3 {
                     result.add(new output(Ranking.FLUSH, rango.getText(), 3));
                 } else if (countFirst == 1) {
                     result.add(new output(Ranking.THREEOFAKIND, rango.getText(), 3));
-                } else if (maxCount == 2) {
-                    result.add(new output(Ranking.TWOPAIR, rango.getText(), 6));
-                } //parametro boolean 
+                } 
+                //parametro boolean 
                 else {
                     comparaParejas(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1));
                 }
+                
+                if(palo=='x')
+                    drawColor(rango,board,false);
+                
+                if(!escaleras)
+                    draw(rango,escalera,countFirst);
 
                 break;
 
@@ -255,9 +261,9 @@ public class Ap3 {
                 } else if (countFirst == 3 || countSecond == 3) {
                     result.add(new output(Ranking.FOUROFAKIND, rango.getText(), 1));
                 } else if (countFirst == 2 && countSecond >= 1) {
-                    result.add(new output(Ranking.FULLHOUSE, rango.getText(), 4));
+                    result.add(new output(Ranking.FULLHOUSE, rango.getText(), 2));
                 } else if (countFirst >= 1 && countSecond == 2) {
-                    result.add(new output(Ranking.FULLHOUSE, rango.getText(), 4));
+                    result.add(new output(Ranking.FULLHOUSE, rango.getText(), 2));
                 } else if (maxCount >= 2 && countFirst == 2 && countSecond == 0) {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 2));
                 } else if (maxCount >= 2 && countFirst == 0 && countSecond == 2) {
@@ -266,6 +272,45 @@ public class Ap3 {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 3));
                 } else if (maxCount >= 3 && countFirst == 0 && countSecond == 1) {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 3));
+                }else if(palo!='x')   {
+                    
+                    switch(palo){
+                         case 'h': {
+                            
+                         
+                                result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "h", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
+                            }
+                        
+
+                        break;
+
+                        case 'c': {
+                            
+                                result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "c", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "h, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
+                            
+                        }
+                        break;
+                        case 'd': {
+                            
+                                 result.add(new output(Ranking.FLUSH, firstString + "d" + secondString + "d", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "h" + secondString + "h, " + firstString + "s" + secondString + "s", 3));
+                            
+                        }
+                        break;
+
+                        case 's': {
+                            
+                                result.add(new output(Ranking.FLUSH, firstString + "s" + secondString + "s", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "h" + secondString + "h", 3));
+                            
+                        }
+                        break;
+
+               
+                    }
+                    
                 } else if (countFirst == 2 || countSecond == 2) {
                     result.add(new output(Ranking.THREEOFAKIND, rango.getText(), 2));
                 } else if (countFirst == 1 && countSecond == 1) {
@@ -295,7 +340,10 @@ public class Ap3 {
                 } else {
                     result.add(new output(Ranking.NOMADEHAND, rango.getText(), 4));
                 }
-
+                
+                if(palo=='x')
+                    drawColor(rango,board,true);
+                
                 break;
 
             case OFF_SUIT:
@@ -435,7 +483,44 @@ public class Ap3 {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 9));
                 } else if (maxCount >= 3 && countFirst == 0 && countSecond == 1) {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 9));
-                
+                }else if(palo!='x')   {
+                    
+                    switch(palo){
+                         case 'h': {
+                            
+                         
+                                result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "h", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
+                            }
+                        
+
+                        break;
+
+                        case 'c': {
+                            
+                                result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "c", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "h, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
+                            
+                        }
+                        break;
+                        case 'd': {
+                            
+                                 result.add(new output(Ranking.FLUSH, firstString + "d" + secondString + "d", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "h" + secondString + "h, " + firstString + "s" + secondString + "s", 3));
+                            
+                        }
+                        break;
+
+                        case 's': {
+                            
+                                result.add(new output(Ranking.FLUSH, firstString + "s" + secondString + "s", 1));
+                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "h" + secondString + "h", 3));
+                            
+                        }
+                        break;
+
+               
+                    }
                 } else if (countFirst == 2 || countSecond == 2) {
                     result.add(new output(Ranking.THREEOFAKIND, rango.getText(), 6));
                 } else if (countFirst == 1 && countSecond == 1) {
@@ -459,13 +544,16 @@ public class Ap3 {
 //                } else if (countFirst == 0 && countSecond == 1 && maxCount == 2) {
 //                    result.add(new output(Ranking.TWOPAIR, rango.getText(), 3));
                 } else if (countFirst == 1) {
-                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), true, true);
+                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), false, true);
                 } else if (countSecond == 1) {
-                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), true, false);
+                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), false, false);
                 } else {
-                    result.add(new output(Ranking.NOMADEHAND, rango.getText(), 4));
+                    result.add(new output(Ranking.NOMADEHAND, rango.getText(), 12));
                 }
-
+                
+                if(palo=='x')
+                    drawColor(rango,board,false);
+                
                 break;
 
         }
@@ -574,9 +662,9 @@ public class Ap3 {
                 d++;
             }
             
-//            if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
-//                return aux1;
-//            }
+            if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
+                return aux1;
+            }
 
             i++;
         }
@@ -601,10 +689,54 @@ public class Ap3 {
 
         return aux1;
     }
+    
+    public static void drawColor(PairButton rango, ArrayList<BoardButton> color, boolean suited) {
+        boolean repeticion;
+        char aux1 = 'x';
+        int i = 0, h = 0, s = 0, c = 0, d = 0;
+        int combs;
+        ArrayList<BoardButton> aux = color;
+
+        while (i < aux.size()) {
+
+            if (color.get(i).getCardText().charAt(1) == ('h')) {
+                h++;
+            } else if (color.get(i).getCardText().charAt(1) == ('s')) {
+                s++;
+            } else if (color.get(i).getCardText().charAt(1) == ('c')) {
+                c++;
+            } else if (color.get(i).getCardText().charAt(1) == ('d')) {
+                d++;
+            }
+            
+            if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
+                repeticion=false;
+            }
+
+            i++;
+        }
+        
+        if (!suited) {
+            if (h == 3 || s == 3 || d == 3 || c == 3) {
+                
+                if(rango.getFirstCard()==rango.getSecondCard()){
+                    result.add(new output(Ranking.DRAWFLUSH, rango.getText(), 6));
+                }
+                    
+             
+                else
+                    result.add(new output(Ranking.DRAWFLUSH, rango.getText(), 12));
+            }
+        } else if (h == 2 || s == 2 || d == 2 || c == 2) {
+           
+            result.add(new output(Ranking.DRAWFLUSH, rango.getText(), 4));
+        }
+
+        
+    }
 
     public static void comparaParejas(PairButton range, int first, int second, int last) {
         int firstCard = range.getFirstCard();
-        int secondCard = range.getSecondCard();
 
         if (firstCard > first) {
             result.add(new output(Ranking.OVERPAIR, range.getText(), 6));
@@ -658,6 +790,255 @@ public class Ap3 {
         }
 
     }
+    
+    public static void  draw(PairButton rango, ArrayList<Integer> escalera, int countFirst){
+        boolean resultBool = true;
+        int i = 1,fallo=0,auxFallo=0,combs;
+        String draw="";
+        ArrayList<Integer> aux = new ArrayList<Integer>();
+        aux = (ArrayList<Integer>) escalera.clone();
+        //if(rango.getFirstCard() == 14) aux.add(1);
+        aux.add(rango.getFirstCard());
+
+        Collections.sort(aux);
+
+        while (i < aux.size() && resultBool) {
+            if(aux.size()==4 || aux.size()==5){
+                
+                if((aux.size()==4 && countFirst >=1) || (aux.size()==5 && countFirst > 1)){
+                    resultBool=false;
+                }
+                
+                if (aux.get(i) - aux.get(i - 1) != 1) {
+                    fallo++;
+                    auxFallo=i;
+                    if(aux.get(i) - aux.get(i - 1) ==2 && fallo==1 && aux.size()==4){
+                        resultBool=true;
+                    }
+                    
+                    else if((aux.get(i) - aux.get(i - 1) ==2 && fallo==2 && aux.size()==5) || (aux.get(i) - aux.get(i - 1) ==2 && fallo==1 && aux.size()==5) ){
+                        resultBool=true;
+                    }
+                    
+                }
+                
+                
+                if(aux.get(i) - aux.get(i - 1) != 1 && countFirst==1 && aux.size()==5){
+                    fallo--;
+                }
+                
+                if(fallo>2)
+                   resultBool=false;
+            }
+           
+            else {
+                resultBool= false;
+            } 
+
+            i++;
+        }
+        
+        if(resultBool){
+            if(aux.size()==4){
+                if(fallo==0){
+                    draw="Open-Ended";
+                    result.add(new output(Ranking.DRAWOPENENDED,rango.getText(),48));
+                    combs=48;
+                }
+                else{
+                    draw="Gutshot";
+                    result.add(new output(Ranking.DRAWGUSTSHOT,rango.getText(),24));
+                    combs=24;
+                }
+                        
+            }
+            else if (aux.size()==5){
+                
+                if(fallo==0 && countFirst==1){
+                    draw="Open-Ended";
+                    result.add(new output(Ranking.DRAWOPENENDED,rango.getText(),24));
+                    combs=24;
+                }
+                else if (countFirst==1 && fallo > 1){
+                    draw="Gutshot";
+                    result.add(new output(Ranking.DRAWGUSTSHOT,rango.getText(),12));
+                    combs=12;
+                }
+                else if (countFirst==0 && fallo > 1){
+                    draw="Gutshot";
+                    result.add(new output(Ranking.DRAWGUSTSHOT,rango.getText(),24));
+                    combs=24;
+                }
+            }      
+        }
+        
+
+    }
+    
+    public static void  drawSO(PairButton rango, ArrayList<Integer> escalera, int countFirst,int countSecond){
+        boolean result = true,result2=true,result3=true;
+        int i = 1,j=1,k=1,fallo=0,fallo2=0,fallo3=0,combs,combs2,combs3,falloPos=0,gap=0;
+        String draw="",draw2="",draw3="";
+        ArrayList<Integer> aux = new ArrayList<Integer>();
+        ArrayList<Integer> aux2 = new ArrayList<Integer>();
+        ArrayList<Integer> aux3= new ArrayList<Integer>();
+        aux = (ArrayList<Integer>) escalera.clone();
+        aux2 = (ArrayList<Integer>) escalera.clone();
+        aux3= (ArrayList<Integer>) escalera.clone();
+        //if(rango.getFirstCard() == 14) aux.add(1);
+        aux.add(rango.getFirstCard());
+        aux2.add(rango.getSecondCard());
+        aux3.add(rango.getFirstCard(),rango.getSecondCard());
+
+
+        Collections.sort(aux);
+        Collections.sort(aux2);
+        Collections.sort(aux3);
+
+        while (i < aux.size() && result) {
+            if(aux.size()==4 || aux.size()==5){
+                
+                if((aux.size()==4 && countFirst >=1) || (aux.size()==5 && countFirst > 1)){
+                    result=false;
+                }
+                
+                if (aux.get(i) - aux.get(i - 1) != 1) {
+                    fallo++;
+                    
+                    if(aux.get(i) - aux.get(i - 1) ==2 && fallo==1 && aux.size()==4){
+                        result=true;
+                    }
+                    
+                    else if((aux.get(i) - aux.get(i - 1) ==2 && fallo==2 && aux.size()==5) || (aux.get(i) - aux.get(i - 1) ==2 && fallo==1 && aux.size()==5) ){
+                        result=true;
+                    }
+                    
+                }
+                
+                
+                if(aux.get(i) - aux.get(i - 1) != 1 && countFirst==1 && aux.size()==5){
+                    fallo--;
+                }
+                
+                if(fallo>2)
+                   result=false;
+            }
+           
+            else {
+                result= false;
+            } 
+
+            i++;
+        }
+        
+        while (j < aux2.size() && result2) {
+            if(aux2.size()==4 || aux2.size()==5){
+                
+                if((aux2.size()==4 && countSecond >=1) || (aux2.size()==5 && countSecond > 1)){
+                    result2=false;
+                }
+                
+                if (aux2.get(j) - aux2.get(j - 1) != 1) {
+                    fallo2++;
+                    
+                    if(aux2.get(j) - aux2.get(j - 1) ==2 && fallo2==1 && aux2.size()==4){
+                        result2=true;
+                    }
+                    
+                    else if((aux2.get(j) - aux2.get(j - 1) ==2 && fallo2==2 && aux2.size()==5) || (aux2.get(j) - aux2.get(j - 1) ==2 && fallo2==1 && aux2.size()==5) ){
+                        result2=true;
+                    }
+                    
+                }
+                
+                
+                if(aux2.get(j) - aux2.get(j - 1) != 1 && countSecond==1 && aux2.size()==5){
+                    fallo2--;
+                }
+                
+                if(fallo2>2)
+                   result2=false;
+            }
+           
+            else {
+                result2= false;
+            } 
+
+            j++;
+        }
+        
+        while (k < aux3.size() && result3) {
+            if(aux3.size()==5){
+                 if (aux3.get(k) - aux3.get(k - 1) != 1) {
+                    fallo3++;
+                    falloPos=k;
+                    //1gap 1fallo / 2gap 2fallos / 1gap 2fallos
+                    if(aux3.get(k) - aux3.get(k - 1) ==2 && fallo3<=2){
+                        gap++;
+                    }
+                    if(countFirst==1 && countSecond==1){
+                        result3=false;
+                    }
+                    if((countFirst==1 || countSecond==1)&&( fallo3>2 || (fallo3==2 && gap==0)))
+                        result3=false;
+                    
+                    
+                 }
+            }
+            //fallo==0 && contFirst==1 && contSecond==1 (Open-end) / fallo==1 && contFirst==1 && contSecond==1 (gutshot)
+            else if(aux3.size()==6){
+                if (aux3.get(k) - aux3.get(k - 1) != 1) {
+                    fallo3++;
+                    falloPos=k;
+                    //1gap 1fallo / 2gap 2fallos / 1gap 2fallos
+                    if(aux3.get(k) - aux3.get(k - 1) ==2 && fallo3<=2){
+                        gap++;
+                    }
+                    if(countFirst==1 && countSecond==1 && fallo3>2){
+                        result3=false;
+                    }
+                    //fallo3>=2 && gap>=2
+                    if((countFirst==1 || countSecond==1)&&( fallo3>2 || (fallo3==3 && gap==0)))
+                        result3=false;
+                    
+                    if(fallo3>3)
+                        result3=false;
+            }
+            k++;
+        }
+        
+        if(result){
+            if(aux.size()==4){
+                if(fallo==0){
+                    draw="Open-Ended";
+                    combs=48;
+                }
+                else{
+                    draw="Gutshot";
+                    combs=24;
+                }
+                        
+            }
+            else if (aux.size()==5){
+                
+                if(fallo==0 && countFirst==1){
+                    draw="Open-Ended";
+                    combs=24;
+                }
+                else if (countFirst==1 && fallo > 1 ){
+                    draw="Gutshot";
+                    combs=12;
+                }
+                else if (countFirst==0 && fallo > 1){
+                    draw="Gutshot";
+                    combs=24;
+                }
+            }      
+        }
+        
+
+        }
+    }
 
     public static ArrayList<output> cargaLista(ArrayList<output> in) {
         ArrayList<output> out = new ArrayList<output>();
@@ -675,14 +1056,20 @@ public class Ap3 {
         out.add(new output(Ranking.MIDDLEPAIR, "", 0));
         out.add(new output(Ranking.WEAKPAIR, "", 0));
         out.add(new output(Ranking.NOMADEHAND, "", 0));
+        out.add(new output(Ranking.DRAWFLUSH, "", 0));
+        out.add(new output(Ranking.DRAWOPENENDED, "", 0));
+        out.add(new output(Ranking.DRAWGUSTSHOT, "", 0));
+
+
 
         for (output act : in) {
             for (output res : out) {
                 if (act.ranking.equals(res.ranking)) {
-                    res.cards += act.cards + ", ";
+                    res.cards += act.cards +"("+ act.jugadas+ "), ";
                     res.jugadas += act.jugadas;
                 }
-                total+= res.jugadas;
+                if(!act.ranking.equals(Ranking.DRAWFLUSH)&& !act.ranking.equals(Ranking.DRAWGUSTSHOT)&& !act.ranking.equals(Ranking.DRAWOPENENDED))
+                    total+= res.jugadas;
             }
         }
 

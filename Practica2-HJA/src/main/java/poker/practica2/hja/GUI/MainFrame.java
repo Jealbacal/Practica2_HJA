@@ -665,12 +665,12 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void calcCombs(){
         
-        
+        int total;
         RangeGrid.checkSelected();
         CombGrid.checkSelected();
        
 
-        if(CombGrid.getSelectedCards().size() >= 3){
+        if(CombGrid.getSelectedCards().size() >= 3 && RangeGrid.getSelButtonList().size()>=1){
             
             String text = "";
             Ap3Out.setText(text);
@@ -682,10 +682,10 @@ public class MainFrame extends javax.swing.JFrame {
 
             Ap3 logic = new Ap3(RangeGrid.getSelButtonList(), CombGrid.getButtonList());
 
-            Ap3.calcular(RangeGrid.getSelButtonList(), CombGrid.getSelectedCards());
-
+           total= Ap3.calcular(RangeGrid.getSelButtonList(), CombGrid.getSelectedCards());
+            
             for(output o : Ap3.result){
-                text = text.concat(o.toString());
+                text = text.concat(o.toString(total));
             }
 
             Ap3Out.setText(text);

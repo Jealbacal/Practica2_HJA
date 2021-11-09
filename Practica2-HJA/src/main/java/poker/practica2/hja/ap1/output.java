@@ -21,6 +21,9 @@ public class output {
     //numero de jugadas
     public int jugadas;
     
+    //draws
+    public String draw;
+    
     
     public output (Ranking ranking, String cards, int jugadas){
         this.ranking = ranking;
@@ -28,9 +31,10 @@ public class output {
         this.jugadas = jugadas;        
     }
     
-    @Override
-    public String toString(){ 
-        return ranking.toString() + ": " + Integer.toString(jugadas) + "\n" +
+    
+    public String toString(int total){ 
+        int jaja= (jugadas*100)/total;
+        return ranking.toString() + ": " + Integer.toString(jugadas) +" ("+jaja + ")%\n" +
                 "   - Cartas: " + cards + "\n";
         
     }
