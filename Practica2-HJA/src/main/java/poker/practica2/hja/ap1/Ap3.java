@@ -69,7 +69,7 @@ public class Ap3 {
 
             case PAIR:
 
-                palo = comprobarColor(rango, board, 0);
+                
                 for (int i = 0; i < board.size(); ++i) {
 
                     //Contamos si se repiten cartas
@@ -90,7 +90,7 @@ public class Ap3 {
 
                 }
                 escaleras = comprobarEscalera(rango, escalera,countFirst);
-
+                palo = comprobarColor(rango, board, 0,countFirst,countSecond);
                 //Analizo jugada
 //                if (straightCount >= 5 && (hs >=4 || cs >=4 || ds >=4 || ss >=4))result.add(new output(Ranking.STRAIGHTFLUSH,rango.getText(),1));
                 if (escaleras) {
@@ -156,7 +156,6 @@ public class Ap3 {
             case SUITED:
 
                 escaleras = comprobarEscaleraSO(rango, escalera,colorPalo);
-                palo = comprobarColor(rango, board, 1);
                 boolean h1 = false,
                  h2 = false,
                  s1 = false,
@@ -202,6 +201,7 @@ public class Ap3 {
                         maxCount = freq;
                     }
                 }
+                palo = comprobarColor(rango, board, 1,countFirst,countSecond);
 
                 //Analizo jugada
                 if (escaleras) {
@@ -351,7 +351,7 @@ public class Ap3 {
 
             case OFF_SUIT:
                 escaleras = comprobarEscaleraSO(rango, escalera,colorPalo);
-                palo = comprobarColor(rango, board, 2);
+                
                 h1 = false;
                 h2 = false;
                 s1 = false;
@@ -396,6 +396,7 @@ public class Ap3 {
                         maxCount = freq;
                     }
                 }
+                palo = comprobarColor(rango, board, 2,countFirst,countSecond);
                 //Analizo jugada
                 if (escaleras) {
                     switch (palo) {
@@ -486,38 +487,65 @@ public class Ap3 {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 9));
                 } else if (maxCount >= 3 && countFirst == 0 && countSecond == 1) {
                     result.add(new output(Ranking.FULLHOUSE, rango.getText(), 9));
+                }else if (maxCount >= 3 && countFirst == 1 && countSecond == 1) {
+                    result.add(new output(Ranking.FULLHOUSE, rango.getText(), 6));    
                 }else if(palo!='x')   {
                     
                     switch(palo){
                          case 'h': {
-                            
-                         
-                                result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "h", 1));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
+                                
+                                if(countFirst==1){
+                                    result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "h, " + firstString + "d" + secondString + "h, " + firstString + "s" + secondString + "h" , 3));
+                                    
+                                }else if (countSecond==1){
+                                    result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s" , 3));
+                                    
+                                }else{
+                                    result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "c, " + firstString + "h" + secondString + "d, " + firstString + "h" + secondString + "s, "+firstString + "c" + secondString + "h, " + firstString + "d" + secondString + "h, " + firstString + "s" + secondString + "h" , 6));
+                                }
+                                    
                             }
                         
 
                         break;
 
                         case 'c': {
-                            
-                                result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "c", 1));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "h" + secondString + "h, " + firstString + "d" + secondString + "d, " + firstString + "s" + secondString + "s", 3));
+                            if(countFirst==1){
+                                    result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "c, " + firstString + "d" + secondString + "c, " + firstString + "s" + secondString + "c" , 3));
+                                    
+                                }else if (countSecond==1){
+                                    result.add(new output(Ranking.FLUSH, firstString + "c" + secondString + "h, " + firstString + "d" + secondString + "c, " + firstString + "s" + secondString + "c" , 3));
+                                    
+                                }else{
+                                    result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "c, " + firstString + "d" + secondString + "c, " + firstString + "s" + secondString + "c, " + firstString + "c" + secondString + "h, " + firstString + "d" + secondString + "c, " + firstString + "s" + secondString + "c" , 6));
+                                }
                             
                         }
                         break;
                         case 'd': {
-                            
-                                 result.add(new output(Ranking.FLUSH, firstString + "d" + secondString + "d", 1));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "h" + secondString + "h, " + firstString + "s" + secondString + "s", 3));
+                            if(countFirst==1){
+                                    result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "d, " + firstString + "c" + secondString + "d, " + firstString + "s" + secondString + "d" , 3));
+                                    
+                                }else if (countSecond==1){
+                                    result.add(new output(Ranking.FLUSH, firstString + "d" + secondString + "h, " + firstString + "d" + secondString + "c, " + firstString + "d" + secondString + "s" , 3));
+                                    
+                                }else{
+                                    result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "d, " + firstString + "c" + secondString + "d, " + firstString + "s" + secondString + "d, " + firstString + "d" + secondString + "h, " + firstString + "d" + secondString + "c, " + firstString + "d" + secondString + "s", 6));
+                                }
                             
                         }
                         break;
 
                         case 's': {
-                            
-                                result.add(new output(Ranking.FLUSH, firstString + "s" + secondString + "s", 1));
-                                result.add(new output(Ranking.NOMADEHAND, firstString + "c" + secondString + "c, " + firstString + "d" + secondString + "d, " + firstString + "h" + secondString + "h", 3));
+                            if(countFirst==1){
+                                    result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "s, " + firstString + "d" + secondString + "s, " + firstString + "c" + secondString + "s" , 3));
+                                    
+                                }else if (countSecond==1){
+                                    result.add(new output(Ranking.FLUSH, firstString + "s" + secondString + "h, " + firstString + "s" + secondString + "d, " + firstString + "s" + secondString + "c" , 3));
+                                    
+                                }else{
+                                    result.add(new output(Ranking.FLUSH, firstString + "h" + secondString + "s, " + firstString + "d" + secondString + "s, " + firstString + "c" + secondString + "s, "+firstString + "s" + secondString + "h, " + firstString + "s" + secondString + "d, " + firstString + "s" + secondString + "c"  , 6));
+                                }
                             
                         }
                         break;
@@ -649,7 +677,7 @@ public class Ap3 {
         }
     }
 
-    public static char comprobarColor(PairButton rango, ArrayList<BoardButton> color, int type) {
+    public static char comprobarColor(PairButton rango, ArrayList<BoardButton> color, int type,int countFirst,int countSecond) {
         boolean result = true;
         char aux1 = 'x';
         int i = 0, h = 0, s = 0, c = 0, d = 0;
@@ -667,19 +695,19 @@ public class Ap3 {
                 d++;
             }
             
-           if(type==0 || type==1){
-                if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
-                    return aux1;
-                }
-            }
-            else if(type==2){
-                if ((color.get(i).getValor() == rango.getFirstCard() &&  color.get(i).getValor() == rango.getSecondCard())) {
-                    return aux1;
-                }
-            }
-
             i++;
         }
+        
+        if(type==0 || type==1){
+                if (countFirst >=1 || countSecond >=1) {
+                    return aux1;
+                }
+            }
+        else if(type==2){
+                if (countFirst >=1 && countSecond >=1) {
+                    return aux1;
+                }
+            }
 
         if (type==0 || type==2) {
             if (h < 4 && s < 4 && d < 4 && c < 4) {
@@ -720,20 +748,21 @@ public class Ap3 {
             } else if (color.get(i).getCardText().charAt(1) == ('d')) {
                 d++;
             }
-            if(type==0 || type==1){
-                if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
+           
+
+            i++;
+        }
+         if(type==0 || type==1){
+                if (countFirst >=1 || countSecond >=1) {
                     repeticion=false;
                 }
             }
             else if(type==2){
-                if ((color.get(i).getValor() == rango.getFirstCard() &&  color.get(i).getValor() == rango.getSecondCard())) {
+                if (countFirst >=1 && countSecond >=1) {
                     repeticion=false;
                 }
             }
-
-            i++;
-        }
-        
+         
         if(repeticion){
             if (type==0 || type==2) {
                 if (h == 3 || s == 3 || d == 3 || c == 3) {
