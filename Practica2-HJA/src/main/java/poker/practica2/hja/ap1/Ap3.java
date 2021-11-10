@@ -27,12 +27,12 @@ public class Ap3 {
     public static ArrayList<output> result = new ArrayList<>();
 
     public Ap3(ArrayList<PairButton> rangos, ArrayList<BoardButton> board) {
-
+       
     }
 
     public static int calcular(ArrayList<PairButton> rangos, ArrayList<BoardButton> board) {
         result = new ArrayList<>();
-        
+        ppbtp=0;
         for (PairButton act : rangos) {
 
             compara(act, board);
@@ -150,8 +150,9 @@ public class Ap3 {
                 if(palo=='x')
                     drawColor(rango,board,0,countFirst,countSecond);
                 
-                if(!escaleras)
-                    draw(rango,escalera,countFirst);
+                if(!escaleras){
+                    drawSOBOOl(rango,escalera);
+                }
 
                 break;
 
@@ -349,6 +350,9 @@ public class Ap3 {
                 if(palo=='x')
                     drawColor(rango,board,1,countFirst,countSecond);
                 
+                if(!escaleras){
+                    drawSOBOOl(rango,escalera);
+                }
                 break;
 
             case OFF_SUIT:
@@ -588,6 +592,10 @@ public class Ap3 {
                 
                 if(palo=='x')
                     drawColor(rango,board,2,countFirst,countSecond);
+                
+                if(!escaleras){
+                    drawSOBOOl(rango,escalera);
+                }
                 
                 break;
 
@@ -1105,13 +1113,54 @@ public class Ap3 {
         }
     }
     
-    public static void  drawSOBOOl(PairButton rango, ArrayList<Integer> escalera, int countFirst,int countSecond){
+    public static void  drawSOBOOl(PairButton rango, ArrayList<Integer> escalera){
         
-        //ArrayList<boolean> aux = new ArrayList<boolean>();
+        boolean[] aux = new boolean[14];
+        boolean hueco=false;
+        int cont=0;
+        ArrayList<Integer> auxInt = new ArrayList<Integer>();
         
-//        for(int i=0;i<14;i++){
-//            aux.add(false);
-//        }
+        auxInt = (ArrayList<Integer>) escalera.clone();
+        
+        if(rango.getFirstCard() == 14) auxInt.add(1);
+        if(escalera.contains(14)) auxInt.add(1);
+        auxInt.add(rango.getFirstCard());
+        auxInt.add(rango.getSecondCard());
+        
+        for(int i=0;i<14;i++){
+            aux[i]=false;
+        }
+        
+        for(int i=0;i<auxInt.size()-1;i++){
+            int valor;
+            valor= auxInt.get(i);
+            aux[valor-1]=true;
+            
+        }
+        
+        for(int i=0;i<aux.length-1;i++){
+            
+            if(aux[i]){
+                cont++;
+                
+            }
+            else if(hueco){
+                cont=0;
+            }
+            else{
+                hueco=true;
+                cont++;
+            }
+            
+        }
+        
+        if((cont==4) && escalera.size()<5 ){
+            result.add(new output(Ranking.DRAWOPENENDED,rango.getText(),12));
+        }
+        else if( (cont==5 && hueco) && escalera.size()<5  ){
+            result.add(new output(Ranking.DRAWGUSTSHOT,rango.getText(),9));
+
+        }
        
     }
     public static ArrayList<output> cargaLista(ArrayList<output> in) {
