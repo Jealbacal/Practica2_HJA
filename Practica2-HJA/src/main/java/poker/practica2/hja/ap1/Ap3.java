@@ -58,7 +58,8 @@ public class Ap3 {
             escalera.add(s.getValor());
             colorPalo.add(s.getCardText().charAt(1));
         }
-
+        
+        Collections.sort(escalera,Collections.reverseOrder());
         first = rango.getFirstCard();
         second = rango.getSecondCard();
 
@@ -337,9 +338,9 @@ public class Ap3 {
 //                } else if (countFirst == 0 && countSecond == 1 && maxCount == 2) {
 //                    result.add(new output(Ranking.TWOPAIR, rango.getText(), 3));
                 } else if (countFirst == 1) {
-                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), true, true);
+                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), true, first);
                 } else if (countSecond == 1) {
-                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), true, false);
+                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), true, second);
                 } else {
                     result.add(new output(Ranking.NOMADEHAND, rango.getText(), 4));
                 }
@@ -351,7 +352,9 @@ public class Ap3 {
 
             case OFF_SUIT:
                 escaleras = comprobarEscaleraSO(rango, escalera,colorPalo);
-                
+                int aux=first;
+                first=second;
+                second=aux;
                 h1 = false;
                 h2 = false;
                 s1 = false;
@@ -575,9 +578,9 @@ public class Ap3 {
 //                } else if (countFirst == 0 && countSecond == 1 && maxCount == 2) {
 //                    result.add(new output(Ranking.TWOPAIR, rango.getText(), 3));
                 } else if (countFirst == 1) {
-                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), false, true);
+                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), false, first);
                 } else if (countSecond == 1) {
-                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), false, false);
+                    comparaParejasSO(rango, escalera.get(0), escalera.get(1), escalera.get(escalera.size() - 1), false, second);
                 } else {
                     result.add(new output(Ranking.NOMADEHAND, rango.getText(), 12));
                 }
@@ -737,7 +740,7 @@ public class Ap3 {
         int combs;
         ArrayList<BoardButton> aux = color;
 
-        while (i < aux.size()) {
+        while (i < aux.size() && aux.size()<5 ) {
 
             if (color.get(i).getCardText().charAt(1) == ('h')) {
                 h++;
@@ -807,14 +810,9 @@ public class Ap3 {
 
     }
 
-    public static void comparaParejasSO(PairButton range, int first, int second, int last, boolean suited, boolean carta) {
-        int firstCard;
+    public static void comparaParejasSO(PairButton range, int first, int second, int last, boolean suited, int firstCard) {
 
-        if (carta) {
-            firstCard = range.getFirstCard();
-        } else {
-            firstCard = range.getSecondCard();
-        }
+       
 
         if (suited) {
             if (firstCard > first) {
@@ -855,7 +853,7 @@ public class Ap3 {
 
         Collections.sort(aux);
 
-        while (i < aux.size() && resultBool) {
+        while (i < aux.size() && resultBool && escalera.size()<5) {
             if(aux.size()==4 || aux.size()==5){
                 
                 if((aux.size()==4 && countFirst >=1) || (aux.size()==5 && countFirst > 1)){
@@ -948,7 +946,7 @@ public class Ap3 {
         Collections.sort(aux2);
         Collections.sort(aux3);
 
-        while (i < aux.size() && result) {
+        while (i < aux.size() && result && escalera.size()<5) {
             if(aux.size()==4 || aux.size()==5){
                 
                 if((aux.size()==4 && countFirst >=1) || (aux.size()==5 && countFirst > 1)){
