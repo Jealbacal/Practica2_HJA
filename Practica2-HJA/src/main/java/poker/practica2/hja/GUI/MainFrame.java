@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import poker.practica2.hja.ap1.Ap1;
 import poker.practica2.hja.ap1.Ap2;
 import poker.practica2.hja.ap1.Ap3;
+import poker.practica2.hja.ap1.Ranking;
 import poker.practica2.hja.ap1.output;
 
 /**
@@ -674,6 +675,7 @@ public class MainFrame extends javax.swing.JFrame {
             
             String text = "";
             Ap3Out.setText(text);
+            output.totalisimo = 0;
 
             text = text.concat("The total number of combos pre-flop is:" + "\n"
                     + Integer.toString(PairButton.comb_sum) + "\n");
@@ -684,8 +686,24 @@ public class MainFrame extends javax.swing.JFrame {
 
            total= Ap3.calcular(RangeGrid.getSelButtonList(), CombGrid.getSelectedCards());
             
+           total=0;
             for(output o : Ap3.result){
-                text = text.concat(o.toString(total));
+                //DRAWFLUSH(1),DRAWOPENENDED(2),DRAWGUSTSHOT(69)
+                if (o.ranking != Ranking.DRAWFLUSH &&
+                        o.ranking != Ranking.DRAWOPENENDED &&
+                        o.ranking != Ranking.DRAWGUSTSHOT){
+                    total += o.jugadas;
+                }
+                
+            }
+            
+            
+            output.totalisimo = total;
+            
+            //text = text.concat("Total es: " + output.totalisimo);
+            
+            for(output o : Ap3.result){
+                text = text.concat(o.toString());
             }
 
             Ap3Out.setText(text);
