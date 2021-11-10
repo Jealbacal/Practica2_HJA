@@ -62,15 +62,14 @@ public class Ap3 {
         first = rango.getFirstCard();
         second = rango.getSecondCard();
 
-        char firstString = rango.getText().charAt(0);
-        char secondString = rango.getText().charAt(1);
+        String firstString = String.valueOf ( rango.getText().charAt(0));
+        String secondString =String.valueOf ( rango.getText().charAt(1));
 
         switch (tipo) {
 
             case PAIR:
 
-                escaleras = comprobarEscalera(rango, escalera);
-                palo = comprobarColor(rango, board, false);
+                palo = comprobarColor(rango, board, 0);
                 for (int i = 0; i < board.size(); ++i) {
 
                     //Contamos si se repiten cartas
@@ -90,6 +89,7 @@ public class Ap3 {
                     }
 
                 }
+                escaleras = comprobarEscalera(rango, escalera,countFirst);
 
                 //Analizo jugada
 //                if (straightCount >= 5 && (hs >=4 || cs >=4 || ds >=4 || ss >=4))result.add(new output(Ranking.STRAIGHTFLUSH,rango.getText(),1));
@@ -121,7 +121,10 @@ public class Ap3 {
                         break;
 
                         case 'x': {
-                            result.add(new output(Ranking.STRAIGHT, rango.getText(), 1));
+                            if(countFirst==1)
+                                result.add(new output(Ranking.STRAIGHT, rango.getText(), 3));
+                            else
+                                result.add(new output(Ranking.STRAIGHT, rango.getText(), 6));
                         }
 
                     }
@@ -143,7 +146,7 @@ public class Ap3 {
                 }
                 
                 if(palo=='x')
-                    drawColor(rango,board,false);
+                    drawColor(rango,board,0,countFirst,countSecond);
                 
                 if(!escaleras)
                     draw(rango,escalera,countFirst);
@@ -153,7 +156,7 @@ public class Ap3 {
             case SUITED:
 
                 escaleras = comprobarEscaleraSO(rango, escalera,colorPalo);
-                palo = comprobarColor(rango, board, true);
+                palo = comprobarColor(rango, board, 1);
                 boolean h1 = false,
                  h2 = false,
                  s1 = false,
@@ -342,13 +345,13 @@ public class Ap3 {
                 }
                 
                 if(palo=='x')
-                    drawColor(rango,board,true);
+                    drawColor(rango,board,1,countFirst,countSecond);
                 
                 break;
 
             case OFF_SUIT:
                 escaleras = comprobarEscaleraSO(rango, escalera,colorPalo);
-                palo = comprobarColor(rango, board, false);
+                palo = comprobarColor(rango, board, 2);
                 h1 = false;
                 h2 = false;
                 s1 = false;
@@ -552,7 +555,7 @@ public class Ap3 {
                 }
                 
                 if(palo=='x')
-                    drawColor(rango,board,false);
+                    drawColor(rango,board,2,countFirst,countSecond);
                 
                 break;
 
@@ -560,12 +563,13 @@ public class Ap3 {
 
     }
 
-    public static boolean comprobarEscalera(PairButton rango, ArrayList<Integer> escalera) {
+    public static boolean comprobarEscalera(PairButton rango, ArrayList<Integer> escalera, int countFirst) {
         boolean result = true;
         int i = 1, iguales = 0;
         ArrayList<Integer> aux = new ArrayList<Integer>();
         aux = (ArrayList<Integer>) escalera.clone();
-        //if(rango.getFirstCard() == 14) aux.add(1);
+        if(rango.getFirstCard() == 14) aux.add(1);
+        if(escalera.contains(14)) aux.add(1);
         aux.add(rango.getFirstCard());
 
         Collections.sort(aux);
@@ -576,13 +580,13 @@ public class Ap3 {
                 if (aux.get(i) - aux.get(i - 1) != 1) {
                     result = false;
                 }
-            } else if (aux.size() == 6) {
+            } else if (aux.size() == 6 || (aux.size() == 7 && countFirst==1)) {
 
                 if (aux.get(i) == aux.get(i - 1)) {
                     iguales++;
                 }
 
-                if (aux.get(i) - aux.get(i - 1) > 1) {
+                if (aux.get(i) - aux.get(i - 1) > 1 && !aux.contains(1)) {
                     result = false;
                 } else if (iguales > 1) {
                     result = false;
@@ -608,6 +612,7 @@ public class Ap3 {
         if (rango.getFirstCard() == 14) {
             aux.add(1);
         }
+        if(escalera.contains(14)) aux.add(1);
         aux.add(rango.getFirstCard());
         aux.add(rango.getSecondCard());
         Collections.sort(aux);
@@ -644,7 +649,7 @@ public class Ap3 {
         }
     }
 
-    public static char comprobarColor(PairButton rango, ArrayList<BoardButton> color, boolean suited) {
+    public static char comprobarColor(PairButton rango, ArrayList<BoardButton> color, int type) {
         boolean result = true;
         char aux1 = 'x';
         int i = 0, h = 0, s = 0, c = 0, d = 0;
@@ -662,14 +667,21 @@ public class Ap3 {
                 d++;
             }
             
-            if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
-                return aux1;
+           if(type==0 || type==1){
+                if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
+                    return aux1;
+                }
+            }
+            else if(type==2){
+                if ((color.get(i).getValor() == rango.getFirstCard() &&  color.get(i).getValor() == rango.getSecondCard())) {
+                    return aux1;
+                }
             }
 
             i++;
         }
 
-        if (!suited) {
+        if (type==0 || type==2) {
             if (h < 4 && s < 4 && d < 4 && c < 4) {
                 return aux1;
             }
@@ -690,8 +702,8 @@ public class Ap3 {
         return aux1;
     }
     
-    public static void drawColor(PairButton rango, ArrayList<BoardButton> color, boolean suited) {
-        boolean repeticion;
+    public static void drawColor(PairButton rango, ArrayList<BoardButton> color, int type,int countFirst,int countSecond) {
+        boolean repeticion=true;
         char aux1 = 'x';
         int i = 0, h = 0, s = 0, c = 0, d = 0;
         int combs;
@@ -708,30 +720,42 @@ public class Ap3 {
             } else if (color.get(i).getCardText().charAt(1) == ('d')) {
                 d++;
             }
-            
-            if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
-                repeticion=false;
+            if(type==0 || type==1){
+                if ((color.get(i).getValor() == rango.getFirstCard() || color.get(i).getValor() == rango.getSecondCard())) {
+                    repeticion=false;
+                }
+            }
+            else if(type==2){
+                if ((color.get(i).getValor() == rango.getFirstCard() &&  color.get(i).getValor() == rango.getSecondCard())) {
+                    repeticion=false;
+                }
             }
 
             i++;
         }
         
-        if (!suited) {
-            if (h == 3 || s == 3 || d == 3 || c == 3) {
-                
-                if(rango.getFirstCard()==rango.getSecondCard()){
-                    result.add(new output(Ranking.DRAWFLUSH, rango.getText(), 6));
-                }
-                    
-             
-                else
-                    result.add(new output(Ranking.DRAWFLUSH, rango.getText(), 12));
-            }
-        } else if (h == 2 || s == 2 || d == 2 || c == 2) {
-           
-            result.add(new output(Ranking.DRAWFLUSH, rango.getText(), 4));
-        }
+        if(repeticion){
+            if (type==0 || type==2) {
+                if (h == 3 || s == 3 || d == 3 || c == 3) {
 
+                    if(rango.getFirstCard()==rango.getSecondCard()){
+                        result.add(new output(Ranking.DRAWFLUSH, rango.getText(), 3));
+                    }
+
+
+                    else{
+                        if(countFirst==1 || countSecond == 1)
+                            result.add(new output(Ranking.DRAWFLUSH, rango.getText(),3));
+                        
+                        else
+                            result.add(new output(Ranking.DRAWFLUSH, rango.getText(),6));
+                    }
+                }
+            } else if (h == 2 || s == 2 || d == 2 || c == 2) {
+
+                result.add(new output(Ranking.DRAWFLUSH, rango.getText(), 1));
+            }
+        }
         
     }
 

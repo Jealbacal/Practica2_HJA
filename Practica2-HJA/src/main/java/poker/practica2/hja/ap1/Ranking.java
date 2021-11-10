@@ -24,4 +24,64 @@ public enum Ranking {
 	public boolean biggerThan(Ranking r) {
 		return this.val > r.getNumVal();
 	}
+        
+        @Override
+        public String toString(){
+            String s = "";
+            switch (this){
+                case NOMADEHAND:
+                    s = "No Made Hand";
+                    break;
+                case DRAWFLUSH:
+                    s = "Flush Draw";
+                    break;
+                case DRAWOPENENDED:
+                    s = "OESD";
+                    break;
+                case DRAWGUSTSHOT:
+                    s = "GSD";
+                    break;
+                case WEAKPAIR:
+                    s = "Weak Pair";
+                    break;
+                case MIDDLEPAIR:
+                    s= "Middle Pair";
+                    break;
+                case PPBTP:
+                    s = "PPBTP";
+                    break;
+                case TOPPAIR:
+                    s= "Top Pair";
+                    break;
+                case OVERPAIR:
+                    s="Overpair";
+                    break;
+                case TWOPAIR:
+                    s="Two Pair";
+                    break;
+                case THREEOFAKIND:
+                    s="Trips";
+                    break;
+                case STRAIGHT:
+                    s="Straight";
+                    break;
+                case FLUSH:
+                    s="Flush";
+                    break;
+                case FULLHOUSE:
+                    s="Full House";
+                    break;
+                case FOUROFAKIND:
+                    s="Quads";
+                    break;
+                case STRAIGHTFLUSH:
+                    s="Straight Flush";
+                    break;
+                default:
+                    s = "ERROR";
+                    break;
+
+            }
+            return s;
+        }
 }
