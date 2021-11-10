@@ -21,6 +21,7 @@ public class Ap3 {
 
     ArrayList<PairButton> rangos;
     public static int total=0;
+    public static int ppbtp=0;
     public static boolean straightFlush =true;
     ArrayList<BoardButton> board;
     public static ArrayList<output> result = new ArrayList<>();
@@ -98,25 +99,25 @@ public class Ap3 {
                     switch (palo) {
 
                         case 'h': {
-                            result.add(new output(Ranking.STRAIGHTFLUSH, firstString + secondString + "h", 1));
+                            result.add(new output(Ranking.STRAIGHTFLUSH, firstString + secondString + "h", 3));
                             result.add(new output(Ranking.STRAIGHT, firstString + secondString + "c, " + firstString + secondString + "d, " + firstString + secondString + "s", 3));
                         }
 
                         break;
 
                         case 'c': {
-                            result.add(new output(Ranking.STRAIGHTFLUSH, firstString + secondString + "c", 1));
+                            result.add(new output(Ranking.STRAIGHTFLUSH, firstString + secondString + "c", 3));
                             result.add(new output(Ranking.STRAIGHT, firstString + secondString + "h, " + firstString + secondString + "d, " + firstString + secondString + "s", 3));
                         }
                         break;
                         case 'd': {
-                            result.add(new output(Ranking.STRAIGHTFLUSH, firstString + secondString + "d", 1));
+                            result.add(new output(Ranking.STRAIGHTFLUSH, firstString + secondString + "d", 3));
                             result.add(new output(Ranking.STRAIGHT, firstString + secondString + "c, " + firstString + secondString + "h, " + firstString + secondString + "s", 3));
                         }
                         break;
 
                         case 's': {
-                            result.add(new output(Ranking.STRAIGHTFLUSH, firstString + secondString + "s", 1));
+                            result.add(new output(Ranking.STRAIGHTFLUSH, firstString + secondString + "s", 3));
                             result.add(new output(Ranking.STRAIGHT, firstString + secondString + "c, " + firstString + secondString + "d, " + firstString + secondString + "h", 3));
                         }
                         break;
@@ -468,7 +469,7 @@ public class Ap3 {
                         break;
 
                         case 'x': {
-                            result.add(new output(Ranking.STRAIGHT, rango.getText(), 4));
+                            result.add(new output(Ranking.STRAIGHT, rango.getText(), 12));
                         }
 
                     }
@@ -596,7 +597,7 @@ public class Ap3 {
 
     public static boolean comprobarEscalera(PairButton rango, ArrayList<Integer> escalera, int countFirst) {
         boolean result = true;
-        int i = 1, iguales = 0;
+        int i = 1, iguales = 0,cont=0;
         ArrayList<Integer> aux = new ArrayList<Integer>();
         aux = (ArrayList<Integer>) escalera.clone();
         if(rango.getFirstCard() == 14) aux.add(1);
@@ -605,30 +606,41 @@ public class Ap3 {
 
         Collections.sort(aux);
 
-        while (i < aux.size() && result) {
+        while (i < aux.size() ) {
 
             if (aux.size() == 5) {
                 if (aux.get(i) - aux.get(i - 1) != 1) {
                     result = false;
                 }
             } else if (aux.size() == 6 || (aux.size() == 7 && countFirst==1)) {
-
+                
+                if(aux.get(i)==aux.get(i - 1)+1)
+                    cont++;
+                
                 if (aux.get(i) == aux.get(i - 1)) {
                     iguales++;
                 }
-
-                if (aux.get(i) - aux.get(i - 1) > 1 && !aux.contains(1)) {
-                    result = false;
-                } else if (iguales > 1) {
+                
+                if ((aux.get(i) - aux.get(i - 1) > 1 ) ) {
                     result = false;
                 }
+                else if (iguales > 1) {
+                    result = false;
+                }
+                
+                
             } else {
                 result = false;
+                if(aux.get(i)==aux.get(i - 1)+1)
+                    cont++;
             }
-
+            
+             
             i++;
         }
-
+        if((aux.get(0)==1 && aux.get(aux.size()-2)==5 && cont==4)|| (aux.get(0)==1 && aux.get(aux.size()-3)==5 && cont==4) )
+            result=true;
+        
         return result;
     }
 
@@ -793,6 +805,7 @@ public class Ap3 {
 
     public static void comparaParejas(PairButton range, int first, int second, int last) {
         int firstCard = range.getFirstCard();
+        
 
         if (firstCard > first) {
             result.add(new output(Ranking.OVERPAIR, range.getText(), 6));
@@ -800,8 +813,9 @@ public class Ap3 {
         else if (firstCard == first) {
             result.add(new output(Ranking.TOPPAIR, range.getText(), 6));
         } //preguntar sobre el weak pair 
-        else if (firstCard < first && firstCard > last) {
+        else if (firstCard < first && firstCard > last && ppbtp==0) {
             result.add(new output(Ranking.PPBTP, range.getText(), 6));
+            ppbtp++;
         } else if (firstCard == second && firstCard > last) {
             result.add(new output(Ranking.MIDDLEPAIR, range.getText(), 6));
         } else {
@@ -1090,7 +1104,16 @@ public class Ap3 {
 
         }
     }
-
+    
+    public static void  drawSOBOOl(PairButton rango, ArrayList<Integer> escalera, int countFirst,int countSecond){
+        
+        //ArrayList<boolean> aux = new ArrayList<boolean>();
+        
+//        for(int i=0;i<14;i++){
+//            aux.add(false);
+//        }
+       
+    }
     public static ArrayList<output> cargaLista(ArrayList<output> in) {
         ArrayList<output> out = new ArrayList<output>();
 
