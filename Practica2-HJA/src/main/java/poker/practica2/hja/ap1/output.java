@@ -24,6 +24,8 @@ public class output {
     //draws
     public String draw;
     
+    public static int totalisimo;
+    
     
     public output (Ranking ranking, String cards, int jugadas){
         this.ranking = ranking;
@@ -31,10 +33,10 @@ public class output {
         this.jugadas = jugadas;        
     }
     
-    
-    public String toString(int total){ 
-        int jaja= (jugadas*100)/total;
-        return ranking.toString() + ": " + Integer.toString(jugadas) +" ("+jaja + ")%\n" +
+    @Override
+    public String toString(){ 
+        int jaja= (jugadas*100)/totalisimo;
+        return ranking.toString() + ": " + Integer.toString(jugadas) +" ("+ jaja + "%)\n" +
                 "   - Cartas: " + cards + "\n";
         
     }
